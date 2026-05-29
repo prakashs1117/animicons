@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.1] — 2026-05-29
+
+### Fixed
+- Added `repository`, `homepage`, `bugs`, `license`, and `keywords` to both package.json files
+- Added README.md to published package files (now visible on npmjs.com)
+- Added MIT LICENSE file
+
 ## [0.1.0] — 2026-05-29
 
 ### Added
