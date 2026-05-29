@@ -1,0 +1,17 @@
+{
+  "name": "animicons-monorepo",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "build:web": "npm run build -w packages/react",
+    "build:rn": "npm run build -w packages/react-native",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "publish:web": "npm publish -w packages/react",
+    "publish:rn": "npm publish -w packages/react-native"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "tsup": "^8.0.0"
+  }
+}
