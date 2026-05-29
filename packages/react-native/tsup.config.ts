@@ -7,4 +7,7 @@ export default defineConfig({
   clean: true,
   treeshake: true,
   external: ['react', 'react-native', 'react-native-svg', 'react-native-reanimated'],
+  outExtension({ format }) {
+    return { js: format === 'esm' ? '.esm.js' : '.js' };
+  },
 });
