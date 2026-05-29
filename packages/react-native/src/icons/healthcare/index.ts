@@ -1,0 +1,13 @@
+export { ECG } from './ECG';
+export { HeartRate } from './HeartRate';
+export { Lungs } from './Lungs';
+export { Pill } from './Pill';
+export { Thermometer } from './Thermometer';
+export { DNA } from './DNA';
+export { Syringe } from './Syringe';
+export { Brain } from './Brain';
+export { BloodDrop } from './BloodDrop';
+export { Steps } from './Steps';
+export { Sleep } from './Sleep';
+export { Oxygen } from './Oxygen';
+export { Medkit } from './Medkit';
