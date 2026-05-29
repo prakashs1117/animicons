@@ -7,8 +7,8 @@
     "build:web": "npm run build -w packages/react",
     "build:rn": "npm run build -w packages/react-native",
     "typecheck": "npm run typecheck --workspaces --if-present",
-    "publish:web": "npm publish -w packages/react",
-    "publish:rn": "npm publish -w packages/react-native"
+    "publish:web": "npm publish -w packages/react --access public",
+    "publish:rn": "npm publish -w packages/react-native --access public"
   },
   "devDependencies": {
     "typescript": "^5.4.0",
