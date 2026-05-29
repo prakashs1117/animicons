@@ -1,0 +1,13 @@
+export { ECGPaths } from './ECG';
+export { HeartRatePaths } from './HeartRate';
+export { LungsPaths } from './Lungs';
+export { PillPaths } from './Pill';
+export { ThermometerPaths } from './Thermometer';
+export { DNAPaths } from './DNA';
+export { SyringePaths } from './Syringe';
+export { BrainPaths } from './Brain';
+export { BloodDropPaths } from './BloodDrop';
+export { StepsPaths } from './Steps';
+export { SleepPaths } from './Sleep';
+export { OxygenPaths } from './Oxygen';
+export { MedkitPaths } from './Medkit';
