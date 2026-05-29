@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Svg, Path } from 'react-native-svg';
 import Animated, {
   useSharedValue, useAnimatedProps,
-  withTiming, withDelay, withRepeat, cancelAnimation, Easing,
+  withTiming, withDelay, withRepeat, cancelAnimation, Easing, runOnJS,
 } from 'react-native-reanimated';
 import type { IconProps } from '@animicons/shared';
 import { CheckPaths } from '@animicons/shared';
@@ -27,7 +27,9 @@ export const Check: React.FC<IconProps> = ({
         checkProgress.value = withRepeat(withDelay(d.short * 0.6, withTiming(0, { duration: d.short * 0.6, easing: Easing.ease })), -1);
       } else {
         circleProgress.value = withTiming(0, { duration: d.short, easing: Easing.ease });
-        checkProgress.value = withDelay(d.short * 0.6, withTiming(0, { duration: d.short * 0.6, easing: Easing.ease }));
+        checkProgress.value = withDelay(d.short * 0.6, withTiming(0, { duration: d.short * 0.6, easing: Easing.ease }, () => {
+          if (onAnimationEnd) runOnJS(onAnimationEnd)();
+        }));
       }
     } else {
       cancelAnimation(circleProgress); cancelAnimation(checkProgress);

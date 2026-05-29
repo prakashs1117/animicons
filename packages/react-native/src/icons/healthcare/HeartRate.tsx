@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Svg, Path, Circle } from 'react-native-svg';
 import Animated, {
   useSharedValue, useAnimatedProps,
-  withRepeat, withSequence, withTiming, cancelAnimation, Easing,
+  withRepeat, withSequence, withTiming, cancelAnimation, Easing, runOnJS,
 } from 'react-native-reanimated';
 import type { IconProps } from '@animicons/shared';
 import { HeartRatePaths } from '@animicons/shared';
@@ -13,7 +13,7 @@ const AnimatedPath = Animated.createAnimatedComponent(Path);
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 export const HeartRate: React.FC<IconProps> = ({
-  size = 48, autoPlay = true, loop = true, speed = 'normal', style, ...colorProps
+  size = 48, autoPlay = true, loop = true, speed = 'normal', onAnimationEnd, style, ...colorProps
 }) => {
   const scaleVal = useSharedValue(1);
   const glowR = useSharedValue(16);
@@ -25,7 +25,9 @@ export const HeartRate: React.FC<IconProps> = ({
     if (autoPlay) {
       scaleVal.value = withRepeat(
         withSequence(withTiming(1.2, { duration: d.medium * 0.2 }), withTiming(1, { duration: d.medium * 0.8 })),
-        loop ? -1 : 1
+        loop ? -1 : 1,
+        false,
+        () => { if (!loop && onAnimationEnd) runOnJS(onAnimationEnd)(); }
       );
       glowR.value = withRepeat(
         withSequence(withTiming(20, { duration: d.medium * 0.2 }), withTiming(16, { duration: d.medium * 0.8 })),
@@ -38,7 +40,7 @@ export const HeartRate: React.FC<IconProps> = ({
     } else {
       cancelAnimation(scaleVal); cancelAnimation(glowR); cancelAnimation(glowOp);
     }
-  }, [autoPlay, loop, speed]);
+  }, [autoPlay, loop, speed, onAnimationEnd]);
 
   const heartProps = useAnimatedProps(() => ({ transform: [{ scale: scaleVal.value }], originX: 24, originY: 24 }));
   const glowProps = useAnimatedProps(() => ({ r: glowR.value, opacity: glowOp.value }));

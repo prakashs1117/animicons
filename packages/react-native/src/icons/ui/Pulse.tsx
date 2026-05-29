@@ -21,6 +21,7 @@ function usePulseRing(stagger: number, duration: number, autoPlay: boolean, loop
     } else {
       cancelAnimation(r); cancelAnimation(opacity);
     }
+    return () => { cancelAnimation(r); cancelAnimation(opacity); };
   }, [autoPlay, loop, duration, stagger]);
   return { r, opacity };
 }

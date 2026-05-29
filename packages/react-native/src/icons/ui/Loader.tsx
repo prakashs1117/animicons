@@ -31,7 +31,8 @@ export const Loader: React.FC<IconProps> = ({
     } else {
       cancelAnimation(rotation);
     }
-  }, [autoPlay, loop, speed]);
+    return () => { cancelAnimation(rotation); };
+  }, [autoPlay, loop, speed, onAnimationEnd]);
 
   const animatedProps = useAnimatedProps(() => ({
     transform: [{ rotate: `${rotation.value}deg` }],

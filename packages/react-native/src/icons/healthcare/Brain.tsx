@@ -30,6 +30,7 @@ export const Brain: React.FC<IconProps> = ({
     } else {
       [n1r, n2r, n3r, n1op, n2op, n3op].forEach(sv => cancelAnimation(sv));
     }
+    return () => { [n1r, n2r, n3r, n1op, n2op, n3op].forEach(sv => cancelAnimation(sv)); };
   }, [autoPlay, loop, speed]);
 
   const ap1 = useAnimatedProps(() => ({ r: n1r.value, opacity: n1op.value }));

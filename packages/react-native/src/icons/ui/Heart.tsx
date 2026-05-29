@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Svg, Path } from 'react-native-svg';
 import Animated, {
-  useSharedValue, useAnimatedProps,
+  useSharedValue, useAnimatedProps, useAnimatedStyle,
   withRepeat, withSequence, withTiming, cancelAnimation, Easing,
 } from 'react-native-reanimated';
 import type { IconProps } from '@animicons/shared';
@@ -39,16 +39,17 @@ export const Heart: React.FC<IconProps> = ({
     }
   }, [autoPlay, loop, speed]);
 
-  const heartProps = useAnimatedProps(() => ({
-    transform: [{ scale: scaleVal.value }],
-    originX: 24, originY: 24,
-  }));
+  const heartStyle = useAnimatedStyle(() => ({ transform: [{ scale: scaleVal.value }] }));
   const glowProps = useAnimatedProps(() => ({ opacity: glowOp.value }));
 
   return (
     <Svg width={size} height={size} viewBox={HeartPaths.viewBox} style={style as any}>
       <AnimatedPath animatedProps={glowProps} d={HeartPaths.glow} fill={s.secondaryColor} stroke="none" />
-      <AnimatedPath animatedProps={heartProps} d={HeartPaths.heart} stroke={s.stroke} strokeWidth={s.strokeWidth} fill={s.fill} opacity={s.opacity} />
+      <Animated.View style={[{ position: 'absolute' }, heartStyle]}>
+        <Svg width={size} height={size} viewBox={HeartPaths.viewBox} style={{ position: 'absolute' }}>
+          <Path d={HeartPaths.heart} stroke={s.stroke} strokeWidth={s.strokeWidth} fill={s.fill} opacity={s.opacity} />
+        </Svg>
+      </Animated.View>
     </Svg>
   );
 };

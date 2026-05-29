@@ -24,6 +24,7 @@ export const Oxygen: React.FC<IconProps> = ({
     } else {
       cancelAnimation(rotation);
     }
+    return () => { cancelAnimation(rotation); };
   }, [autoPlay, loop, speed]);
 
   const electronProps = useAnimatedProps(() => ({

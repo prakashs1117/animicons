@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Pressable } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
 import Animated, {
@@ -20,7 +20,7 @@ export const Star: React.FC<IconProps> = ({
   const d = getAnimDuration(speed);
   const s = resolveStyle(colorProps, StarPaths);
 
-  const trigger = () => {
+  const trigger = useCallback(() => {
     scaleVal.value = withTiming(1.3, { duration: d.short * 0.5 }, () => {
       scaleVal.value = withTiming(1, { duration: d.short * 0.5 }, () => {
         if (onAnimationEnd) runOnJS(onAnimationEnd)();
@@ -29,11 +29,12 @@ export const Star: React.FC<IconProps> = ({
     sparkleOp.value = withTiming(1, { duration: d.short * 0.5 }, () => {
       sparkleOp.value = withTiming(0, { duration: d.short * 0.5 });
     });
-  };
+  }, [onAnimationEnd, d.short, scaleVal, sparkleOp]);
 
   useEffect(() => {
     if (autoPlay) trigger();
-  }, []);
+    return () => { cancelAnimation(scaleVal); cancelAnimation(sparkleOp); };
+  }, [autoPlay, trigger]);
 
   const starProps = useAnimatedProps(() => ({ transform: [{ scale: scaleVal.value }], originX: 24, originY: 24 }));
   const sparkleProps = useAnimatedProps(() => ({ opacity: sparkleOp.value }));

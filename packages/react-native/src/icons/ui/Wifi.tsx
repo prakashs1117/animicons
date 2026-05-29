@@ -32,6 +32,7 @@ export const Wifi: React.FC<IconProps> = ({
     } else {
       cancelAnimation(op1); cancelAnimation(op2); cancelAnimation(op3);
     }
+    return () => { cancelAnimation(op1); cancelAnimation(op2); cancelAnimation(op3); };
   }, [autoPlay, loop, speed]);
 
   const ap1 = useAnimatedProps(() => ({ opacity: op1.value }));

@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react';
 import { Svg, Path, Circle } from 'react-native-svg';
 import Animated, {
-  useSharedValue, useAnimatedProps, useAnimatedStyle,
+  useSharedValue, useAnimatedStyle,
   withRepeat, withSequence, withTiming, cancelAnimation, Easing,
 } from 'react-native-reanimated';
 import type { IconProps } from '@animicons/shared';
 import { BellPaths } from '@animicons/shared';
 import { resolveStyle } from '../../utils/resolveStyle';
 import { getAnimDuration } from '../../utils/animDuration';
-
-const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 export const Bell: React.FC<IconProps> = ({
   size = 48, autoPlay = true, loop = true, speed = 'normal', style, ...colorProps
@@ -40,7 +38,7 @@ export const Bell: React.FC<IconProps> = ({
   }, [autoPlay, loop, speed]);
 
   const bellStyle = useAnimatedStyle(() => ({ transform: [{ rotate: `${rotation.value}deg` }] }));
-  const badgeProps = useAnimatedProps(() => ({ transform: [{ scale: badgeScale.value }] }));
+  const badgeStyle = useAnimatedStyle(() => ({ transform: [{ scale: badgeScale.value }] }));
 
   return (
     <Svg width={size} height={size} viewBox={BellPaths.viewBox} style={style as any}>
@@ -51,7 +49,11 @@ export const Bell: React.FC<IconProps> = ({
           <Path d={BellPaths.handle} stroke={s.stroke} strokeWidth={s.strokeWidth} strokeLinecap="round" fill="none" opacity={s.opacity} />
         </Svg>
       </Animated.View>
-      <AnimatedCircle animatedProps={badgeProps} cx="34" cy="12" r={5} fill={s.stroke} opacity={s.opacity} />
+      <Animated.View style={[{ position: 'absolute' }, badgeStyle]}>
+        <Svg width={size} height={size} viewBox={BellPaths.viewBox} style={{ position: 'absolute' }}>
+          <Circle cx="34" cy="12" r={5} fill={s.stroke} opacity={s.opacity} />
+        </Svg>
+      </Animated.View>
     </Svg>
   );
 };

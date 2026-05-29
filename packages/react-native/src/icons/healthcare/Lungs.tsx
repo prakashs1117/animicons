@@ -21,9 +21,8 @@ export const Lungs: React.FC<IconProps> = ({
 
   useEffect(() => {
     if (autoPlay) {
-      const breathe = withRepeat(withTiming(1.08, { duration: d.long, easing: Easing.inOut(Easing.ease) }), loop ? -1 : 1, true);
-      scaleL.value = breathe;
-      scaleR.value = breathe;
+      scaleL.value = withRepeat(withTiming(1.08, { duration: d.long, easing: Easing.inOut(Easing.ease) }), loop ? -1 : 1, true);
+      scaleR.value = withRepeat(withTiming(1.08, { duration: d.long, easing: Easing.inOut(Easing.ease) }), loop ? -1 : 1, true);
     } else {
       cancelAnimation(scaleL); cancelAnimation(scaleR);
     }
