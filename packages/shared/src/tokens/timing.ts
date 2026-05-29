@@ -4,7 +4,7 @@ export const DURATION = {
   fast:   { short: 200,  medium: 500,  long: 1000, stagger: 150 },
 } as const;
 
-export type DurationSet = { short: number; medium: number; long: number; stagger: number };
+export type DurationSet = typeof DURATION[keyof typeof DURATION];
 
 export const EASING_CSS = {
   easeInOut: 'ease-in-out',

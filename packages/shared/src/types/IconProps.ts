@@ -12,5 +12,5 @@ export interface IconProps {
   loop?: boolean;
   speed?: AnimationSpeed;
   onAnimationEnd?: () => void;
-  style?: object;
+  style?: Record<string, unknown>;
 }
