@@ -4,5 +4,6 @@ export const UploadPaths = {
   defaultStrokeWidth: 2.5,
   arrow: 'M24 32 L24 10 M14 20 L24 10 L34 20',
   bar: 'M10 38 L38 38',
+  // zero-length start state; animated to full bar length by the icon component
   progress: 'M10 38 L10 38',
 } as const;
