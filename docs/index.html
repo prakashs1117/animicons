@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>@animicons — Animated SVG Icon Library</title>
+<style>
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --surface2: #f1f5f9;
+    --border: #e2e8f0;
+    --text: #0f172a;
+    --text2: #64748b;
+    --accent: #6366f1;
+    --accent2: #8b5cf6;
+    --card-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
+    --badge-bg: #ede9fe;
+    --badge-text: #5b21b6;
+    --code-bg: #f1f5f9;
+    --code-text: #1e293b;
+    --btn-bg: #f1f5f9;
+    --btn-hover: #e2e8f0;
+    --tag-ui: #dbeafe;
+    --tag-ui-text: #1d4ed8;
+    --tag-health: #dcfce7;
+    --tag-health-text: #15803d;
+  }
+  [data-theme="dark"] {
+    --bg: #0b0f1a;
+    --surface: #131929;
+    --surface2: #1a2235;
+    --border: #1e2d45;
+    --text: #f1f5f9;
+    --text2: #64748b;
+    --accent: #818cf8;
+    --accent2: #a78bfa;
+    --card-shadow: 0 1px 3px rgba(0,0,0,0.4), 0 4px 24px rgba(0,0,0,0.3);
+    --badge-bg: #2d1b69;
+    --badge-text: #c4b5fd;
+    --code-bg: #0f172a;
+    --code-text: #e2e8f0;
+    --btn-bg: #1e2d45;
+    --btn-hover: #243352;
+    --tag-ui: #1e3a5f;
+    --tag-ui-text: #93c5fd;
+    --tag-health: #14291a;
+    --tag-health-text: #86efac;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s, color 0.3s;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex; align-items: center; gap: 16px;
+    height: 60px;
+    backdrop-filter: blur(12px);
+  }
+  .nav-logo { font-weight: 800; font-size: 18px; color: var(--accent); letter-spacing: -0.5px; }
+  .nav-logo span { color: var(--text2); font-weight: 400; }
+  .nav-badge { background: var(--badge-bg); color: var(--badge-text); font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 99px; }
+  .nav-spacer { flex: 1; }
+  .nav-links { display: flex; gap: 8px; align-items: center; }
+  .nav-link { color: var(--text2); text-decoration: none; font-size: 14px; padding: 6px 12px; border-radius: 8px; transition: all 0.15s; }
+  .nav-link:hover { background: var(--btn-bg); color: var(--text); }
+  .theme-btn {
+    background: var(--btn-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 6px 10px; cursor: pointer;
+    font-size: 16px; color: var(--text); transition: all 0.15s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .theme-btn:hover { background: var(--btn-hover); }
+
+  /* HERO */
+  .hero {
+    text-align: center; padding: 80px 24px 60px;
+    background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
+  }
+  .hero-title {
+    font-size: clamp(36px, 6vw, 64px); font-weight: 900;
+    letter-spacing: -2px; line-height: 1.1;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
+  .hero-sub { font-size: 18px; color: var(--text2); max-width: 520px; margin: 0 auto 32px; line-height: 1.6; }
+  .hero-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+  .badge { background: var(--surface2); border: 1px solid var(--border); color: var(--text2); font-size: 13px; font-weight: 500; padding: 5px 12px; border-radius: 99px; }
+  .install-box {
+    display: inline-flex; gap: 0; border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden; background: var(--surface);
+    box-shadow: var(--card-shadow); margin-bottom: 8px;
+  }
+  .install-tab {
+    padding: 8px 16px; font-size: 12px; font-weight: 600; cursor: pointer;
+    color: var(--text2); background: transparent; border: none;
+    border-right: 1px solid var(--border); transition: all 0.15s;
+  }
+  .install-tab.active { background: var(--accent); color: white; }
+  .install-tab:last-child { border-right: none; }
+  .install-code {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--code-bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 16px;
+    font-family: 'SF Mono', 'Fira Code', monospace; font-size: 14px;
+    color: var(--code-text); max-width: 480px; margin: 0 auto;
+  }
+  .install-code code { flex: 1; }
+  .copy-btn {
+    background: var(--btn-bg); border: 1px solid var(--border);
+    border-radius: 6px; padding: 4px 10px; cursor: pointer;
+    font-size: 12px; color: var(--text2); transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .copy-btn:hover { background: var(--btn-hover); color: var(--text); }
+  .copy-btn.copied { background: #dcfce7; color: #15803d; border-color: #86efac; }
+
+  /* CONTROLS */
+  .controls-section {
+    max-width: 1100px; margin: 0 auto 32px; padding: 0 24px;
+  }
+  .controls-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 20px 24px;
+    box-shadow: var(--card-shadow);
+    display: flex; gap: 24px; flex-wrap: wrap; align-items: center;
+  }
+  .control-group { display: flex; flex-direction: column; gap: 6px; }
+  .control-label { font-size: 11px; font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.8px; }
+  .control-row { display: flex; gap: 6px; align-items: center; }
+  .seg-btn {
+    background: var(--btn-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 6px 14px; cursor: pointer;
+    font-size: 13px; font-weight: 500; color: var(--text2);
+    transition: all 0.15s;
+  }
+  .seg-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .seg-btn:hover:not(.active) { background: var(--btn-hover); color: var(--text); }
+  input[type="color"] {
+    width: 36px; height: 32px; border: 1px solid var(--border);
+    border-radius: 8px; cursor: pointer; padding: 2px;
+    background: var(--btn-bg);
+  }
+  input[type="range"] {
+    width: 120px; accent-color: var(--accent);
+  }
+  .range-val { font-size: 13px; color: var(--text2); min-width: 30px; }
+  .toggle-wrap { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+  .toggle {
+    width: 40px; height: 22px; border-radius: 99px;
+    background: var(--border); position: relative; transition: background 0.2s;
+    cursor: pointer; border: none; flex-shrink: 0;
+  }
+  .toggle.on { background: var(--accent); }
+  .toggle::after {
+    content: ''; position: absolute; width: 16px; height: 16px;
+    background: white; border-radius: 50%; top: 3px; left: 3px;
+    transition: left 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+  .toggle.on::after { left: 21px; }
+  .toggle-label { font-size: 13px; color: var(--text2); }
+  .divider { width: 1px; background: var(--border); height: 40px; }
+  .filter-btns { display: flex; gap: 6px; }
+
+  /* GRID */
+  .grid-section { max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; }
+  .section-label {
+    font-size: 12px; font-weight: 700; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .icons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+  .icon-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px 16px 16px;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    cursor: pointer; transition: all 0.2s;
+    box-shadow: var(--card-shadow);
+    position: relative; overflow: hidden;
+  }
+  .icon-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(99,102,241,0.15);
+  }
+  .icon-card.selected {
+    border-color: var(--accent);
+    background: var(--surface2);
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
+  }
+  .icon-svg-wrap {
+    width: 56px; height: 56px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .icon-name { font-size: 13px; font-weight: 600; color: var(--text); }
+  .icon-tag {
+    font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 99px;
+    position: absolute; top: 10px; right: 10px;
+  }
+  .tag-ui { background: var(--tag-ui); color: var(--tag-ui-text); }
+  .tag-health { background: var(--tag-health); color: var(--tag-health-text); }
+
+  /* CODE PANEL */
+  .code-panel {
+    position: fixed; right: 0; top: 60px; bottom: 0;
+    width: 360px; background: var(--surface);
+    border-left: 1px solid var(--border);
+    transform: translateX(100%); transition: transform 0.3s ease;
+    overflow-y: auto; z-index: 50;
+    display: flex; flex-direction: column;
+  }
+  .code-panel.open { transform: translateX(0); }
+  .panel-header {
+    padding: 20px 20px 0; position: sticky; top: 0;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+  }
+  .panel-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .panel-sub { font-size: 13px; color: var(--text2); }
+  .panel-close {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--btn-bg); border: 1px solid var(--border);
+    border-radius: 8px; width: 32px; height: 32px;
+    cursor: pointer; font-size: 16px; color: var(--text2);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+  }
+  .panel-close:hover { background: var(--btn-hover); color: var(--text); }
+  .panel-body { padding: 20px; flex: 1; }
+  .panel-icon-preview {
+    display: flex; align-items: center; justify-content: center;
+    padding: 32px; background: var(--surface2); border-radius: 12px;
+    margin-bottom: 20px; border: 1px solid var(--border);
+  }
+  .code-block {
+    background: var(--code-bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px; margin-bottom: 12px;
+    position: relative;
+  }
+  .code-block-label {
+    font-size: 11px; font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px;
+  }
+  .code-block pre {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 12px; color: var(--code-text); white-space: pre-wrap;
+    word-break: break-all; line-height: 1.6;
+  }
+  .code-copy {
+    position: absolute; top: 10px; right: 10px;
+    background: var(--btn-bg); border: 1px solid var(--border);
+    border-radius: 6px; padding: 3px 8px; cursor: pointer;
+    font-size: 11px; color: var(--text2); transition: all 0.15s;
+  }
+  .code-copy:hover { background: var(--btn-hover); }
+  .code-copy.copied { background: #dcfce7; color: #15803d; }
+
+  /* OVERLAY */
+  .overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.3);
+    z-index: 49; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    backdrop-filter: blur(2px);
+  }
+  .overlay.visible { opacity: 1; pointer-events: all; }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 40px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text2); font-size: 14px;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    .code-panel { width: 100%; }
+    .controls-card { gap: 16px; }
+    .divider { display: none; }
+    nav { padding: 0 16px; }
+    .nav-links .nav-link { display: none; }
+  }
+</style>
+</head>
+<body data-theme="dark">
+
+<nav>
+  <div class="nav-logo">@animicons<span>/react</span></div>
+  <span class="nav-badge">v0.1.1</span>
+  <div class="nav-spacer"></div>
+  <div class="nav-links">
+    <a class="nav-link" href="https://github.com/prakashs1117/animicons" target="_blank">GitHub</a>
+    <a class="nav-link" href="https://www.npmjs.com/package/@animicons/react" target="_blank">npm</a>
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙 Dark</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1 class="hero-title">@animicons</h1>
+  <p class="hero-sub">Animated SVG icon library for React and React Native. 21 icons. 60fps. Full colour control. Tree-shakeable.</p>
+  <div class="hero-badges">
+    <span class="badge">✦ 21 Icons</span>
+    <span class="badge">⚡ 60fps</span>
+    <span class="badge">🎨 Full colour control</span>
+    <span class="badge">🌲 Tree-shakeable</span>
+    <span class="badge">📘 TypeScript</span>
+    <span class="badge">MIT License</span>
+  </div>
+  <div style="margin-bottom:12px">
+    <div class="install-box">
+      <button class="install-tab active" onclick="switchInstall('react', this)">React</button>
+      <button class="install-tab" onclick="switchInstall('rn', this)">React Native</button>
+    </div>
+  </div>
+  <div class="install-code">
+    <code id="installCmd">npm install @animicons/react react-native-svg</code>
+    <button class="copy-btn" onclick="copyInstall(this)">Copy</button>
+  </div>
+</section>
+
+<!-- CONTROLS -->
+<div class="controls-section">
+  <div class="controls-card">
+    <!-- Filter -->
+    <div class="control-group">
+      <div class="control-label">Category</div>
+      <div class="filter-btns">
+        <button class="seg-btn active" onclick="setFilter('all', this)">All</button>
+        <button class="seg-btn" onclick="setFilter('ui', this)">UI / System</button>
+        <button class="seg-btn" onclick="setFilter('healthcare', this)">Healthcare</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Color -->
+    <div class="control-group">
+      <div class="control-label">Primary Color</div>
+      <div class="control-row">
+        <input type="color" id="colorPicker" value="#6366f1" oninput="updateIcons()" />
+        <div style="display:flex;gap:4px;flex-wrap:wrap;max-width:180px">
+          <button class="seg-btn" style="padding:4px 8px;font-size:11px" onclick="setColor('#6366f1')">Indigo</button>
+          <button class="seg-btn" style="padding:4px 8px;font-size:11px" onclick="setColor('#ef4444')">Red</button>
+          <button class="seg-btn" style="padding:4px 8px;font-size:11px" onclick="setColor('#22c55e')">Green</button>
+          <button class="seg-btn" style="padding:4px 8px;font-size:11px" onclick="setColor('#f59e0b')">Amber</button>
+          <button class="seg-btn" style="padding:4px 8px;font-size:11px" onclick="setColor('#ec4899')">Pink</button>
+          <button class="seg-btn" style="padding:4px 8px;font-size:11px" onclick="setColor('#0ea5e9')">Sky</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Size -->
+    <div class="control-group">
+      <div class="control-label">Size</div>
+      <div class="control-row">
+        <input type="range" id="sizePicker" min="24" max="80" value="48" oninput="updateIcons(); document.getElementById('sizeVal').textContent=this.value+'px'" />
+        <span class="range-val" id="sizeVal">48px</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Speed -->
+    <div class="control-group">
+      <div class="control-label">Speed</div>
+      <div class="filter-btns">
+        <button class="seg-btn" onclick="setSpeed('slow', this)">Slow</button>
+        <button class="seg-btn active" onclick="setSpeed('normal', this)">Normal</button>
+        <button class="seg-btn" onclick="setSpeed('fast', this)">Fast</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Loop -->
+    <div class="control-group">
+      <div class="control-label">Loop</div>
+      <div class="toggle-wrap" onclick="toggleLoop()">
+        <button class="toggle on" id="loopToggle"></button>
+        <span class="toggle-label" id="loopLabel">On</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- AutoPlay -->
+    <div class="control-group">
+      <div class="control-label">AutoPlay</div>
+      <div class="toggle-wrap" onclick="toggleAutoPlay()">
+        <button class="toggle on" id="autoPlayToggle"></button>
+        <span class="toggle-label" id="autoPlayLabel">On</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ICON GRID -->
+<div class="grid-section">
+  <div class="section-label" id="uiLabel">UI / System — 8 icons</div>
+  <div class="icons-grid" id="uiGrid"></div>
+
+  <div class="section-label" id="healthLabel">Healthcare — 13 icons</div>
+  <div class="icons-grid" id="healthGrid"></div>
+</div>
+
+<!-- CODE PANEL -->
+<div class="overlay" id="overlay" onclick="closePanel()"></div>
+<div class="code-panel" id="codePanel">
+  <div class="panel-header">
+    <div class="panel-title" id="panelTitle">Icon</div>
+    <div class="panel-sub" id="panelSub">Click to copy code</div>
+    <button class="panel-close" onclick="closePanel()">✕</button>
+  </div>
+  <div class="panel-body">
+    <div class="panel-icon-preview" id="panelPreview"></div>
+    <div class="code-block">
+      <div class="code-block-label">React (Web)</div>
+      <pre id="codeReact"></pre>
+      <button class="code-copy" onclick="copyCode('codeReact', this)">Copy</button>
+    </div>
+    <div class="code-block">
+      <div class="code-block-label">React Native</div>
+      <pre id="codeRN"></pre>
+      <button class="code-copy" onclick="copyCode('codeRN', this)">Copy</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Built with ❤️ by <a href="https://github.com/prakashs1117" target="_blank">Prakash</a> ·
+  <a href="https://github.com/prakashs1117/animicons" target="_blank">GitHub</a> ·
+  <a href="https://www.npmjs.com/package/@animicons/react" target="_blank">npm</a> ·
+  MIT License
+</footer>
+
+<script>
+// ─── State ───────────────────────────────────────────────────────────────────
+let state = {
+  color: '#6366f1',
+  size: 48,
+  speed: 'normal',
+  loop: true,
+  autoPlay: true,
+  filter: 'all',
+  selectedIcon: null,
+};
+
+// ─── Icon Definitions ────────────────────────────────────────────────────────
+const ICONS = {
+  ui: [
+    { name: 'Pulse',  label: 'Live Pulse',        svg: (c, s) => pulse(c, s) },
+    { name: 'Check',  label: 'Success Check',      svg: (c, s) => check(c, s) },
+    { name: 'Loader', label: 'Loader',             svg: (c, s) => loader(c, s) },
+    { name: 'Upload', label: 'Upload',             svg: (c, s) => upload(c, s) },
+    { name: 'Wifi',   label: 'Wifi Signal',        svg: (c, s) => wifi(c, s) },
+    { name: 'Bell',   label: 'Notification Bell',  svg: (c, s) => bell(c, s) },
+    { name: 'Star',   label: 'Favorite Star',      svg: (c, s) => star(c, s) },
+    { name: 'Heart',  label: 'Heartbeat',          svg: (c, s) => heart(c, s) },
+  ],
+  healthcare: [
+    { name: 'ECG',         label: 'ECG Monitor',      svg: (c, s) => ecg(c, s) },
+    { name: 'HeartRate',   label: 'Heart Rate',        svg: (c, s) => heartRate(c, s) },
+    { name: 'Lungs',       label: 'Breathing Lungs',   svg: (c, s) => lungs(c, s) },
+    { name: 'Pill',        label: 'Medication Pill',   svg: (c, s) => pill(c, s) },
+    { name: 'Thermometer', label: 'Thermometer',       svg: (c, s) => thermometer(c, s) },
+    { name: 'DNA',         label: 'DNA Helix',         svg: (c, s) => dna(c, s) },
+    { name: 'Syringe',     label: 'Vaccine Syringe',   svg: (c, s) => syringe(c, s) },
+    { name: 'Brain',       label: 'Brain Neurons',     svg: (c, s) => brain(c, s) },
+    { name: 'BloodDrop',   label: 'Blood Drop',        svg: (c, s) => bloodDrop(c, s) },
+    { name: 'Steps',       label: 'Activity Steps',    svg: (c, s) => steps(c, s) },
+    { name: 'Sleep',       label: 'Sleep Mode',        svg: (c, s) => sleep(c, s) },
+    { name: 'Oxygen',      label: 'SpO2 Oxygen',       svg: (c, s) => oxygen(c, s) },
+    { name: 'Medkit',      label: 'Med Kit',           svg: (c, s) => medkit(c, s) },
+  ]
+};
+
+// ─── Duration helpers ─────────────────────────────────────────────────────────
+const DUR = {
+  slow:   { short: 800,  medium: 2000, long: 4000, stagger: 600 },
+  normal: { short: 400,  medium: 1000, long: 2000, stagger: 300 },
+  fast:   { short: 200,  medium: 500,  long: 1000, stagger: 150 },
+};
+const d = () => DUR[state.speed];
+const iter = () => state.loop ? 'infinite' : '1';
+const play = () => state.autoPlay ? 'running' : 'paused';
+const sec = (ms) => (ms/1000).toFixed(1) + 's';
+const hex2 = (c) => c + '33';
+let uid = 0; const nextId = () => 'ai' + (++uid);
+
+// ─── SVG Icon generators ──────────────────────────────────────────────────────
+function svgWrap(id, size, content, style='') {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" style="${style}">${content}</svg>`;
+}
+
+function pulse(c, size) {
+  const id = nextId();
+  const dd = d();
+  return `<style>
+    @keyframes ${id}-ring { 0%{transform:scale(0.2);opacity:0.8} 100%{transform:scale(1);opacity:0} }
+    .${id}-r1{animation:${id}-ring ${sec(dd.medium)} ease-out ${iter()};animation-play-state:${play()};animation-delay:0ms;transform-origin:24px 24px}
+    .${id}-r2{animation:${id}-ring ${sec(dd.medium)} ease-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger}ms;transform-origin:24px 24px}
+    .${id}-r3{animation:${id}-ring ${sec(dd.medium)} ease-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger*2}ms;transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <circle class="${id}-r1" cx="24" cy="24" r="20" stroke="${c}" stroke-width="2" fill="none"/>
+    <circle class="${id}-r2" cx="24" cy="24" r="20" stroke="${c}" stroke-width="2" fill="none"/>
+    <circle class="${id}-r3" cx="24" cy="24" r="20" stroke="${c}" stroke-width="2" fill="none"/>
+    <circle cx="24" cy="24" r="4" fill="${c}"/>
+  `);
+}
+
+function check(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-circ{from{stroke-dashoffset:126}to{stroke-dashoffset:0}}
+    @keyframes ${id}-chk{from{stroke-dashoffset:30}to{stroke-dashoffset:0}}
+    .${id}-c{stroke-dasharray:126;animation:${id}-circ ${sec(dd.short)} ease ${iter()};animation-play-state:${play()}}
+    .${id}-m{stroke-dasharray:30;animation:${id}-chk ${sec(dd.short)} ease ${iter()};animation-play-state:${play()};animation-delay:${dd.short*0.6}ms}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-c" d="M24 4 a20 20 0 1 1 0 40 a20 20 0 1 1 0 -40" stroke="${c}" stroke-width="2.5" fill="none"/>
+    <path class="${id}-m" d="M14 24 l7 7 l13 -13" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function loader(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    .${id}-a{animation:${id}-spin ${sec(dd.medium)} linear ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-a" d="M24 6 a18 18 0 0 1 18 18" stroke="${c}" stroke-width="3" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function upload(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-arr{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+    @keyframes ${id}-bar{0%{stroke-dashoffset:28}50%{stroke-dashoffset:0}100%{stroke-dashoffset:28}}
+    .${id}-a{animation:${id}-arr ${sec(dd.short)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 20px}
+    .${id}-b{stroke-dasharray:28;animation:${id}-bar ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-a" d="M24 32 L24 10 M14 20 L24 10 L34 20" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="${id}-b" d="M10 38 L38 38" stroke="${c}" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  `);
+}
+
+function wifi(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-f{0%,100%{opacity:0}50%{opacity:1}}
+    .${id}-1{animation:${id}-f ${sec(dd.medium)} ease ${iter()};animation-play-state:${play()};animation-delay:0ms}
+    .${id}-2{animation:${id}-f ${sec(dd.medium)} ease ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger}ms}
+    .${id}-3{animation:${id}-f ${sec(dd.medium)} ease ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger*2}ms}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-1" d="M8 22 Q24 8 40 22" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-2" d="M13 28 Q24 17 35 28" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-3" d="M18 34 Q24 27 30 34" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <circle cx="24" cy="40" r="2" fill="${c}"/>
+  `);
+}
+
+function bell(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-sw{0%,100%{transform:rotate(0)}20%{transform:rotate(15deg)}40%{transform:rotate(-15deg)}60%{transform:rotate(8deg)}80%{transform:rotate(-8deg)}}
+    @keyframes ${id}-bd{0%,100%{transform:scale(1)}30%{transform:scale(1.3)}}
+    .${id}-b{animation:${id}-sw ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 12px}
+    .${id}-d{animation:${id}-bd ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:34px 12px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-b" d="M12 32 C12 20 18 12 24 12 C30 12 36 20 36 32 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <path d="M20 36 Q24 40 28 36" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M24 8 L24 12" stroke="${c}" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <circle class="${id}-d" cx="34" cy="12" r="5" fill="${c}"/>
+  `);
+}
+
+function star(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-p{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
+    @keyframes ${id}-sp{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}}
+    .${id}-s{animation:${id}-p ${sec(dd.short)} ease ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+    .${id}-k{animation:${id}-sp ${sec(dd.short)} ease ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-s" d="M24 6 L28.5 18 L42 18 L31.5 26 L35.5 38 L24 30 L12.5 38 L16.5 26 L6 18 L19.5 18 Z" stroke="${c}" stroke-width="2" fill="${c}"/>
+    <path class="${id}-k" d="M8 8 L10 6 L12 8 L10 10 Z" fill="${c}"/>
+    <path class="${id}-k" d="M36 6 L38 4 L40 6 L38 8 Z" fill="${c}"/>
+    <path class="${id}-k" d="M40 28 L42 26 L44 28 L42 30 Z" fill="${c}"/>
+  `);
+}
+
+function heart(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-p{0%,100%{transform:scale(1)}14%{transform:scale(1.2)}28%{transform:scale(1)}42%{transform:scale(1.15)}56%{transform:scale(1)}}
+    @keyframes ${id}-g{0%,100%{opacity:0;transform:scale(1)}28%{opacity:0.4;transform:scale(1.3)}}
+    .${id}-b{animation:${id}-p ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+    .${id}-g{animation:${id}-g ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-g" d="M24 40 C24 40 4 27 4 15 C4 8 9 4 15 4 C19 4 22 6 24 10 C26 6 29 4 33 4 C39 4 44 8 44 15 C44 27 24 40 24 40 Z" fill="${hex2(c)}" stroke="none"/>
+    <path class="${id}-b" d="M24 38 C24 38 6 26 6 16 C6 10 11 6 16 6 C19.5 6 22.5 8 24 11 C25.5 8 28.5 6 32 6 C37 6 42 10 42 16 C42 26 24 38 24 38 Z" stroke="${c}" stroke-width="2" fill="${c}"/>
+  `);
+}
+
+function ecg(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-d{0%{stroke-dashoffset:100;opacity:1}70%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+    .${id}-l{stroke-dasharray:100;animation:${id}-d ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-l" d="M4 24 L12 24 L16 12 L20 36 L24 18 L28 30 L32 24 L44 24" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  `);
+}
+
+function heartRate(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-p{0%,100%{transform:scale(1)}20%{transform:scale(1.2)}40%{transform:scale(1)}}
+    @keyframes ${id}-g{0%,100%{opacity:0}20%{opacity:0.5}}
+    .${id}-h{animation:${id}-p ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+    .${id}-g{animation:${id}-g ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <circle class="${id}-g" cx="24" cy="24" r="18" fill="${hex2(c)}"/>
+    <path class="${id}-h" d="M24 38 C24 38 6 26 6 16 C6 10 11 6 16 6 C19.5 6 22.5 8 24 11 C25.5 8 28.5 6 32 6 C37 6 42 10 42 16 C42 26 24 38 24 38 Z" stroke="${c}" stroke-width="2" fill="${c}"/>
+  `);
+}
+
+function lungs(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-b{0%,100%{transform:scale(1)}50%{transform:scaleX(1.12) scaleY(1.08)}}
+    .${id}-l{animation:${id}-b ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:16px 26px}
+    .${id}-r{animation:${id}-b ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:32px 26px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-l" d="M24 10 C24 10 10 14 8 26 C6 36 12 42 18 40 C22 38 24 34 24 34" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linecap="round"/>
+    <path class="${id}-r" d="M24 10 C24 10 38 14 40 26 C42 36 36 42 30 40 C26 38 24 34 24 34" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linecap="round"/>
+    <path d="M24 6 L24 18" stroke="${c}" stroke-width="2" stroke-linecap="round" fill="none"/>
+  `);
+}
+
+function pill(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-f{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+    @keyframes ${id}-s{0%,100%{opacity:0}50%{opacity:0.8}}
+    .${id}-b{animation:${id}-f ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+    .${id}-s{animation:${id}-s ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-b" d="M14 20 Q14 10 24 10 Q34 10 34 20 L34 28 Q34 38 24 38 Q14 38 14 28 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <path class="${id}-b" d="M14 24 L34 24" stroke="${c}" stroke-width="2" fill="none"/>
+    <path class="${id}-s" d="M18 14 Q20 12 24 13" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function thermometer(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-r{0%{transform:scaleY(0.2)}70%{transform:scaleY(1)}100%{transform:scaleY(1)}}
+    @keyframes ${id}-s{0%,60%,100%{transform:rotate(0)}70%{transform:rotate(3deg)}80%{transform:rotate(-3deg)}90%{transform:rotate(2deg)}}
+    .${id}-m{animation:${id}-r ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 34px}
+    .${id}-t{animation:${id}-s ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-t" d="M20 8 L20 30 Q20 38 24 38 Q28 38 28 30 L28 8 Q28 6 24 6 Q20 6 20 8 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <path class="${id}-m" d="M22 30 L22 22 L26 22 L26 30" fill="${c}"/>
+    <circle cx="24" cy="40" r="5" fill="${c}"/>
+  `);
+}
+
+function dna(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-s{from{transform:translateY(0)}to{transform:translateY(-16px)}}
+    .${id}-g{animation:${id}-s ${sec(dd.medium)} linear ${iter()};animation-play-state:${play()};animation-direction:alternate}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-g" d="M16 6 Q32 14 16 22 Q32 30 16 38 Q32 46 16 48" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path class="${id}-g" d="M32 6 Q16 14 32 22 Q16 30 32 38 Q16 46 32 48" stroke="${hex2(c).replace('33','88')}" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path class="${id}-g" d="M19 12 L29 12 M19 24 L29 24 M19 36 L29 36" stroke="${c}" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function syringe(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-p{0%,100%{transform:translateX(0)}50%{transform:translateX(8px)}}
+    @keyframes ${id}-l{0%,100%{transform:scaleX(1)}50%{transform:scaleX(0.3)}}
+    @keyframes ${id}-d{0%,49%{opacity:0;transform:translateY(0)}50%{opacity:1}100%{opacity:0;transform:translateY(6px)}}
+    .${id}-p{animation:${id}-p ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+    .${id}-l{animation:${id}-l ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:14px 25px}
+    .${id}-d{animation:${id}-d ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path d="M12 16 L36 16 L36 34 L12 34 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <path class="${id}-l" d="M14 18 L30 18 L30 32 L14 32 Z" fill="${c}" opacity="0.7"/>
+    <path class="${id}-p" d="M12 22 L6 22 L6 28 L12 28" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M36 24 L44 24" stroke="${c}" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path class="${id}-d" d="M44 26 Q46 28 44 30 Q42 28 44 26 Z" fill="${c}"/>
+  `);
+}
+
+function brain(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-n{0%,100%{opacity:0.2;transform:scale(0.67)}50%{opacity:1;transform:scale(1.5)}}
+    .${id}-1{animation:${id}-n ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:0ms;transform-origin:16px 20px}
+    .${id}-2{animation:${id}-n ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger}ms;transform-origin:24px 16px}
+    .${id}-3{animation:${id}-n ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger*2}ms;transform-origin:32px 20px}
+  </style>` + svgWrap(id, size, `
+    <path d="M24 36 C24 36 8 34 8 22 C8 14 14 8 20 10 C22 10 24 12 24 12" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linecap="round"/>
+    <path d="M24 36 C24 36 40 34 40 22 C40 14 34 8 28 10 C26 10 24 12 24 12" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linecap="round"/>
+    <path d="M19 20 L21 16 M27 16 L29 20" stroke="${c}" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle class="${id}-1" cx="16" cy="20" r="3" fill="${c}"/>
+    <circle class="${id}-2" cx="24" cy="16" r="3" fill="${c}"/>
+    <circle class="${id}-3" cx="32" cy="20" r="3" fill="${c}"/>
+  `);
+}
+
+function bloodDrop(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-p{0%,100%{transform:scaleY(1)}50%{transform:scaleY(0.85)}}
+    @keyframes ${id}-r{0%{opacity:0.6;transform:scale(0.6)}100%{opacity:0;transform:scale(1)}}
+    .${id}-d{animation:${id}-p ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 28px}
+    .${id}-r1{animation:${id}-r ${sec(dd.long)} ease-out ${iter()};animation-play-state:${play()};transform-origin:24px 42px}
+    .${id}-r2{animation:${id}-r ${sec(dd.long)} ease-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger}ms;transform-origin:24px 42px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-d" d="M24 8 Q36 20 36 28 Q36 38 24 38 Q12 38 12 28 Q12 20 24 8 Z" stroke="${c}" stroke-width="2" fill="${c}"/>
+    <circle class="${id}-r1" cx="24" cy="42" r="6" stroke="${c}" stroke-width="1.5" fill="none"/>
+    <circle class="${id}-r2" cx="24" cy="42" r="10" stroke="${c}" stroke-width="1.5" fill="none"/>
+  `);
+}
+
+function steps(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-f1{0%,49%,100%{opacity:0.3}50%,99%{opacity:1}}
+    @keyframes ${id}-f2{0%,100%{opacity:1}50%,99%{opacity:0.3}}
+    .${id}-1{animation:${id}-f1 ${sec(dd.medium)} ease ${iter()};animation-play-state:${play()}}
+    .${id}-2{animation:${id}-f2 ${sec(dd.medium)} ease ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-1" d="M14 28 Q12 24 14 20 Q18 18 20 22 Q22 26 20 30 Q16 32 14 28 Z M12 20 Q10 18 12 17 M14 19 Q13 17 15 16" stroke="${c}" stroke-width="2" fill="${c}" stroke-linecap="round"/>
+    <path class="${id}-2" d="M28 20 Q26 16 28 12 Q32 10 34 14 Q36 18 34 22 Q30 24 28 20 Z M26 12 Q24 10 26 9 M28 11 Q27 9 29 8" stroke="${c}" stroke-width="2" fill="${c}" stroke-linecap="round"/>
+  `);
+}
+
+function sleep(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-m{0%,100%{opacity:0.7;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+    @keyframes ${id}-s{0%,100%{opacity:0.3;transform:scale(0.8)}50%{opacity:1;transform:scale(1.2)}}
+    @keyframes ${id}-z{0%{opacity:0;transform:translate(0,0) scale(0.5)}50%{opacity:1;transform:translate(4px,-6px) scale(1)}100%{opacity:0;transform:translate(8px,-12px) scale(0.5)}}
+    .${id}-m{animation:${id}-m ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:18px 24px}
+    .${id}-s1{animation:${id}-s ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger}ms}
+    .${id}-s2{animation:${id}-s ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger*2}ms}
+    .${id}-z1{animation:${id}-z ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+    .${id}-z2{animation:${id}-z ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger}ms}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-m" d="M28 8 Q20 12 20 24 Q20 36 28 40 Q16 40 10 30 Q4 20 10 12 Q16 4 28 8 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <path class="${id}-s1" d="M36 10 L37 8 L38 10 L40 11 L38 12 L37 14 L36 12 L34 11 Z" fill="${c}"/>
+    <path class="${id}-s2" d="M40 22 L41 20 L42 22 L44 23 L42 24 L41 26 L40 24 L38 23 Z" fill="${c}"/>
+    <path class="${id}-z1" d="M32 26 L38 26 L32 32 L38 32" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="${id}-z2" d="M36 20 L40 20 L36 24 L40 24" stroke="${c}" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  `);
+}
+
+function oxygen(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-o{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    .${id}-e{animation:${id}-o ${sec(dd.long)} linear ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <path d="M24 24 m-16 0 a16 16 0 1 0 32 0 a16 16 0 1 0 -32 0" stroke="${hex2(c).replace('33','55')}" stroke-width="1" fill="none" stroke-dasharray="3 3"/>
+    <circle cx="18" cy="20" r="4" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <circle cx="26" cy="20" r="4" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <path d="M22 20 L26 20" stroke="${c}" stroke-width="2" fill="none"/>
+    <circle class="${id}-e" cx="40" cy="24" r="2.5" fill="${c}"/>
+  `);
+}
+
+function medkit(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-b{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+    @keyframes ${id}-x{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+    .${id}-b{animation:${id}-b ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+    .${id}-x{animation:${id}-x ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 27px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-b" d="M8 16 Q8 12 12 12 L36 12 Q40 12 40 16 L40 38 Q40 42 36 42 L12 42 Q8 42 8 38 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <path class="${id}-b" d="M18 12 L18 8 Q18 6 20 6 L28 6 Q30 6 30 8 L30 12" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path class="${id}-x" d="M24 20 L24 34 M17 27 L31 27" stroke="${c}" stroke-width="3" stroke-linecap="round" fill="none"/>
+  `);
+}
+
+// ─── Render ───────────────────────────────────────────────────────────────────
+function renderGrid() {
+  ['ui', 'healthcare'].forEach(cat => {
+    const grid = document.getElementById(cat === 'ui' ? 'uiGrid' : 'healthGrid');
+    const label = document.getElementById(cat === 'ui' ? 'uiLabel' : 'healthLabel');
+    const icons = ICONS[cat];
+    const show = state.filter === 'all' || state.filter === cat;
+    grid.style.display = show ? 'grid' : 'none';
+    label.style.display = show ? 'flex' : 'none';
+
+    grid.innerHTML = icons.map(icon => `
+      <div class="icon-card ${state.selectedIcon === icon.name ? 'selected' : ''}"
+           onclick="selectIcon('${icon.name}', '${cat}')">
+        <span class="icon-tag ${cat === 'ui' ? 'tag-ui' : 'tag-health'}">${cat === 'ui' ? 'UI' : '🏥'}</span>
+        <div class="icon-svg-wrap">${icon.svg(state.color, state.size < 48 ? state.size : 48)}</div>
+        <div class="icon-name">${icon.name}</div>
+      </div>
+    `).join('');
+  });
+}
+
+function updateIcons() {
+  state.color = document.getElementById('colorPicker').value;
+  state.size = parseInt(document.getElementById('sizePicker').value);
+  renderGrid();
+  if (state.selectedIcon) updatePanel();
+}
+
+function setColor(hex) {
+  document.getElementById('colorPicker').value = hex;
+  state.color = hex;
+  renderGrid();
+  if (state.selectedIcon) updatePanel();
+}
+
+function setSpeed(s, btn) {
+  state.speed = s;
+  document.querySelectorAll('.filter-btns .seg-btn').forEach(b => {
+    if (['slow','normal','fast'].includes(b.textContent.toLowerCase())) b.classList.remove('active');
+  });
+  btn.classList.add('active');
+  renderGrid();
+  if (state.selectedIcon) updatePanel();
+}
+
+function setFilter(f, btn) {
+  state.filter = f;
+  document.querySelectorAll('.filter-btns .seg-btn').forEach(b => {
+    if (['all','ui / system','healthcare'].includes(b.textContent.toLowerCase())) b.classList.remove('active');
+  });
+  btn.classList.add('active');
+  renderGrid();
+}
+
+function toggleLoop() {
+  state.loop = !state.loop;
+  const t = document.getElementById('loopToggle');
+  const l = document.getElementById('loopLabel');
+  t.classList.toggle('on', state.loop);
+  l.textContent = state.loop ? 'On' : 'Off';
+  renderGrid();
+  if (state.selectedIcon) updatePanel();
+}
+
+function toggleAutoPlay() {
+  state.autoPlay = !state.autoPlay;
+  const t = document.getElementById('autoPlayToggle');
+  const l = document.getElementById('autoPlayLabel');
+  t.classList.toggle('on', state.autoPlay);
+  l.textContent = state.autoPlay ? 'On' : 'Off';
+  renderGrid();
+  if (state.selectedIcon) updatePanel();
+}
+
+// ─── Panel ────────────────────────────────────────────────────────────────────
+function findIcon(name) {
+  return [...ICONS.ui, ...ICONS.healthcare].find(i => i.name === name);
+}
+
+function selectIcon(name, cat) {
+  state.selectedIcon = name;
+  document.getElementById('codePanel').classList.add('open');
+  document.getElementById('overlay').classList.add('visible');
+  updatePanel();
+  renderGrid();
+}
+
+function updatePanel() {
+  const icon = findIcon(state.selectedIcon);
+  if (!icon) return;
+  document.getElementById('panelTitle').textContent = icon.name;
+  document.getElementById('panelSub').textContent = icon.label;
+  document.getElementById('panelPreview').innerHTML = icon.svg(state.color, 72);
+
+  const props = [
+    `size={${state.size}}`,
+    `color="${state.color}"`,
+    state.speed !== 'normal' ? `speed="${state.speed}"` : null,
+    !state.loop ? `loop={false}` : null,
+    !state.autoPlay ? `autoPlay={false}` : null,
+  ].filter(Boolean).join('\n  ');
+
+  document.getElementById('codeReact').textContent =
+    `import { ${icon.name} } from '@animicons/react'\n\n<${icon.name}\n  ${props}\n/>`;
+  document.getElementById('codeRN').textContent =
+    `import { ${icon.name} } from '@animicons/react-native'\n\n<${icon.name}\n  ${props}\n/>`;
+}
+
+function closePanel() {
+  state.selectedIcon = null;
+  document.getElementById('codePanel').classList.remove('open');
+  document.getElementById('overlay').classList.remove('visible');
+  renderGrid();
+}
+
+// ─── Install tabs ─────────────────────────────────────────────────────────────
+function switchInstall(platform, btn) {
+  document.querySelectorAll('.install-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const cmd = platform === 'react'
+    ? 'npm install @animicons/react react-native-svg'
+    : 'npm install @animicons/react-native react-native-svg react-native-reanimated';
+  document.getElementById('installCmd').textContent = cmd;
+}
+
+// ─── Copy helpers ─────────────────────────────────────────────────────────────
+function copyInstall(btn) {
+  navigator.clipboard.writeText(document.getElementById('installCmd').textContent);
+  btn.textContent = 'Copied!'; btn.classList.add('copied');
+  setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+}
+
+function copyCode(id, btn) {
+  navigator.clipboard.writeText(document.getElementById(id).textContent);
+  btn.textContent = '✓ Copied'; btn.classList.add('copied');
+  setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+}
+
+// ─── Theme ────────────────────────────────────────────────────────────────────
+function toggleTheme() {
+  const isDark = document.body.dataset.theme === 'dark';
+  document.body.dataset.theme = isDark ? 'light' : 'dark';
+  document.getElementById('themeBtn').textContent = isDark ? '🌙 Dark' : '☀️ Light';
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+renderGrid();
+</script>
+</body>
+</html>
