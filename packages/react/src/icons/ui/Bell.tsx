@@ -1,12 +1,12 @@
 import React, { useId } from 'react';
 import { Svg, Path, Circle } from 'react-native-svg';
-import { IconProps } from '@animicons/shared';
-import { BellPaths } from '@animicons/shared';
+import type { IconProps } from '@animicons/shared';
+import { BellPaths, EASING_CSS } from '@animicons/shared';
 import { resolveStyle } from '../../utils/resolveStyle';
 import { getAnimDuration } from '../../utils/animDuration';
 
 export const Bell: React.FC<IconProps> = ({
-  size = 48, autoPlay = true, loop = true, speed = 'normal', style, ...colorProps
+  size = 48, autoPlay = true, loop = true, speed = 'normal', onAnimationEnd, style, ...colorProps
 }) => {
   const uid = useId().replace(/:/g, '');
   const d = getAnimDuration(speed);
@@ -29,17 +29,18 @@ export const Bell: React.FC<IconProps> = ({
           30% { transform: scale(1.3); }
         }
         .ai-bell-body-${uid} {
-          animation: ai-bell-swing-${uid} ${d.long}ms ease-in-out ${iterCount};
+          animation: ai-bell-swing-${uid} ${d.long}ms ${EASING_CSS.easeInOut} ${iterCount};
           animation-play-state: ${playState};
           transform-origin: 24px 12px;
         }
         .ai-bell-badge-${uid} {
-          animation: ai-bell-badge-${uid} ${d.long}ms ease-in-out ${iterCount};
+          animation: ai-bell-badge-${uid} ${d.long}ms ${EASING_CSS.easeInOut} ${iterCount};
           animation-play-state: ${playState};
           transform-origin: 34px 12px;
         }
       `}</style>
-      <Svg width={size} height={size} viewBox={BellPaths.viewBox} style={style as any}>
+      <Svg width={size} height={size} viewBox={BellPaths.viewBox} style={style as any}
+        {...({ onAnimationEnd: loop ? undefined : onAnimationEnd } as any)}>
         <Path {...({ className: `ai-bell-body-${uid}` } as any)} d={BellPaths.bell} stroke={s.stroke} strokeWidth={s.strokeWidth} fill={s.secondaryColor} opacity={s.opacity} />
         <Path d={BellPaths.clapper} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" strokeLinecap="round" opacity={s.opacity} />
         <Path d={BellPaths.handle} stroke={s.stroke} strokeWidth={s.strokeWidth} strokeLinecap="round" fill="none" opacity={s.opacity} />

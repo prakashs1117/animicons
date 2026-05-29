@@ -1,12 +1,12 @@
 import React, { useId } from 'react';
 import { Svg, Path, Circle } from 'react-native-svg';
-import { IconProps } from '@animicons/shared';
+import type { IconProps } from '@animicons/shared';
 import { WifiPaths } from '@animicons/shared';
 import { resolveStyle } from '../../utils/resolveStyle';
 import { getAnimDuration } from '../../utils/animDuration';
 
 export const Wifi: React.FC<IconProps> = ({
-  size = 48, autoPlay = true, loop = true, speed = 'normal', style, ...colorProps
+  size = 48, autoPlay = true, loop = true, speed = 'normal', onAnimationEnd, style, ...colorProps
 }) => {
   const uid = useId().replace(/:/g, '');
   const d = getAnimDuration(speed);
@@ -25,7 +25,8 @@ export const Wifi: React.FC<IconProps> = ({
         .ai-wifi-a2-${uid} { animation: ai-wifi-fade-${uid} ${d.medium}ms ease ${iterCount}; animation-play-state: ${playState}; animation-delay: ${d.stagger}ms; }
         .ai-wifi-a3-${uid} { animation: ai-wifi-fade-${uid} ${d.medium}ms ease ${iterCount}; animation-play-state: ${playState}; animation-delay: ${d.stagger * 2}ms; }
       `}</style>
-      <Svg width={size} height={size} viewBox={WifiPaths.viewBox} style={style as any}>
+      <Svg width={size} height={size} viewBox={WifiPaths.viewBox} style={style as any}
+        {...({ onAnimationEnd: loop ? undefined : onAnimationEnd } as any)}>
         <Path {...({ className: `ai-wifi-a1-${uid}` } as any)} d={WifiPaths.arc1} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" strokeLinecap="round" opacity={s.opacity} />
         <Path {...({ className: `ai-wifi-a2-${uid}` } as any)} d={WifiPaths.arc2} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" strokeLinecap="round" opacity={s.opacity} />
         <Path {...({ className: `ai-wifi-a3-${uid}` } as any)} d={WifiPaths.arc3} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" strokeLinecap="round" opacity={s.opacity} />

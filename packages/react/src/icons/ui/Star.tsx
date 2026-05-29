@@ -1,12 +1,12 @@
 import React, { useId, useState } from 'react';
 import { Svg, Path } from 'react-native-svg';
-import { IconProps } from '@animicons/shared';
+import type { IconProps } from '@animicons/shared';
 import { StarPaths } from '@animicons/shared';
 import { resolveStyle } from '../../utils/resolveStyle';
 import { getAnimDuration } from '../../utils/animDuration';
 
 export const Star: React.FC<IconProps> = ({
-  size = 48, autoPlay = true, speed = 'normal', onAnimationEnd, style, ...colorProps
+  size = 48, autoPlay = true, loop: _loop, speed = 'normal', onAnimationEnd, style, ...colorProps
 }) => {
   const uid = useId().replace(/:/g, '');
   const d = getAnimDuration(speed);

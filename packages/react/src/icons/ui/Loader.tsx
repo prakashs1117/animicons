@@ -1,7 +1,7 @@
 import React, { useId } from 'react';
 import { Svg, Path } from 'react-native-svg';
-import { IconProps } from '@animicons/shared';
-import { LoaderPaths } from '@animicons/shared';
+import type { IconProps } from '@animicons/shared';
+import { LoaderPaths, EASING_CSS } from '@animicons/shared';
 import { resolveStyle } from '../../utils/resolveStyle';
 import { getAnimDuration } from '../../utils/animDuration';
 
@@ -28,12 +28,15 @@ export const Loader: React.FC<IconProps> = ({
           to   { transform: rotate(360deg); }
         }
         .ai-loader-${uid} {
-          animation: ai-spin-${uid} ${d.medium}ms linear ${iterCount};
+          animation: ai-spin-${uid} ${d.medium}ms ${EASING_CSS.linear} ${iterCount};
           animation-play-state: ${playState};
           transform-origin: 24px 24px;
         }
       `}</style>
-      <Svg width={size} height={size} viewBox={LoaderPaths.viewBox} style={style as any}>
+      <Svg
+        width={size} height={size} viewBox={LoaderPaths.viewBox} style={style as any}
+        {...({ onAnimationEnd: loop ? undefined : onAnimationEnd } as any)}
+      >
         <Path
           {...({ className: `ai-loader-${uid}` } as any)}
           d={LoaderPaths.arc}

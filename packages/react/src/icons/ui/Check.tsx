@@ -1,12 +1,12 @@
 import React, { useId } from 'react';
 import { Svg, Path } from 'react-native-svg';
-import { IconProps } from '@animicons/shared';
+import type { IconProps } from '@animicons/shared';
 import { CheckPaths } from '@animicons/shared';
 import { resolveStyle } from '../../utils/resolveStyle';
 import { getAnimDuration } from '../../utils/animDuration';
 
 export const Check: React.FC<IconProps> = ({
-  size = 48, autoPlay = true, loop = false, speed = 'normal', style, ...colorProps
+  size = 48, autoPlay = true, loop = false, speed = 'normal', onAnimationEnd, style, ...colorProps
 }) => {
   const uid = useId().replace(/:/g, '');
   const d = getAnimDuration(speed);
@@ -37,7 +37,8 @@ export const Check: React.FC<IconProps> = ({
           animation-delay: ${d.short * 0.6}ms;
         }
       `}</style>
-      <Svg width={size} height={size} viewBox={CheckPaths.viewBox} style={style as any}>
+      <Svg width={size} height={size} viewBox={CheckPaths.viewBox} style={style as any}
+        {...({ onAnimationEnd: loop ? undefined : onAnimationEnd } as any)}>
         <Path {...({ className: `ai-check-circle-${uid}` } as any)} d={CheckPaths.circle} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} />
         <Path {...({ className: `ai-check-mark-${uid}` } as any)} d={CheckPaths.check} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" strokeLinecap="round" opacity={s.opacity} />
       </Svg>

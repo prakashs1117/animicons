@@ -1,12 +1,12 @@
 import React, { useId } from 'react';
 import { Svg, Circle } from 'react-native-svg';
-import { IconProps } from '@animicons/shared';
-import { PulsePaths } from '@animicons/shared';
+import type { IconProps } from '@animicons/shared';
+import { PulsePaths, EASING_CSS } from '@animicons/shared';
 import { resolveStyle } from '../../utils/resolveStyle';
 import { getAnimDuration } from '../../utils/animDuration';
 
 export const Pulse: React.FC<IconProps> = ({
-  size = 48, autoPlay = true, loop = true, speed = 'normal', style, ...colorProps
+  size = 48, autoPlay = true, loop = true, speed = 'normal', onAnimationEnd, style, ...colorProps
 }) => {
   const uid = useId().replace(/:/g, '');
   const d = getAnimDuration(speed);
@@ -18,17 +18,18 @@ export const Pulse: React.FC<IconProps> = ({
     <>
       <style>{`
         @keyframes ai-pulse-ring-${uid} {
-          0%   { r: 4; opacity: 0.8; }
-          100% { r: 20; opacity: 0; }
+          0%   { transform: scale(0.2); opacity: 0.8; }
+          100% { transform: scale(1);   opacity: 0; }
         }
-        .ai-pulse-r1-${uid} { animation: ai-pulse-ring-${uid} ${d.medium}ms ease-out ${iterCount}; animation-play-state: ${playState}; animation-delay: 0ms; }
-        .ai-pulse-r2-${uid} { animation: ai-pulse-ring-${uid} ${d.medium}ms ease-out ${iterCount}; animation-play-state: ${playState}; animation-delay: ${d.stagger}ms; }
-        .ai-pulse-r3-${uid} { animation: ai-pulse-ring-${uid} ${d.medium}ms ease-out ${iterCount}; animation-play-state: ${playState}; animation-delay: ${d.stagger * 2}ms; }
+        .ai-pulse-r1-${uid} { animation: ai-pulse-ring-${uid} ${d.medium}ms ${EASING_CSS.easeOut} ${iterCount}; animation-play-state: ${playState}; animation-delay: 0ms; transform-origin: 24px 24px; }
+        .ai-pulse-r2-${uid} { animation: ai-pulse-ring-${uid} ${d.medium}ms ${EASING_CSS.easeOut} ${iterCount}; animation-play-state: ${playState}; animation-delay: ${d.stagger}ms; transform-origin: 24px 24px; }
+        .ai-pulse-r3-${uid} { animation: ai-pulse-ring-${uid} ${d.medium}ms ${EASING_CSS.easeOut} ${iterCount}; animation-play-state: ${playState}; animation-delay: ${d.stagger * 2}ms; transform-origin: 24px 24px; }
       `}</style>
-      <Svg width={size} height={size} viewBox={PulsePaths.viewBox} style={style as any}>
-        <Circle {...({ className: `ai-pulse-r1-${uid}` } as any)} cx="24" cy="24" r="4" stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} />
-        <Circle {...({ className: `ai-pulse-r2-${uid}` } as any)} cx="24" cy="24" r="4" stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} />
-        <Circle {...({ className: `ai-pulse-r3-${uid}` } as any)} cx="24" cy="24" r="4" stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} />
+      <Svg width={size} height={size} viewBox={PulsePaths.viewBox} style={style as any}
+        {...({ onAnimationEnd: loop ? undefined : onAnimationEnd } as any)}>
+        <Circle {...({ className: `ai-pulse-r1-${uid}` } as any)} cx="24" cy="24" r="20" stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} />
+        <Circle {...({ className: `ai-pulse-r2-${uid}` } as any)} cx="24" cy="24" r="20" stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} />
+        <Circle {...({ className: `ai-pulse-r3-${uid}` } as any)} cx="24" cy="24" r="20" stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} />
         <Circle cx="24" cy="24" r="3" fill={s.stroke} opacity={s.opacity} />
       </Svg>
     </>
