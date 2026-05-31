@@ -41,7 +41,7 @@ export const Camera: React.FC<IconProps> = ({
           d={CameraPaths.inner} stroke={s.stroke} strokeWidth={s.strokeWidth}
           fill={s.fill} opacity={s.opacity} />
         <Path {...({ className: `ai-cam-flash-${uid}` } as any)}
-          d="M6 14 L42 14 L42 40 L6 40 Z" fill="white" opacity={0} />
+          d={CameraPaths.flashOverlay} fill="white" />
       </Svg>
     </>
   );

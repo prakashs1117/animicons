@@ -4,4 +4,5 @@ export const CameraPaths = {
   notch: 'M16 14 L19 8 L29 8 L32 14',
   lens:  'M24 20 a8 8 0 1 0 0.01 0',
   inner: 'M24 24 a4 4 0 1 0 0.01 0',
+  flashOverlay: 'M6 14 L42 14 L42 40 L6 40 Z',
 } as const;
