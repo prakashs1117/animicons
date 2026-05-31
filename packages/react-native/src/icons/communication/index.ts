@@ -1,0 +1,10 @@
+export { Mail }     from './Mail';
+export { Chat }     from './Chat';
+export { Phone }    from './Phone';
+export { Video }    from './Video';
+export { User }     from './User';
+export { Users }    from './Users';
+export { ThumbsUp } from './ThumbsUp';
+export { Send }     from './Send';
+export { Reaction } from './Reaction';
+export { Mention }  from './Mention';
