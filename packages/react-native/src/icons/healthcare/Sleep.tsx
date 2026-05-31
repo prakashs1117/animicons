@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Svg, Path } from 'react-native-svg';
 import Animated, {
-  useSharedValue, useAnimatedProps, useAnimatedStyle,
+  useSharedValue, useAnimatedProps,
   withRepeat, withTiming, withDelay, cancelAnimation, Easing,
 } from 'react-native-reanimated';
 import type { IconProps } from '@animicons/shared';
@@ -36,7 +36,7 @@ export const Sleep: React.FC<IconProps> = ({
     }
   }, [autoPlay, loop, speed]);
 
-  const moonStyle = useAnimatedStyle(() => ({ transform: [{ scale: moonScale.value }] }));
+  const moonProps = useAnimatedProps(() => ({ transform: [{ scale: moonScale.value }], originX: 19, originY: 24 }));
   const star1Props = useAnimatedProps(() => ({ opacity: star1Op.value }));
   const star2Props = useAnimatedProps(() => ({ opacity: star2Op.value }));
   const z1Props = useAnimatedProps(() => ({ opacity: z1Op.value, transform: [{ translateY: z1Y.value }] }));
@@ -44,11 +44,7 @@ export const Sleep: React.FC<IconProps> = ({
 
   return (
     <Svg width={size} height={size} viewBox={SleepPaths.viewBox} style={style as any}>
-      <Animated.View style={[{ position: 'absolute' }, moonStyle]}>
-        <Svg width={size} height={size} viewBox={SleepPaths.viewBox} style={{ position: 'absolute' }}>
-          <Path d={SleepPaths.moon} stroke={s.stroke} strokeWidth={s.strokeWidth} fill={s.secondaryColor} opacity={s.opacity} />
-        </Svg>
-      </Animated.View>
+      <AnimatedPath animatedProps={moonProps} d={SleepPaths.moon} stroke={s.stroke} strokeWidth={s.strokeWidth} fill={s.secondaryColor} opacity={s.opacity} />
       <AnimatedPath animatedProps={star1Props} d={SleepPaths.star1} fill={s.fill} opacity={s.opacity} />
       <AnimatedPath animatedProps={star2Props} d={SleepPaths.star2} fill={s.fill} opacity={s.opacity} />
       <AnimatedPath animatedProps={z1Props} d={SleepPaths.z1} stroke={s.stroke} strokeWidth={2} fill="none" strokeLinecap="round" strokeLinejoin="round" />

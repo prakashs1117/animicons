@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Svg, Path } from 'react-native-svg';
 import Animated, {
-  useSharedValue, useAnimatedProps, useAnimatedStyle,
+  useSharedValue, useAnimatedProps,
   withRepeat, withTiming, cancelAnimation, Easing,
 } from 'react-native-reanimated';
 import type { IconProps } from '@animicons/shared';
@@ -28,17 +28,14 @@ export const Medkit: React.FC<IconProps> = ({
     }
   }, [autoPlay, loop, speed]);
 
-  const bodyStyle = useAnimatedStyle(() => ({ transform: [{ translateY: bodyY.value }] }));
-  const crossProps = useAnimatedProps(() => ({ transform: [{ scale: crossScale.value }], originX: 24, originY: 27 }));
+  const boxProps = useAnimatedProps(() => ({ transform: [{ translateY: bodyY.value }] }));
+  const handleProps = useAnimatedProps(() => ({ transform: [{ translateY: bodyY.value }] }));
+  const crossProps = useAnimatedProps(() => ({ transform: [{ translateY: bodyY.value }, { scale: crossScale.value }], originX: 24, originY: 27 }));
 
   return (
     <Svg width={size} height={size} viewBox={MedkitPaths.viewBox} style={style as any}>
-      <Animated.View style={[{ position: 'absolute' }, bodyStyle]}>
-        <Svg width={size} height={size} viewBox={MedkitPaths.viewBox} style={{ position: 'absolute' }}>
-          <Path d={MedkitPaths.box} stroke={s.stroke} strokeWidth={s.strokeWidth} fill={s.secondaryColor} opacity={s.opacity} />
-          <Path d={MedkitPaths.handle} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" strokeLinecap="round" opacity={s.opacity} />
-        </Svg>
-      </Animated.View>
+      <AnimatedPath animatedProps={boxProps} d={MedkitPaths.box} stroke={s.stroke} strokeWidth={s.strokeWidth} fill={s.secondaryColor} opacity={s.opacity} />
+      <AnimatedPath animatedProps={handleProps} d={MedkitPaths.handle} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" strokeLinecap="round" opacity={s.opacity} />
       <AnimatedPath animatedProps={crossProps} d={`${MedkitPaths.crossV} ${MedkitPaths.crossH}`} stroke={s.fill} strokeWidth={3} strokeLinecap="round" fill="none" opacity={s.opacity} />
     </Svg>
   );

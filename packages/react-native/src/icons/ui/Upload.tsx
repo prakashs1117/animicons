@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Svg, Path } from 'react-native-svg';
 import Animated, {
-  useSharedValue, useAnimatedStyle, useAnimatedProps,
+  useSharedValue, useAnimatedProps,
   withRepeat, withTiming, cancelAnimation, Easing,
 } from 'react-native-reanimated';
 import type { IconProps } from '@animicons/shared';
@@ -34,16 +34,12 @@ export const Upload: React.FC<IconProps> = ({
     }
   }, [autoPlay, loop, speed]);
 
-  const arrowStyle = useAnimatedStyle(() => ({ transform: [{ translateY: translateY.value }] }));
+  const arrowProps = useAnimatedProps(() => ({ transform: [{ translateY: translateY.value }] }));
   const barProps = useAnimatedProps(() => ({ strokeDashoffset: barDash.value }));
 
   return (
     <Svg width={size} height={size} viewBox={UploadPaths.viewBox} style={style as any}>
-      <Animated.View style={arrowStyle}>
-        <Svg width={size} height={size} viewBox={UploadPaths.viewBox} style={{ position: 'absolute' }}>
-          <Path d={UploadPaths.arrow} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" strokeLinecap="round" strokeLinejoin="round" opacity={s.opacity} />
-        </Svg>
-      </Animated.View>
+      <AnimatedPath animatedProps={arrowProps} d={UploadPaths.arrow} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" strokeLinecap="round" strokeLinejoin="round" opacity={s.opacity} />
       <AnimatedPath animatedProps={barProps} d={UploadPaths.bar} stroke={s.stroke} strokeWidth={s.strokeWidth} strokeLinecap="round" fill="none" strokeDasharray={28} opacity={s.opacity} />
     </Svg>
   );

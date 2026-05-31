@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Svg, Path, Circle } from 'react-native-svg';
 import Animated, {
-  useSharedValue, useAnimatedProps, useAnimatedStyle,
+  useSharedValue, useAnimatedProps,
   withRepeat, withSequence, withTiming, cancelAnimation, Easing,
 } from 'react-native-reanimated';
 import type { IconProps } from '@animicons/shared';
@@ -37,15 +37,11 @@ export const Thermometer: React.FC<IconProps> = ({
   }, [autoPlay, loop, speed]);
 
   const mercuryProps = useAnimatedProps(() => ({ transform: [{ scaleY: mercuryScale.value }], originY: 34 }));
-  const tubeStyle = useAnimatedStyle(() => ({ transform: [{ rotate: `${tubeRotation.value}deg` }] }));
+  const tubeProps = useAnimatedProps(() => ({ transform: [{ rotate: `${tubeRotation.value}deg` }], originX: 24, originY: 24 }));
 
   return (
     <Svg width={size} height={size} viewBox={ThermometerPaths.viewBox} style={style as any}>
-      <Animated.View style={[{ position: 'absolute' }, tubeStyle]}>
-        <Svg width={size} height={size} viewBox={ThermometerPaths.viewBox} style={{ position: 'absolute' }}>
-          <Path d={ThermometerPaths.tube} stroke={s.stroke} strokeWidth={s.strokeWidth} fill={s.secondaryColor} opacity={s.opacity} />
-        </Svg>
-      </Animated.View>
+      <AnimatedPath animatedProps={tubeProps} d={ThermometerPaths.tube} stroke={s.stroke} strokeWidth={s.strokeWidth} fill={s.secondaryColor} opacity={s.opacity} />
       <AnimatedPath animatedProps={mercuryProps} d={ThermometerPaths.mercury} fill={s.fill} opacity={s.opacity} />
       <Circle cx="24" cy="40" r={5} fill={s.fill} opacity={s.opacity} />
     </Svg>

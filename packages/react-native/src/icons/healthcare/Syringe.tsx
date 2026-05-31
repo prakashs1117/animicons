@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Svg, Path } from 'react-native-svg';
 import Animated, {
-  useSharedValue, useAnimatedProps, useAnimatedStyle,
+  useSharedValue, useAnimatedProps,
   withRepeat, withSequence, withTiming, cancelAnimation, Easing,
 } from 'react-native-reanimated';
 import type { IconProps } from '@animicons/shared';
@@ -32,7 +32,7 @@ export const Syringe: React.FC<IconProps> = ({
     }
   }, [autoPlay, loop, speed]);
 
-  const plungerStyle = useAnimatedStyle(() => ({ transform: [{ translateX: plungerX.value }] }));
+  const plungerProps = useAnimatedProps(() => ({ transform: [{ translateX: plungerX.value }] }));
   const liquidProps = useAnimatedProps(() => ({ transform: [{ scaleX: liquidScale.value }], originX: 14 }));
   const dropProps = useAnimatedProps(() => ({ opacity: dropOp.value, transform: [{ translateY: dropY.value }] }));
 
@@ -40,11 +40,7 @@ export const Syringe: React.FC<IconProps> = ({
     <Svg width={size} height={size} viewBox={SyringePaths.viewBox} style={style as any}>
       <Path d={SyringePaths.barrel} stroke={s.stroke} strokeWidth={s.strokeWidth} fill={s.secondaryColor} opacity={s.opacity} />
       <AnimatedPath animatedProps={liquidProps} d={SyringePaths.liquid} fill={s.fill} opacity={s.opacity * 0.7} />
-      <Animated.View style={[{ position: 'absolute' }, plungerStyle]}>
-        <Svg width={size} height={size} viewBox={SyringePaths.viewBox} style={{ position: 'absolute' }}>
-          <Path d={SyringePaths.plunger} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" strokeLinecap="round" opacity={s.opacity} />
-        </Svg>
-      </Animated.View>
+      <AnimatedPath animatedProps={plungerProps} d={SyringePaths.plunger} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" strokeLinecap="round" opacity={s.opacity} />
       <Path d={SyringePaths.needle} stroke={s.stroke} strokeWidth={s.strokeWidth} strokeLinecap="round" fill="none" opacity={s.opacity} />
       <AnimatedPath animatedProps={dropProps} d={SyringePaths.drop} fill={s.fill} />
     </Svg>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Svg, Path } from 'react-native-svg';
 import Animated, {
-  useSharedValue, useAnimatedProps, useAnimatedStyle,
+  useSharedValue, useAnimatedProps,
   withRepeat, withTiming, cancelAnimation, Easing,
 } from 'react-native-reanimated';
 import type { IconProps } from '@animicons/shared';
@@ -28,17 +28,14 @@ export const Pill: React.FC<IconProps> = ({
     }
   }, [autoPlay, loop, speed]);
 
-  const bodyStyle = useAnimatedStyle(() => ({ transform: [{ translateY: translateY.value }] }));
-  const shineProps = useAnimatedProps(() => ({ opacity: shineOp.value }));
+  const capsuleProps = useAnimatedProps(() => ({ transform: [{ translateY: translateY.value }] }));
+  const dividerProps = useAnimatedProps(() => ({ transform: [{ translateY: translateY.value }] }));
+  const shineProps = useAnimatedProps(() => ({ opacity: shineOp.value, transform: [{ translateY: translateY.value }] }));
 
   return (
     <Svg width={size} height={size} viewBox={PillPaths.viewBox} style={style as any}>
-      <Animated.View style={[{ position: 'absolute' }, bodyStyle]}>
-        <Svg width={size} height={size} viewBox={PillPaths.viewBox} style={{ position: 'absolute' }}>
-          <Path d={PillPaths.capsule} stroke={s.stroke} strokeWidth={s.strokeWidth} fill={s.secondaryColor} opacity={s.opacity} />
-          <Path d={PillPaths.divider} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} />
-        </Svg>
-      </Animated.View>
+      <AnimatedPath animatedProps={capsuleProps} d={PillPaths.capsule} stroke={s.stroke} strokeWidth={s.strokeWidth} fill={s.secondaryColor} opacity={s.opacity} />
+      <AnimatedPath animatedProps={dividerProps} d={PillPaths.divider} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} />
       <AnimatedPath animatedProps={shineProps} d={PillPaths.shine} stroke="white" strokeWidth={2} fill="none" strokeLinecap="round" />
     </Svg>
   );
