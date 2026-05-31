@@ -594,8 +594,8 @@ const ICONS = {
   ],
   media: [
     { name: 'Play',        label: 'Play',             svg: (c, s) => playIcon(c, s) },
-    { name: 'Pause',       label: 'Pause',            svg: (c, s) => pause(c, s) },
-    { name: 'Stop',        label: 'Stop',             svg: (c, s) => stop(c, s) },
+    { name: 'Pause',       label: 'Pause',            svg: (c, s) => pauseIcon(c, s) },
+    { name: 'Stop',        label: 'Stop',             svg: (c, s) => stopIcon(c, s) },
     { name: 'FastForward', label: 'Fast Forward',     svg: (c, s) => fastForward(c, s) },
     { name: 'Rewind',      label: 'Rewind',           svg: (c, s) => rewind(c, s) },
     { name: 'Volume',      label: 'Volume / Speaker', svg: (c, s) => volume(c, s) },
@@ -605,7 +605,7 @@ const ICONS = {
   device: [
     { name: 'Battery',    label: 'Battery',           svg: (c, s) => battery(c, s) },
     { name: 'Bluetooth',  label: 'Bluetooth',         svg: (c, s) => bluetooth(c, s) },
-    { name: 'Location',   label: 'GPS / Location',    svg: (c, s) => location(c, s) },
+    { name: 'Location',   label: 'GPS / Location',    svg: (c, s) => locationIcon(c, s) },
     { name: 'CloudSync',  label: 'Cloud Sync',        svg: (c, s) => cloudSync(c, s) },
     { name: 'Camera',     label: 'Camera',            svg: (c, s) => camera(c, s) },
     { name: 'Brightness', label: 'Brightness / Sun',  svg: (c, s) => brightness(c, s) },
@@ -1236,7 +1236,7 @@ function phone(c, size) {
   `);
 }
 
-function video(c, size) {
+function videoIcon(c, size) {
   const id = nextId(); const dd = d();
   return `<style>
     @keyframes ${id}-blink{0%,49%,51%,100%{opacity:1}50%{opacity:0}}
@@ -1551,7 +1551,7 @@ function playIcon(c, size) {
   `);
 }
 
-function pause(c, size) {
+function pauseIcon(c, size) {
   const id = nextId(); const dd = d();
   return `<style>
     @keyframes ${id}-br{0%,100%{transform:scaleY(1)}50%{transform:scaleY(0.6)}}
@@ -1563,7 +1563,7 @@ function pause(c, size) {
   `);
 }
 
-function stop(c, size) {
+function stopIcon(c, size) {
   const id = nextId(); const dd = d();
   return `<style>
     @keyframes ${id}-pl{0%{transform:scale(1)}40%{transform:scale(1.15)}100%{transform:scale(1)}}
@@ -1667,7 +1667,7 @@ function bluetooth(c, size) {
   `);
 }
 
-function location(c, size) {
+function locationIcon(c, size) {
   const id = nextId(); const dd = d();
   return `<style>
     @keyframes ${id}-drop{0%{transform:translateY(-20px);opacity:0}60%{transform:translateY(4px)}80%{transform:translateY(-2px)}100%{transform:translateY(0);opacity:1}}
