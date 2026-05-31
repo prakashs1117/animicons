@@ -38,7 +38,7 @@ export const Camera: React.FC<IconProps> = ({
     }
   }, [autoPlay, loop, speed]);
 
-  const lensProps  = useAnimatedProps(() => ({ opacity: lensOp.value }));
+  const lensProps  = useAnimatedProps(() => ({ opacity: lensOp.value * s.opacity }));
   const flashProps = useAnimatedProps(() => ({ opacity: flashOp.value }));
 
   return (

@@ -37,7 +37,7 @@ export const Image: React.FC<IconProps> = ({
   }, [autoPlay, loop, speed]);
 
   const sunProps   = useAnimatedProps(() => ({ transform: [{ translateY: sunY.value }] }));
-  const frameProps = useAnimatedProps(() => ({ opacity: frameOp.value }));
+  const frameProps = useAnimatedProps(() => ({ opacity: frameOp.value * s.opacity }));
 
   return (
     <Svg width={size} height={size} viewBox={ImagePaths.viewBox} style={style as any}>

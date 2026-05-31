@@ -39,7 +39,7 @@ export const Battery: React.FC<IconProps> = ({
   }, [autoPlay, loop, speed]);
 
   const levelProps = useAnimatedProps(() => ({ strokeDashoffset: levelDash.value }));
-  const boltProps  = useAnimatedProps(() => ({ opacity: boltOp.value }));
+  const boltProps  = useAnimatedProps(() => ({ opacity: boltOp.value * s.opacity }));
 
   return (
     <Svg width={size} height={size} viewBox={BatteryPaths.viewBox} style={style as any}>

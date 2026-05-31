@@ -56,7 +56,7 @@ export const Archive: React.FC<IconProps> = ({
     originX: 24,
     originY: 18,
   }));
-  const itemProps = useAnimatedProps(() => ({ transform: [{ translateY: itemY.value }], opacity: itemOp.value }));
+  const itemProps = useAnimatedProps(() => ({ transform: [{ translateY: itemY.value }], opacity: itemOp.value * s.opacity }));
 
   return (
     <Svg width={size} height={size} viewBox={ArchivePaths.viewBox} style={style as any}>

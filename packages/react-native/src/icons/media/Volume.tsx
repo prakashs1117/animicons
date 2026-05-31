@@ -36,8 +36,8 @@ export const Volume: React.FC<IconProps> = ({
     }
   }, [autoPlay, loop, speed]);
 
-  const wave1Props = useAnimatedProps(() => ({ opacity: w1Op.value }));
-  const wave2Props = useAnimatedProps(() => ({ opacity: w2Op.value }));
+  const wave1Props = useAnimatedProps(() => ({ opacity: w1Op.value * s.opacity }));
+  const wave2Props = useAnimatedProps(() => ({ opacity: w2Op.value * s.opacity }));
 
   return (
     <Svg width={size} height={size} viewBox={VolumePaths.viewBox} style={style as any}>

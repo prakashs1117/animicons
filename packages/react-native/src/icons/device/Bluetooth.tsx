@@ -36,8 +36,8 @@ export const Bluetooth: React.FC<IconProps> = ({
     }
   }, [autoPlay, loop, speed]);
 
-  const ring1Props = useAnimatedProps(() => ({ opacity: r1Op.value }));
-  const ring2Props = useAnimatedProps(() => ({ opacity: r2Op.value }));
+  const ring1Props = useAnimatedProps(() => ({ opacity: r1Op.value * s.opacity }));
+  const ring2Props = useAnimatedProps(() => ({ opacity: r2Op.value * s.opacity }));
 
   return (
     <Svg width={size} height={size} viewBox={BluetoothPaths.viewBox} style={style as any}>

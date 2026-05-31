@@ -53,13 +53,13 @@ export const Microphone: React.FC<IconProps> = ({
     transform: [{ scale: r1Scale.value }],
     originX: 24,
     originY: 20,
-    opacity: r1Op.value,
+    opacity: r1Op.value * s.opacity,
   }));
   const ring2Props = useAnimatedProps(() => ({
     transform: [{ scale: r2Scale.value }],
     originX: 24,
     originY: 20,
-    opacity: r2Op.value,
+    opacity: r2Op.value * s.opacity,
   }));
 
   return (
