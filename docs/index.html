@@ -25,6 +25,12 @@
     --tag-ui-text: #1d4ed8;
     --tag-health: #dcfce7;
     --tag-health-text: #15803d;
+    --tag-actions: #fef3c7; --tag-actions-text: #92400e;
+    --tag-communication: #fce7f3; --tag-communication-text: #9d174d;
+    --tag-settings: #ede9fe; --tag-settings-text: #5b21b6;
+    --tag-files: #e0f2fe; --tag-files-text: #0369a1;
+    --tag-media: #fef9c3; --tag-media-text: #854d0e;
+    --tag-device: #f0fdf4; --tag-device-text: #166534;
   }
   [data-theme="dark"] {
     --bg: #0b0f1a;
@@ -46,6 +52,12 @@
     --tag-ui-text: #93c5fd;
     --tag-health: #14291a;
     --tag-health-text: #86efac;
+    --tag-actions: #451a03; --tag-actions-text: #fbbf24;
+    --tag-communication: #500724; --tag-communication-text: #f9a8d4;
+    --tag-settings: #2d1b69; --tag-settings-text: #c4b5fd;
+    --tag-files: #0c4a6e; --tag-files-text: #7dd3fc;
+    --tag-media: #451a03; --tag-media-text: #fcd34d;
+    --tag-device: #052e16; --tag-device-text: #86efac;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -218,6 +230,12 @@
   }
   .tag-ui { background: var(--tag-ui); color: var(--tag-ui-text); }
   .tag-health { background: var(--tag-health); color: var(--tag-health-text); }
+  .tag-actions { background: var(--tag-actions); color: var(--tag-actions-text); }
+  .tag-communication { background: var(--tag-communication); color: var(--tag-communication-text); }
+  .tag-settings { background: var(--tag-settings); color: var(--tag-settings-text); }
+  .tag-files { background: var(--tag-files); color: var(--tag-files-text); }
+  .tag-media { background: var(--tag-media); color: var(--tag-media-text); }
+  .tag-device { background: var(--tag-device); color: var(--tag-device-text); }
 
   /* CODE PANEL */
   .code-panel {
@@ -304,7 +322,7 @@
 
 <nav>
   <div class="nav-logo">@animicons<span>/react</span></div>
-  <span class="nav-badge">v0.1.1</span>
+  <span class="nav-badge">v0.2.0</span>
   <div class="nav-spacer"></div>
   <div class="nav-links">
     <a class="nav-link" href="https://github.com/prakashs1117/animicons" target="_blank">GitHub</a>
@@ -316,9 +334,9 @@
 <!-- HERO -->
 <section class="hero">
   <h1 class="hero-title">@animicons</h1>
-  <p class="hero-sub">Animated SVG icon library for React and React Native. 21 icons. 60fps. Full colour control. Tree-shakeable.</p>
+  <p class="hero-sub">Animated SVG icon library for React and React Native. 84 icons. 60fps. Full colour control. Tree-shakeable.</p>
   <div class="hero-badges">
-    <span class="badge">✦ 21 Icons</span>
+    <span class="badge">✦ 84 Icons</span>
     <span class="badge">⚡ 60fps</span>
     <span class="badge">🎨 Full colour control</span>
     <span class="badge">🌲 Tree-shakeable</span>
@@ -347,6 +365,12 @@
         <button class="seg-btn active" onclick="setFilter('all', this)">All</button>
         <button class="seg-btn" onclick="setFilter('ui', this)">UI / System</button>
         <button class="seg-btn" onclick="setFilter('healthcare', this)">Healthcare</button>
+        <button class="seg-btn" onclick="setFilter('actions', this)">Actions</button>
+        <button class="seg-btn" onclick="setFilter('communication', this)">Communication</button>
+        <button class="seg-btn" onclick="setFilter('settings', this)">Settings</button>
+        <button class="seg-btn" onclick="setFilter('files', this)">Files</button>
+        <button class="seg-btn" onclick="setFilter('media', this)">Media</button>
+        <button class="seg-btn" onclick="setFilter('device', this)">Device</button>
       </div>
     </div>
 
@@ -417,11 +441,29 @@
 
 <!-- ICON GRID -->
 <div class="grid-section">
-  <div class="section-label" id="uiLabel">UI / System — 8 icons</div>
+  <div class="section-label" id="uiLabel">UI / System — 18 icons</div>
   <div class="icons-grid" id="uiGrid"></div>
 
   <div class="section-label" id="healthLabel">Healthcare — 13 icons</div>
   <div class="icons-grid" id="healthGrid"></div>
+
+  <div class="section-label" id="actionsLabel">Actions — 12 icons</div>
+  <div class="icons-grid" id="actionsGrid"></div>
+
+  <div class="section-label" id="communicationLabel">Communication — 10 icons</div>
+  <div class="icons-grid" id="communicationGrid"></div>
+
+  <div class="section-label" id="settingsLabel">Settings — 9 icons</div>
+  <div class="icons-grid" id="settingsGrid"></div>
+
+  <div class="section-label" id="filesLabel">Files — 8 icons</div>
+  <div class="icons-grid" id="filesGrid"></div>
+
+  <div class="section-label" id="mediaLabel">Media — 8 icons</div>
+  <div class="icons-grid" id="mediaGrid"></div>
+
+  <div class="section-label" id="deviceLabel">Device — 6 icons</div>
+  <div class="icons-grid" id="deviceGrid"></div>
 </div>
 
 <!-- CODE PANEL -->
@@ -469,14 +511,24 @@ let state = {
 // ─── Icon Definitions ────────────────────────────────────────────────────────
 const ICONS = {
   ui: [
-    { name: 'Pulse',  label: 'Live Pulse',        svg: (c, s) => pulse(c, s) },
-    { name: 'Check',  label: 'Success Check',      svg: (c, s) => check(c, s) },
-    { name: 'Loader', label: 'Loader',             svg: (c, s) => loader(c, s) },
-    { name: 'Upload', label: 'Upload',             svg: (c, s) => upload(c, s) },
-    { name: 'Wifi',   label: 'Wifi Signal',        svg: (c, s) => wifi(c, s) },
-    { name: 'Bell',   label: 'Notification Bell',  svg: (c, s) => bell(c, s) },
-    { name: 'Star',   label: 'Favorite Star',      svg: (c, s) => star(c, s) },
-    { name: 'Heart',  label: 'Heartbeat',          svg: (c, s) => heart(c, s) },
+    { name: 'Pulse',          label: 'Live Pulse',          svg: (c, s) => pulse(c, s) },
+    { name: 'Check',          label: 'Success Check',        svg: (c, s) => check(c, s) },
+    { name: 'Loader',         label: 'Loader',               svg: (c, s) => loader(c, s) },
+    { name: 'Upload',         label: 'Upload',               svg: (c, s) => upload(c, s) },
+    { name: 'Wifi',           label: 'Wifi Signal',          svg: (c, s) => wifi(c, s) },
+    { name: 'Bell',           label: 'Notification Bell',    svg: (c, s) => bell(c, s) },
+    { name: 'Star',           label: 'Favorite Star',        svg: (c, s) => star(c, s) },
+    { name: 'Heart',          label: 'Heartbeat',            svg: (c, s) => heart(c, s) },
+    { name: 'Home',           label: 'Home',                 svg: (c, s) => home(c, s) },
+    { name: 'Menu',           label: 'Menu / Hamburger',     svg: (c, s) => menu(c, s) },
+    { name: 'KebabMenu',      label: 'Kebab Menu',           svg: (c, s) => kebabMenu(c, s) },
+    { name: 'MoreHorizontal', label: 'More (Horizontal)',    svg: (c, s) => moreHorizontal(c, s) },
+    { name: 'Back',           label: 'Back Arrow',           svg: (c, s) => back(c, s) },
+    { name: 'Forward',        label: 'Forward Arrow',        svg: (c, s) => forward(c, s) },
+    { name: 'ChevronDown',    label: 'Chevron Down',         svg: (c, s) => chevronDown(c, s) },
+    { name: 'Close',          label: 'Close / X',            svg: (c, s) => closeIcon(c, s) },
+    { name: 'Grid',           label: 'Grid Layout',          svg: (c, s) => grid(c, s) },
+    { name: 'Search',         label: 'Search',               svg: (c, s) => search(c, s) },
   ],
   healthcare: [
     { name: 'ECG',         label: 'ECG Monitor',      svg: (c, s) => ecg(c, s) },
@@ -492,7 +544,72 @@ const ICONS = {
     { name: 'Sleep',       label: 'Sleep Mode',        svg: (c, s) => sleep(c, s) },
     { name: 'Oxygen',      label: 'SpO2 Oxygen',       svg: (c, s) => oxygen(c, s) },
     { name: 'Medkit',      label: 'Med Kit',           svg: (c, s) => medkit(c, s) },
-  ]
+  ],
+  actions: [
+    { name: 'Add',       label: 'Add / Plus',          svg: (c, s) => add(c, s) },
+    { name: 'Edit',      label: 'Edit / Pencil',       svg: (c, s) => edit(c, s) },
+    { name: 'Save',      label: 'Save',                svg: (c, s) => save(c, s) },
+    { name: 'Trash',     label: 'Delete / Trash',      svg: (c, s) => trash(c, s) },
+    { name: 'Share',     label: 'Share',               svg: (c, s) => share(c, s) },
+    { name: 'Download',  label: 'Download',            svg: (c, s) => download(c, s) },
+    { name: 'Refresh',   label: 'Refresh',             svg: (c, s) => refresh(c, s) },
+    { name: 'Sync',      label: 'Sync',                svg: (c, s) => sync(c, s) },
+    { name: 'Copy',      label: 'Copy',                svg: (c, s) => copy(c, s) },
+    { name: 'Pin',       label: 'Pin',                 svg: (c, s) => pin(c, s) },
+    { name: 'Bookmark',  label: 'Bookmark',            svg: (c, s) => bookmark(c, s) },
+    { name: 'Filter',    label: 'Filter',              svg: (c, s) => filter(c, s) },
+  ],
+  communication: [
+    { name: 'Mail',     label: 'Email / Mail',         svg: (c, s) => mail(c, s) },
+    { name: 'Chat',     label: 'Chat Bubble',          svg: (c, s) => chat(c, s) },
+    { name: 'Phone',    label: 'Phone',                svg: (c, s) => phone(c, s) },
+    { name: 'Video',    label: 'Video Call',           svg: (c, s) => video(c, s) },
+    { name: 'User',     label: 'User / Person',        svg: (c, s) => user(c, s) },
+    { name: 'Users',    label: 'Group / Users',        svg: (c, s) => users(c, s) },
+    { name: 'ThumbsUp', label: 'Thumbs Up / Like',     svg: (c, s) => thumbsUp(c, s) },
+    { name: 'Send',     label: 'Send / Paper Plane',   svg: (c, s) => send(c, s) },
+    { name: 'Reaction', label: 'Emoji Reaction',       svg: (c, s) => reaction(c, s) },
+    { name: 'Mention',  label: 'Mention / @',          svg: (c, s) => mention(c, s) },
+  ],
+  settings: [
+    { name: 'Settings', label: 'Settings / Gear',     svg: (c, s) => settingsIcon(c, s) },
+    { name: 'Sliders',  label: 'Sliders / Adjust',    svg: (c, s) => sliders(c, s) },
+    { name: 'Lock',     label: 'Lock',                svg: (c, s) => lock(c, s) },
+    { name: 'Unlock',   label: 'Unlock',              svg: (c, s) => unlock(c, s) },
+    { name: 'Key',      label: 'Key',                 svg: (c, s) => key(c, s) },
+    { name: 'Eye',      label: 'Show / Eye',          svg: (c, s) => eye(c, s) },
+    { name: 'EyeOff',   label: 'Hide / Eye Off',      svg: (c, s) => eyeOff(c, s) },
+    { name: 'Info',     label: 'Info',                svg: (c, s) => info(c, s) },
+    { name: 'Help',     label: 'Help / Question',     svg: (c, s) => help(c, s) },
+  ],
+  files: [
+    { name: 'Folder',     label: 'Folder',            svg: (c, s) => folder(c, s) },
+    { name: 'Document',   label: 'Document',          svg: (c, s) => document(c, s) },
+    { name: 'Image',      label: 'Image / Photo',     svg: (c, s) => image(c, s) },
+    { name: 'Attachment', label: 'Attachment / Clip', svg: (c, s) => attachment(c, s) },
+    { name: 'Cloud',      label: 'Cloud Upload',      svg: (c, s) => cloud(c, s) },
+    { name: 'Link',       label: 'Link / Chain',      svg: (c, s) => link(c, s) },
+    { name: 'Archive',    label: 'Archive',           svg: (c, s) => archive(c, s) },
+    { name: 'Tag',        label: 'Tag / Label',       svg: (c, s) => tag(c, s) },
+  ],
+  media: [
+    { name: 'Play',        label: 'Play',             svg: (c, s) => playIcon(c, s) },
+    { name: 'Pause',       label: 'Pause',            svg: (c, s) => pause(c, s) },
+    { name: 'Stop',        label: 'Stop',             svg: (c, s) => stop(c, s) },
+    { name: 'FastForward', label: 'Fast Forward',     svg: (c, s) => fastForward(c, s) },
+    { name: 'Rewind',      label: 'Rewind',           svg: (c, s) => rewind(c, s) },
+    { name: 'Volume',      label: 'Volume / Speaker', svg: (c, s) => volume(c, s) },
+    { name: 'Mute',        label: 'Mute',             svg: (c, s) => mute(c, s) },
+    { name: 'Microphone',  label: 'Microphone',       svg: (c, s) => microphone(c, s) },
+  ],
+  device: [
+    { name: 'Battery',    label: 'Battery',           svg: (c, s) => battery(c, s) },
+    { name: 'Bluetooth',  label: 'Bluetooth',         svg: (c, s) => bluetooth(c, s) },
+    { name: 'Location',   label: 'GPS / Location',    svg: (c, s) => location(c, s) },
+    { name: 'CloudSync',  label: 'Cloud Sync',        svg: (c, s) => cloudSync(c, s) },
+    { name: 'Camera',     label: 'Camera',            svg: (c, s) => camera(c, s) },
+    { name: 'Brightness', label: 'Brightness / Sun',  svg: (c, s) => brightness(c, s) },
+  ],
 };
 
 // ─── Duration helpers ─────────────────────────────────────────────────────────
@@ -810,20 +927,836 @@ function medkit(c, size) {
   `);
 }
 
+// ─── Navigation & UI additions ────────────────────────────────────────────────
+function home(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-b{0%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}60%{transform:translateY(-3px)}}
+    .${id}-h{animation:${id}-b ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-h" d="M8 24 L24 8 L40 24 L40 40 L8 40 Z" stroke="${c}" stroke-width="2.5" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <path class="${id}-h" d="M18 40 L18 30 L30 30 L30 40" stroke="${c}" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+  `);
+}
+
+function menu(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-t{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(10px) rotate(45deg)}}
+    @keyframes ${id}-m{0%,100%{opacity:1}40%,60%{opacity:0}}
+    @keyframes ${id}-b{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-10px) rotate(-45deg)}}
+    .${id}-t{animation:${id}-t ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 14px}
+    .${id}-m{animation:${id}-m ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+    .${id}-b{animation:${id}-b ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 34px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-t" d="M8 14 L40 14" stroke="${c}" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    <path class="${id}-m" d="M8 24 L40 24" stroke="${c}" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    <path class="${id}-b" d="M8 34 L40 34" stroke="${c}" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  `);
+}
+
+function kebabMenu(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-p{0%,100%{opacity:0.3}50%{opacity:1}}
+    .${id}-d1{animation:${id}-p ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:0ms}
+    .${id}-d2{animation:${id}-p ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger}ms}
+    .${id}-d3{animation:${id}-p ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger*2}ms}
+  </style>` + svgWrap(id, size, `
+    <circle class="${id}-d1" cx="24" cy="12" r="3" fill="${c}"/>
+    <circle class="${id}-d2" cx="24" cy="24" r="3" fill="${c}"/>
+    <circle class="${id}-d3" cx="24" cy="36" r="3" fill="${c}"/>
+  `);
+}
+
+function moreHorizontal(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-p{0%,100%{opacity:0.3}50%{opacity:1}}
+    .${id}-d1{animation:${id}-p ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:0ms}
+    .${id}-d2{animation:${id}-p ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger}ms}
+    .${id}-d3{animation:${id}-p ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger*2}ms}
+  </style>` + svgWrap(id, size, `
+    <circle class="${id}-d1" cx="12" cy="24" r="3" fill="${c}"/>
+    <circle class="${id}-d2" cx="24" cy="24" r="3" fill="${c}"/>
+    <circle class="${id}-d3" cx="36" cy="24" r="3" fill="${c}"/>
+  `);
+}
+
+function back(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-sl{0%,100%{transform:translateX(0)}40%{transform:translateX(-6px)}60%{transform:translateX(-2px)}}
+    .${id}-a{animation:${id}-sl ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-a" d="M30 10 L14 24 L30 38" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  `);
+}
+
+function forward(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-sl{0%,100%{transform:translateX(0)}40%{transform:translateX(6px)}60%{transform:translateX(2px)}}
+    .${id}-a{animation:${id}-sl ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-a" d="M18 10 L34 24 L18 38" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  `);
+}
+
+function chevronDown(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-b{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+    .${id}-c{animation:${id}-b ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-c" d="M10 18 L24 32 L38 18" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  `);
+}
+
+function closeIcon(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-sp{0%{transform:rotate(-45deg) scale(0.5)}70%{transform:rotate(5deg) scale(1.1)}100%{transform:rotate(0) scale(1)}}
+    .${id}-x{animation:${id}-sp ${sec(dd.short)} ease ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-x" d="M10 10 L38 38 M38 10 L10 38" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function grid(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-pop{0%{transform:scale(0);opacity:0}80%{transform:scale(1.1);opacity:1}100%{transform:scale(1);opacity:1}}
+    .${id}-c1{animation:${id}-pop ${sec(dd.medium)} ease ${iter()};animation-play-state:${play()};animation-delay:0ms;transform-origin:14px 14px}
+    .${id}-c2{animation:${id}-pop ${sec(dd.medium)} ease ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger}ms;transform-origin:34px 14px}
+    .${id}-c3{animation:${id}-pop ${sec(dd.medium)} ease ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger*2}ms;transform-origin:14px 34px}
+    .${id}-c4{animation:${id}-pop ${sec(dd.medium)} ease ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger*3}ms;transform-origin:34px 34px}
+  </style>` + svgWrap(id, size, `
+    <rect class="${id}-c1" x="6" y="6" width="16" height="16" rx="2" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <rect class="${id}-c2" x="26" y="6" width="16" height="16" rx="2" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <rect class="${id}-c3" x="6" y="26" width="16" height="16" rx="2" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <rect class="${id}-c4" x="26" y="26" width="16" height="16" rx="2" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+  `);
+}
+
+function search(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-pl{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+    @keyframes ${id}-hd{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+    .${id}-l{animation:${id}-pl ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:20px 20px}
+    .${id}-h{animation:${id}-hd ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <circle class="${id}-l" cx="20" cy="20" r="12" stroke="${c}" stroke-width="2.5" fill="${hex2(c)}"/>
+    <path class="${id}-h" d="M30 30 L42 42" stroke="${c}" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  `);
+}
+
+// ─── Actions ──────────────────────────────────────────────────────────────────
+function add(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-pop{0%{transform:scale(0.8)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+    .${id}-p{animation:${id}-pop ${sec(dd.short)} ease ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-p" d="M24 8 L24 40 M8 24 L40 24" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function edit(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-dr{0%{stroke-dashoffset:60}100%{stroke-dashoffset:0}}
+    .${id}-l{stroke-dasharray:60;animation:${id}-dr ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path d="M10 36 L14 32 L32 14 L36 10 L40 14 L22 32 L18 36 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <path class="${id}-l" d="M8 38 L14 38" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M32 14 L36 10 L40 14 L36 18 Z" stroke="${c}" stroke-width="2" fill="${c}" stroke-linejoin="round"/>
+  `);
+}
+
+function save(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-sd{0%{transform:translateY(-8px);opacity:0}60%{transform:translateY(0);opacity:1}100%{transform:translateY(0);opacity:1}}
+    @keyframes ${id}-chk{0%,50%{stroke-dashoffset:20}100%{stroke-dashoffset:0}}
+    .${id}-b{animation:${id}-sd ${sec(dd.medium)} ease-out ${iter()};animation-play-state:${play()}}
+    .${id}-c{stroke-dasharray:20;animation:${id}-chk ${sec(dd.medium)} ease ${iter()};animation-play-state:${play()};animation-delay:${dd.medium*0.5}ms}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-b" d="M10 6 L10 42 L38 42 L38 14 L30 6 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <path class="${id}-b" d="M16 6 L16 18 L32 18 L32 6" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <path class="${id}-c" d="M16 28 L22 34 L32 24" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  `);
+}
+
+function trash(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+    .${id}-b{animation:${id}-shk ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-b" d="M14 12 L34 12 L32 42 L16 42 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <path class="${id}-b" d="M8 12 L40 12 M20 6 L28 6 M20 18 L20 36 M28 18 L28 36" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function share(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-burst{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+    @keyframes ${id}-sat{0%,100%{opacity:0.3}50%{opacity:1}}
+    .${id}-c{animation:${id}-burst ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+    .${id}-l{animation:${id}-sat ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-l" d="M24 24 L36 12 M24 24 L36 36 M24 24 L8 24" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle class="${id}-c" cx="36" cy="12" r="5" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <circle class="${id}-c" cx="36" cy="36" r="5" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <circle cx="8" cy="24" r="5" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+  `);
+}
+
+function download(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-arr{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+    @keyframes ${id}-bar{0%{stroke-dashoffset:28}50%,100%{stroke-dashoffset:0}}
+    .${id}-a{animation:${id}-arr ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+    .${id}-b{stroke-dasharray:28;animation:${id}-bar ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-a" d="M24 8 L24 32 M14 22 L24 32 L34 22" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="${id}-b" d="M10 38 L38 38" stroke="${c}" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  `);
+}
+
+function refresh(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    .${id}-a{animation:${id}-spin ${sec(dd.medium)} linear ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-a" d="M6 24 a18 18 0 1 1 4 10 M6 24 L6 16 M6 24 L14 24" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  `);
+}
+
+function sync(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-cw{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    @keyframes ${id}-ccw{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+    .${id}-a1{animation:${id}-cw ${sec(dd.long)} linear ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+    .${id}-a2{animation:${id}-ccw ${sec(dd.long)} linear ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-a1" d="M8 20 a16 16 0 0 1 28 -8 M8 20 L8 12 M8 20 L16 20" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="${id}-a2" d="M40 28 a16 16 0 0 1 -28 8 M40 28 L40 36 M40 28 L32 28" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  `);
+}
+
+function copy(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-lft{0%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}60%{transform:translateY(0)}}
+    .${id}-t{animation:${id}-lft ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path d="M14 16 L14 38 L34 38 L34 16 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <path class="${id}-t" d="M18 14 L18 10 L38 10 L38 32 L34 32" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+  `);
+}
+
+function pin(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-drop{0%{transform:translateY(-12px);opacity:0}70%{transform:translateY(3px);opacity:1}85%{transform:translateY(-1px)}100%{transform:translateY(0);opacity:1}}
+    .${id}-p{animation:${id}-drop ${sec(dd.short)} ease-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-p" d="M24 4 L34 14 L30 18 L34 28 L14 28 L18 18 L14 14 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <path class="${id}-p" d="M24 28 L24 44" stroke="${c}" stroke-width="2" stroke-linecap="round" fill="none"/>
+  `);
+}
+
+function bookmark(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-sd{0%{transform:translateY(-10px);opacity:0}100%{transform:translateY(0);opacity:1}}
+    .${id}-b{animation:${id}-sd ${sec(dd.short)} ease-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-b" d="M12 8 L36 8 L36 42 L24 34 L12 42 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+  `);
+}
+
+function filter(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-pl{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.08)}}
+    .${id}-f{animation:${id}-pl ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 16px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-f" d="M6 8 L42 8 L28 24 L28 40 L20 36 L20 24 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+  `);
+}
+
+// ─── Communication ────────────────────────────────────────────────────────────
+function mail(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-op{0%,100%{transform:rotate(0)}40%,60%{transform:rotate(-20deg)}}
+    @keyframes ${id}-ltr{0%,50%{transform:translateY(0);opacity:0}60%,90%{transform:translateY(-8px);opacity:1}100%{transform:translateY(-8px);opacity:0}}
+    .${id}-fl{animation:${id}-op ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 20px}
+    .${id}-l{animation:${id}-ltr ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path d="M6 14 L6 38 L42 38 L42 14 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <path class="${id}-fl" d="M6 14 L24 26 L42 14" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path class="${id}-l" d="M16 24 L32 24" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function chat(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-bbl{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+    @keyframes ${id}-dt{0%,100%{opacity:0.3;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+    .${id}-b{animation:${id}-bbl ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 20px}
+    .${id}-d1{animation:${id}-dt ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:0ms}
+    .${id}-d2{animation:${id}-dt ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger}ms}
+    .${id}-d3{animation:${id}-dt ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger*2}ms}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-b" d="M6 8 L42 8 L42 32 L28 32 L24 40 L20 32 L6 32 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <circle class="${id}-d1" cx="17" cy="20" r="2.5" fill="${c}"/>
+    <circle class="${id}-d2" cx="24" cy="20" r="2.5" fill="${c}"/>
+    <circle class="${id}-d3" cx="31" cy="20" r="2.5" fill="${c}"/>
+  `);
+}
+
+function phone(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-vib{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+    .${id}-p{animation:${id}-vib ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-p" d="M14 8 Q12 8 12 12 L12 36 Q12 40 16 40 L32 40 Q36 40 36 36 L36 12 Q36 8 32 8 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linecap="round"/>
+    <path d="M20 34 L28 34" stroke="${c}" stroke-width="2" stroke-linecap="round" fill="none"/>
+  `);
+}
+
+function video(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-blink{0%,49%,51%,100%{opacity:1}50%{opacity:0}}
+    .${id}-r{animation:${id}-blink ${sec(dd.long)} ease ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path d="M4 14 L28 14 L28 34 L4 34 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <path d="M28 20 L44 14 L44 34 L28 28 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <circle class="${id}-r" cx="22" cy="20" r="3" fill="#ef4444"/>
+  `);
+}
+
+function user(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-br{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+    .${id}-u{animation:${id}-br ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-u" d="M24 22 a8 8 0 1 0 0.01 0" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <path class="${id}-u" d="M8 42 Q8 30 24 30 Q40 30 40 42" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function users(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-u1{0%{transform:translateX(0);opacity:0}60%{transform:translateX(0);opacity:1}100%{transform:translateX(0);opacity:1}}
+    @keyframes ${id}-u2{0%{transform:translateX(8px);opacity:0}60%{transform:translateX(0);opacity:1}100%{transform:translateX(0);opacity:1}}
+    .${id}-a{animation:${id}-u1 ${sec(dd.long)} ease-out ${iter()};animation-play-state:${play()}}
+    .${id}-b{animation:${id}-u2 ${sec(dd.long)} ease-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger}ms}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-a" d="M18 20 a7 7 0 1 0 0.01 0 M4 42 Q4 32 18 32 Q24 32 27 35" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path class="${id}-b" d="M28 18 a8 8 0 1 0 0.01 0 M18 40 Q20 30 32 30 Q44 30 44 40" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linecap="round"/>
+  `);
+}
+
+function thumbsUp(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-up{0%{transform:translateY(0)}30%{transform:translateY(-8px)}60%{transform:translateY(-2px)}100%{transform:translateY(0)}}
+    @keyframes ${id}-gl{0%,100%{opacity:0;transform:scale(0.5)}50%{opacity:0.6;transform:scale(1.3)}}
+    .${id}-t{animation:${id}-up ${sec(dd.short)} ease ${iter()};animation-play-state:${play()}}
+    .${id}-g{animation:${id}-gl ${sec(dd.short)} ease ${iter()};animation-play-state:${play()};transform-origin:24px 20px}
+  </style>` + svgWrap(id, size, `
+    <circle class="${id}-g" cx="24" cy="22" r="14" fill="${hex2(c)}"/>
+    <path class="${id}-t" d="M8 22 L8 40 L16 40 L16 22 Z M16 22 Q16 14 20 10 Q22 8 24 10 L24 20 L34 20 Q38 20 38 24 L36 36 Q35 40 30 40 L16 40" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+  `);
+}
+
+function send(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-fly{0%{transform:translate(0,0);opacity:1}70%{transform:translate(20px,-20px);opacity:0.8}100%{transform:translate(0,0);opacity:1}}
+    .${id}-p{animation:${id}-fly ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-p" d="M8 38 L42 24 L8 10 L14 24 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <path class="${id}-p" d="M14 24 L42 24" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function reaction(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-sm{0%,100%{d:path("M16 28 L32 28")}50%{d:path("M16 28 Q24 36 32 28")}}
+    .${id}-m{animation:${id}-sm ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <circle cx="24" cy="24" r="18" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <circle cx="17" cy="20" r="2.5" fill="${c}"/>
+    <circle cx="31" cy="20" r="2.5" fill="${c}"/>
+    <path class="${id}-m" d="M16 28 L32 28" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function mention(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-dr{0%{stroke-dashoffset:126}100%{stroke-dashoffset:0}}
+    @keyframes ${id}-at{0%{stroke-dashoffset:50}100%{stroke-dashoffset:0}}
+    .${id}-c{stroke-dasharray:126;animation:${id}-dr ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+    .${id}-a{stroke-dasharray:50;animation:${id}-at ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.medium*0.5}ms}
+  </style>` + svgWrap(id, size, `
+    <circle class="${id}-c" cx="24" cy="24" r="18" stroke="${c}" stroke-width="2" fill="none"/>
+    <path class="${id}-a" d="M30 18 a8 8 0 1 0 0 12 L30 24 L36 24 Q38 24 38 20 Q38 12 24 12 Q10 12 10 24 Q10 36 24 36 Q30 36 34 33" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+// ─── Settings ─────────────────────────────────────────────────────────────────
+function settingsIcon(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    .${id}-g{animation:${id}-spin ${sec(dd.long)} linear ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-g" d="M24 16 a8 8 0 1 0 0.01 0" stroke="${c}" stroke-width="2.5" fill="${hex2(c)}"/>
+    <path class="${id}-g" d="M24 6 L24 10 M24 38 L24 42 M6 24 L10 24 M38 24 L42 24 M11.5 11.5 L14.3 14.3 M33.7 33.7 L36.5 36.5 M11.5 36.5 L14.3 33.7 M33.7 14.3 L36.5 11.5" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function sliders(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-k1{0%,100%{transform:translateX(0)}50%{transform:translateX(10px)}}
+    @keyframes ${id}-k2{0%,100%{transform:translateX(0)}50%{transform:translateX(-8px)}}
+    @keyframes ${id}-k3{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+    .${id}-k1{animation:${id}-k1 ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+    .${id}-k2{animation:${id}-k2 ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger}ms}
+    .${id}-k3{animation:${id}-k3 ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger*2}ms}
+  </style>` + svgWrap(id, size, `
+    <path d="M6 14 L42 14 M6 24 L42 24 M6 34 L42 34" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <circle class="${id}-k1" cx="18" cy="14" r="4" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <circle class="${id}-k2" cx="28" cy="24" r="4" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <circle class="${id}-k3" cx="16" cy="34" r="4" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+  `);
+}
+
+function lock(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-b{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    @keyframes ${id}-s{0%,100%{transform:translateY(0)}30%,50%{transform:translateY(-6px)}}
+    .${id}-bd{animation:${id}-b ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+    .${id}-sh{animation:${id}-s ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-sh" d="M16 22 L16 16 a8 8 0 0 1 16 0 L32 22" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-bd" d="M10 22 L38 22 L38 42 L10 42 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <circle class="${id}-bd" cx="24" cy="30" r="3" fill="${c}"/>
+    <path class="${id}-bd" d="M24 33 L24 37" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function unlock(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-sw{0%{transform:rotate(0)}100%{transform:rotate(-60deg)}}
+    .${id}-sh{animation:${id}-sw ${sec(dd.medium)} ease-out ${iter()};animation-play-state:${play()};transform-origin:24px 22px}
+  </style>` + svgWrap(id, size, `
+    <path d="M10 22 L38 22 L38 42 L10 42 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <circle cx="24" cy="30" r="3" fill="${c}"/>
+    <path class="${id}-sh" d="M16 22 L16 16 a8 8 0 0 1 16 0 L36 10" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function key(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    .${id}-k{animation:${id}-spin ${sec(dd.long)} linear ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-k" d="M18 10 a10 10 0 1 0 0.01 0" stroke="${c}" stroke-width="2.5" fill="${hex2(c)}"/>
+    <path class="${id}-k" d="M26 18 L42 34 M34 28 L34 34 M38 32 L38 36" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function eye(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-blink{0%,100%{transform:scaleY(1)}45%,55%{transform:scaleY(0.05)}}
+    .${id}-e{animation:${id}-blink ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-e" d="M4 24 Q24 8 44 24 Q24 40 4 24 Z" stroke="${c}" stroke-width="2.5" fill="${hex2(c)}"/>
+    <circle class="${id}-e" cx="24" cy="24" r="5" stroke="${c}" stroke-width="2" fill="${c}"/>
+  `);
+}
+
+function eyeOff(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-sl{0%{stroke-dashoffset:54}100%{stroke-dashoffset:0}}
+    .${id}-s{stroke-dasharray:54;animation:${id}-sl ${sec(dd.short)} linear ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path d="M4 24 Q24 8 44 24" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <circle cx="24" cy="24" r="8" stroke="${c}" stroke-width="2" fill="none"/>
+    <path class="${id}-s" d="M6 6 L42 42" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function info(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-pl{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+    @keyframes ${id}-bn{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    .${id}-c{animation:${id}-pl ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+    .${id}-i{animation:${id}-bn ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-c" d="M24 6 a18 18 0 1 0 0.01 0" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <circle class="${id}-c" cx="24" cy="18" r="2" fill="${c}"/>
+    <path class="${id}-i" d="M24 24 L24 36" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function help(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    .${id}-h{animation:${id}-fl ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-h" d="M24 6 a18 18 0 1 0 0.01 0" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <path class="${id}-h" d="M18 18 Q18 12 24 12 Q30 12 30 18 Q30 24 24 24 L24 28" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <circle class="${id}-h" cx="24" cy="34" r="2" fill="${c}"/>
+  `);
+}
+
+// ─── Files ────────────────────────────────────────────────────────────────────
+function folder(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-op{0%,100%{transform:rotate(0) translateY(0)}40%{transform:rotate(-10deg) translateY(-4px)}}
+    .${id}-t{animation:${id}-op ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:4px 14px}
+  </style>` + svgWrap(id, size, `
+    <path d="M4 16 L44 16 L44 40 L4 40 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <path class="${id}-t" d="M4 16 L4 10 L20 10 L24 16" stroke="${c}" stroke-width="2" fill="${c}" stroke-linejoin="round"/>
+  `);
+}
+
+function document(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-ln{0%{stroke-dashoffset:18}100%{stroke-dashoffset:0}}
+    .${id}-l1{stroke-dasharray:18;animation:${id}-ln ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:0ms}
+    .${id}-l2{stroke-dasharray:18;animation:${id}-ln ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger}ms}
+    .${id}-l3{stroke-dasharray:18;animation:${id}-ln ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger*2}ms}
+  </style>` + svgWrap(id, size, `
+    <path d="M10 6 L32 6 L38 12 L38 42 L10 42 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <path d="M32 6 L32 12 L38 12" stroke="${c}" stroke-width="2" fill="none"/>
+    <path class="${id}-l1" d="M16 20 L32 20" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path class="${id}-l2" d="M16 26 L32 26" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path class="${id}-l3" d="M16 32 L28 32" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function image(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-sun{0%,100%{transform:translateY(4px)}50%{transform:translateY(0)}}
+    @keyframes ${id}-fd{0%,100%{opacity:0.4}50%{opacity:1}}
+    .${id}-su{animation:${id}-sun ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+    .${id}-fd{animation:${id}-fd ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-fd" d="M4 8 L44 8 L44 40 L4 40 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <path class="${id}-fd" d="M4 32 L16 18 L28 30 L34 24 L44 40 L4 40 Z" stroke="${c}" stroke-width="1" fill="${c}" opacity="0.5"/>
+    <circle class="${id}-su" cx="36" cy="16" r="5" stroke="${c}" stroke-width="2" fill="${c}"/>
+  `);
+}
+
+function attachment(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-sw{0%,100%{transform:rotate(0)}25%{transform:rotate(15deg)}75%{transform:rotate(-15deg)}}
+    .${id}-c{animation:${id}-sw ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 8px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-c" d="M32 20 L32 34 Q32 42 24 42 Q16 42 16 34 L16 16 Q16 6 24 6 Q32 6 32 14 L32 34" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function cloud(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-arr{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+    .${id}-a{animation:${id}-arr ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path d="M12 32 Q4 32 4 24 Q4 16 12 16 Q12 8 20 8 Q28 8 28 16 Q34 16 36 22 Q42 22 42 28 Q42 34 36 34 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <path class="${id}-a" d="M24 22 L24 36 M18 30 L24 36 L30 30" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  `);
+}
+
+function link(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-l1{0%,100%{transform:translateX(0)}50%{transform:translateX(-4px)}}
+    @keyframes ${id}-l2{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+    .${id}-l1{animation:${id}-l1 ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+    .${id}-l2{animation:${id}-l2 ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-l1" d="M18 30 Q10 38 10 28 L10 20 Q10 10 18 10 L28 10 Q38 10 38 20" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-l2" d="M30 18 Q38 10 38 20 L38 28 Q38 38 30 38 L20 38 Q10 38 10 28" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function archive(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-lid{0%,100%{transform:rotate(0) translateY(0)}30%,70%{transform:rotate(-15deg) translateY(-6px)}}
+    @keyframes ${id}-itm{0%,30%{transform:translateY(-10px);opacity:0}60%{transform:translateY(0);opacity:1}100%{transform:translateY(0);opacity:1}}
+    .${id}-l{animation:${id}-lid ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:4px 14px}
+    .${id}-i{animation:${id}-itm ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path d="M6 18 L42 18 L42 42 L6 42 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <path class="${id}-l" d="M4 10 L44 10 L44 18 L4 18 Z" stroke="${c}" stroke-width="2" fill="${c}" stroke-linejoin="round"/>
+    <path class="${id}-i" d="M18 28 L24 22 L30 28 M24 22 L24 36" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  `);
+}
+
+function tag(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-sw{0%,100%{transform:rotate(0)}25%{transform:rotate(12deg)}75%{transform:rotate(-12deg)}}
+    .${id}-t{animation:${id}-sw ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 4px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-t" d="M24 8 L38 8 L44 14 L44 28 L30 42 L14 28 L8 28 L8 14 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <circle class="${id}-t" cx="32" cy="16" r="3" fill="${c}"/>
+    <path class="${id}-t" d="M24 8 L24 4" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+// ─── Media ────────────────────────────────────────────────────────────────────
+function playIcon(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-pop{0%{transform:scale(0.8)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+    .${id}-t{animation:${id}-pop ${sec(dd.short)} ease ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-t" d="M12 8 L40 24 L12 40 Z" stroke="${c}" stroke-width="2" fill="${c}"/>
+  `);
+}
+
+function pause(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-br{0%,100%{transform:scaleY(1)}50%{transform:scaleY(0.6)}}
+    .${id}-r1{animation:${id}-br ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:16px 38px}
+    .${id}-r2{animation:${id}-br ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger}ms;transform-origin:32px 38px}
+  </style>` + svgWrap(id, size, `
+    <rect class="${id}-r1" x="12" y="10" width="8" height="28" rx="1" fill="${c}"/>
+    <rect class="${id}-r2" x="28" y="10" width="8" height="28" rx="1" fill="${c}"/>
+  `);
+}
+
+function stop(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-pl{0%{transform:scale(1)}40%{transform:scale(1.15)}100%{transform:scale(1)}}
+    .${id}-s{animation:${id}-pl ${sec(dd.short)} ease ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <rect class="${id}-s" x="12" y="12" width="24" height="24" rx="2" fill="${c}"/>
+  `);
+}
+
+function fastForward(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-sl{0%,100%{transform:translateX(0)}50%{transform:translateX(8px)}}
+    .${id}-c1{animation:${id}-sl ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:0ms}
+    .${id}-c2{animation:${id}-sl ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger}ms}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-c1" d="M6 12 L22 24 L6 36" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="${id}-c2" d="M22 12 L38 24 L22 36" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M42 12 L42 36" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function rewind(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-sl{0%,100%{transform:translateX(0)}50%{transform:translateX(-8px)}}
+    .${id}-c1{animation:${id}-sl ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:0ms}
+    .${id}-c2{animation:${id}-sl ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger}ms}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-c1" d="M42 12 L26 24 L42 36" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="${id}-c2" d="M26 12 L10 24 L26 36" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M6 12 L6 36" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function volume(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-wv{0%,100%{opacity:0.3}50%{opacity:1}}
+    .${id}-w1{animation:${id}-wv ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:0ms}
+    .${id}-w2{animation:${id}-wv ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger}ms}
+  </style>` + svgWrap(id, size, `
+    <path d="M8 18 L8 30 L16 30 L28 40 L28 8 L16 18 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <path class="${id}-w1" d="M33 18 Q38 24 33 30" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-w2" d="M37 13 Q45 24 37 35" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function mute(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-sl{0%{stroke-dashoffset:24}100%{stroke-dashoffset:0}}
+    .${id}-s{stroke-dasharray:24;animation:${id}-sl ${sec(dd.short)} linear ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path d="M8 18 L8 30 L16 30 L28 40 L28 8 L16 18 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <path class="${id}-s" d="M34 14 L44 34" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function microphone(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-rng{0%,100%{opacity:0.2;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+    .${id}-r1{animation:${id}-rng ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:0ms;transform-origin:24px 18px}
+    .${id}-r2{animation:${id}-rng ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger}ms;transform-origin:24px 18px}
+  </style>` + svgWrap(id, size, `
+    <path d="M18 6 Q18 2 24 2 Q30 2 30 6 L30 22 Q30 30 24 30 Q18 30 18 22 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linecap="round"/>
+    <path d="M12 24 Q12 38 24 38 Q36 38 36 24" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M24 38 L24 44 M18 44 L30 44" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path class="${id}-r1" d="M14 20 a10 10 0 0 0 20 0" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path class="${id}-r2" d="M10 20 a14 14 0 0 0 28 0" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+// ─── Device ───────────────────────────────────────────────────────────────────
+function battery(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-lv{0%{stroke-dashoffset:30}80%,100%{stroke-dashoffset:0}}
+    @keyframes ${id}-bt{0%,70%{opacity:0}80%,90%{opacity:1}100%{opacity:0}}
+    .${id}-l{stroke-dasharray:30;animation:${id}-lv ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+    .${id}-b{animation:${id}-bt ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path d="M4 16 L40 16 L40 32 L4 32 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <path d="M40 20 L44 20 L44 28 L40 28" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path class="${id}-l" d="M6 18 L6 30 L36 30 L36 18 Z" stroke="none" fill="${c}"/>
+    <path class="${id}-b" d="M23 20 L20 25 L24 25 L21 32" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  `);
+}
+
+function bluetooth(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-rng{0%,100%{opacity:0.2}50%{opacity:1}}
+    .${id}-r1{animation:${id}-rng ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:0ms}
+    .${id}-r2{animation:${id}-rng ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger}ms}
+  </style>` + svgWrap(id, size, `
+    <path d="M18 14 L30 24 L18 34 L18 10 L30 24 L18 38" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="${id}-r1" d="M34 18 Q40 24 34 30" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-r2" d="M38 13 Q46 24 38 35" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function location(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-drop{0%{transform:translateY(-20px);opacity:0}60%{transform:translateY(4px)}80%{transform:translateY(-2px)}100%{transform:translateY(0);opacity:1}}
+    @keyframes ${id}-shd{0%{transform:scale(0.3);opacity:0}100%{transform:scale(1);opacity:0.4}}
+    .${id}-p{animation:${id}-drop ${sec(dd.medium)} ease-out ${iter()};animation-play-state:${play()}}
+    .${id}-s{animation:${id}-shd ${sec(dd.medium)} ease-out ${iter()};animation-play-state:${play()};transform-origin:24px 46px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-p" d="M24 6 a12 12 0 0 1 0 24 a12 12 0 0 1 0 -24 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <circle class="${id}-p" cx="24" cy="18" r="5" fill="${c}"/>
+    <path class="${id}-p" d="M24 30 L24 44" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path class="${id}-s" d="M18 45 Q24 43 30 45 Q24 47 18 45" stroke="${c}" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function cloudSync(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    .${id}-a{animation:${id}-spin ${sec(dd.long)} linear ${iter()};animation-play-state:${play()};transform-origin:24px 20px}
+  </style>` + svgWrap(id, size, `
+    <path d="M14 30 Q6 30 6 22 Q6 14 14 14 Q14 8 22 8 Q30 8 30 14 Q36 14 38 20 Q42 20 42 26 Q42 32 36 32 L14 32 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <path class="${id}-a" d="M22 22 a8 8 0 1 1 4 0 L26 22 L30 18 M26 22 L22 18" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  `);
+}
+
+function camera(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-blink{0%,85%,100%{opacity:1}90%,95%{opacity:0.2}}
+    .${id}-l{animation:${id}-blink ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path d="M6 14 L42 14 L42 40 L6 40 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <path d="M16 14 L19 8 L29 8 L32 14" stroke="${c}" stroke-width="2" fill="none" stroke-linejoin="round"/>
+    <circle class="${id}-l" cx="24" cy="27" r="8" stroke="${c}" stroke-width="2" fill="none"/>
+    <circle class="${id}-l" cx="24" cy="27" r="4" fill="${c}"/>
+  `);
+}
+
+function brightness(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-rays{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+    .${id}-r{animation:${id}-rays ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <circle cx="24" cy="24" r="10" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+    <path class="${id}-r" d="M24 4 L24 8 M24 40 L24 44 M4 24 L8 24 M40 24 L44 24 M8.6 8.6 L11.4 11.4 M36.6 36.6 L39.4 39.4 M8.6 39.4 L11.4 36.6 M36.6 11.4 L39.4 8.6" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
 // ─── Render ───────────────────────────────────────────────────────────────────
+const CATEGORY_LABELS = {
+  ui: 'UI / System',
+  healthcare: 'Healthcare',
+  actions: 'Actions',
+  communication: 'Communication',
+  settings: 'Settings',
+  files: 'Files',
+  media: 'Media',
+  device: 'Device',
+};
+const CATEGORY_TAGS = {
+  ui: 'tag-ui',
+  healthcare: 'tag-health',
+  actions: 'tag-actions',
+  communication: 'tag-communication',
+  settings: 'tag-settings',
+  files: 'tag-files',
+  media: 'tag-media',
+  device: 'tag-device',
+};
+
 function renderGrid() {
-  ['ui', 'healthcare'].forEach(cat => {
-    const grid = document.getElementById(cat === 'ui' ? 'uiGrid' : 'healthGrid');
-    const label = document.getElementById(cat === 'ui' ? 'uiLabel' : 'healthLabel');
+  Object.keys(ICONS).forEach(cat => {
+    const gridId = cat === 'healthcare' ? 'healthGrid' : cat + 'Grid';
+    const labelId = cat === 'healthcare' ? 'healthLabel' : cat + 'Label';
+    const gridEl = document.getElementById(gridId);
+    const labelEl = document.getElementById(labelId);
+    if (!gridEl || !labelEl) return;
     const icons = ICONS[cat];
     const show = state.filter === 'all' || state.filter === cat;
-    grid.style.display = show ? 'grid' : 'none';
-    label.style.display = show ? 'flex' : 'none';
+    gridEl.style.display = show ? 'grid' : 'none';
+    labelEl.style.display = show ? 'flex' : 'none';
+    labelEl.textContent = `${CATEGORY_LABELS[cat]} — ${icons.length} icons`;
 
-    grid.innerHTML = icons.map(icon => `
+    const tagClass = CATEGORY_TAGS[cat];
+    gridEl.innerHTML = icons.map(icon => `
       <div class="icon-card ${state.selectedIcon === icon.name ? 'selected' : ''}"
            onclick="selectIcon('${icon.name}', '${cat}')">
-        <span class="icon-tag ${cat === 'ui' ? 'tag-ui' : 'tag-health'}">${cat === 'ui' ? 'UI' : '🏥'}</span>
+        <span class="icon-tag ${tagClass}">${CATEGORY_LABELS[cat].split(' / ')[0].split(' ')[0]}</span>
         <div class="icon-svg-wrap">${icon.svg(state.color, state.size < 48 ? state.size : 48)}</div>
         <div class="icon-name">${icon.name}</div>
       </div>
@@ -857,9 +1790,7 @@ function setSpeed(s, btn) {
 
 function setFilter(f, btn) {
   state.filter = f;
-  document.querySelectorAll('.filter-btns .seg-btn').forEach(b => {
-    if (['all','ui / system','healthcare'].includes(b.textContent.toLowerCase())) b.classList.remove('active');
-  });
+  document.querySelectorAll('.filter-btns .seg-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   renderGrid();
 }
@@ -886,7 +1817,7 @@ function toggleAutoPlay() {
 
 // ─── Panel ────────────────────────────────────────────────────────────────────
 function findIcon(name) {
-  return [...ICONS.ui, ...ICONS.healthcare].find(i => i.name === name);
+  return Object.values(ICONS).flat().find(i => i.name === name);
 }
 
 function selectIcon(name, cat) {

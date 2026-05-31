@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0] — 2026-06-01
+
+### Added
+
+- 63 new animated SVG icons across 7 categories in both `@animicons/react` and `@animicons/react-native`
+- **Navigation & UI** (added to `ui/`): `Home`, `Menu`, `KebabMenu`, `MoreHorizontal`, `Back`, `Forward`, `ChevronDown`, `Close`, `Grid`, `Search`
+- **Actions** (`actions/`): `Add`, `Edit`, `Save`, `Trash`, `Share`, `Download`, `Refresh`, `Sync`, `Copy`, `Pin`, `Bookmark`, `Filter`
+- **Communication** (`communication/`): `Mail`, `Chat`, `Phone`, `Video`, `User`, `Users`, `ThumbsUp`, `Send`, `Reaction`, `Mention`
+- **Settings** (`settings/`): `Settings`, `Sliders`, `Lock`, `Unlock`, `Key`, `Eye`, `EyeOff`, `Info`, `Help`
+- **Files** (`files/`): `Folder`, `Document`, `Image`, `Attachment`, `Cloud`, `Link`, `Archive`, `Tag`
+- **Media** (`media/`): `Play`, `Pause`, `Stop`, `FastForward`, `Rewind`, `Volume`, `Mute`, `Microphone`
+- **Device** (`device/`): `Battery`, `Bluetooth`, `Location`, `CloudSync`, `Camera`, `Brightness`
+- Total icon count: 21 → 84
+
 ## [0.1.1] — 2026-05-29
 
 ### Fixed
