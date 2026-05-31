@@ -1154,10 +1154,10 @@ function download(c, size) {
 function refresh(c, size) {
   const id = nextId(); const dd = d();
   return `<style>
-    @keyframes ${id}-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    @keyframes ${id}-spin{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
     .${id}-a{animation:${id}-spin ${sec(dd.medium)} linear ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
   </style>` + svgWrap(id, size, `
-    <path class="${id}-a" d="M6 24 a18 18 0 1 1 4 10 M6 24 L6 16 M6 24 L14 24" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="${id}-a" d="M24 8 a16 16 0 1 0 11.3 4.7 M35.3 12.7 L30 8 M35.3 12.7 L38 19" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   `);
 }
 
