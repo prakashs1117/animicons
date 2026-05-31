@@ -1,7 +1,7 @@
 import React, { useId } from 'react';
 import { Svg, Path } from 'react-native-svg';
 import type { IconProps } from '@animicons/shared';
-import { CheckPaths } from '@animicons/shared';
+import { CheckPaths, EASING_CSS } from '@animicons/shared';
 import { resolveStyle } from '../../utils/resolveStyle';
 import { getAnimDuration } from '../../utils/animDuration';
 
@@ -27,12 +27,12 @@ export const Check: React.FC<IconProps> = ({
         }
         .ai-check-circle-${uid} {
           stroke-dasharray: 126;
-          animation: ai-check-circle-${uid} ${d.short}ms ease ${iterCount};
+          animation: ai-check-circle-${uid} ${d.short}ms ${EASING_CSS.easeInOut} ${iterCount};
           animation-play-state: ${playState};
         }
         .ai-check-mark-${uid} {
           stroke-dasharray: 30;
-          animation: ai-check-mark-${uid} ${d.short}ms ease ${iterCount};
+          animation: ai-check-mark-${uid} ${d.short}ms ${EASING_CSS.easeInOut} ${iterCount};
           animation-play-state: ${playState};
           animation-delay: ${d.short * 0.6}ms;
         }
