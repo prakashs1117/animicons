@@ -55,8 +55,8 @@ export const Reaction: React.FC<IconProps> = ({
       <AnimatedPath animatedProps={faceProps}    d={ReactionPaths.face} stroke={s.stroke} strokeWidth={s.strokeWidth} fill={s.secondaryColor} opacity={s.opacity} />
       <Path d={ReactionPaths.eye1} stroke={s.stroke} strokeWidth={s.strokeWidth} fill={s.stroke} opacity={s.opacity} />
       <Path d={ReactionPaths.eye2} stroke={s.stroke} strokeWidth={s.strokeWidth} fill={s.stroke} opacity={s.opacity} />
-      <AnimatedPath animatedProps={neutralProps} d="M16 28 L32 28"         stroke={s.stroke} strokeWidth={s.strokeWidth} strokeLinecap="round" fill="none" />
-      <AnimatedPath animatedProps={smileProps}   d="M16 28 Q24 36 32 28"  stroke={s.stroke} strokeWidth={s.strokeWidth} strokeLinecap="round" fill="none" />
+      <AnimatedPath animatedProps={neutralProps} d={ReactionPaths.mouth} stroke={s.stroke} strokeWidth={s.strokeWidth} strokeLinecap="round" fill="none" />
+      <AnimatedPath animatedProps={smileProps}   d={ReactionPaths.smile} stroke={s.stroke} strokeWidth={s.strokeWidth} strokeLinecap="round" fill="none" />
     </Svg>
   );
 };

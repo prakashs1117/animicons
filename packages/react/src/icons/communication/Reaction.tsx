@@ -49,8 +49,8 @@ export const Reaction: React.FC<IconProps> = ({
         <Path {...({ className: `ai-react-face-${uid}` } as any)} d={ReactionPaths.face} stroke={s.stroke} strokeWidth={s.strokeWidth} fill={s.secondaryColor} opacity={s.opacity} />
         <Path d={ReactionPaths.eye1} stroke={s.stroke} strokeWidth={s.strokeWidth} fill={s.fill} opacity={s.opacity} />
         <Path d={ReactionPaths.eye2} stroke={s.stroke} strokeWidth={s.strokeWidth} fill={s.fill} opacity={s.opacity} />
-        <Path {...({ className: `ai-react-neutral-${uid}` } as any)} d="M16 28 L32 28" stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" strokeLinecap="round" />
-        <Path {...({ className: `ai-react-smile-${uid}` } as any)} d="M16 28 Q24 36 32 28" stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" strokeLinecap="round" />
+        <Path {...({ className: `ai-react-neutral-${uid}` } as any)} d={ReactionPaths.mouth} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" strokeLinecap="round" />
+        <Path {...({ className: `ai-react-smile-${uid}` } as any)} d={ReactionPaths.smile} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" strokeLinecap="round" />
       </Svg>
     </>
   );
