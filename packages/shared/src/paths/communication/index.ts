@@ -1,0 +1,10 @@
+export { MailPaths }     from './Mail';
+export { ChatPaths }     from './Chat';
+export { PhonePaths }    from './Phone';
+export { VideoPaths }    from './Video';
+export { UserPaths }     from './User';
+export { UsersPaths }    from './Users';
+export { ThumbsUpPaths } from './ThumbsUp';
+export { SendPaths }     from './Send';
+export { ReactionPaths } from './Reaction';
+export { MentionPaths }  from './Mention';

@@ -1,0 +1,12 @@
+export { AddPaths }      from './Add';
+export { EditPaths }     from './Edit';
+export { SavePaths }     from './Save';
+export { TrashPaths }    from './Trash';
+export { SharePaths }    from './Share';
+export { DownloadPaths } from './Download';
+export { RefreshPaths }  from './Refresh';
+export { SyncPaths }     from './Sync';
+export { CopyPaths }     from './Copy';
+export { PinPaths }      from './Pin';
+export { BookmarkPaths } from './Bookmark';
+export { FilterPaths }   from './Filter';

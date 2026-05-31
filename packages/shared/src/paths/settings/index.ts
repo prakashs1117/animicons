@@ -1,0 +1,9 @@
+export { SettingsPaths } from './Settings';
+export { SlidersPaths }  from './Sliders';
+export { LockPaths }     from './Lock';
+export { UnlockPaths }   from './Unlock';
+export { KeyPaths }      from './Key';
+export { EyePaths }      from './Eye';
+export { EyeOffPaths }   from './EyeOff';
+export { InfoPaths }     from './Info';
+export { HelpPaths }     from './Help';
