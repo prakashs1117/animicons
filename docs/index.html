@@ -1157,7 +1157,7 @@ function refresh(c, size) {
     @keyframes ${id}-spin{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
     .${id}-a{animation:${id}-spin ${sec(dd.medium)} linear ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
   </style>` + svgWrap(id, size, `
-    <path class="${id}-a" d="M24 8 a16 16 0 1 0 11.3 4.7 M35.3 12.7 L32.5 21.2 M35.3 12.7 L26.8 15.5" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="${id}-a" d="M40 24 a16 16 0 1 0 -16 16 M24 40 L31 35 M24 40 L31 45" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   `);
 }
 
