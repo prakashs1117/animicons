@@ -432,8 +432,8 @@
     <div class="control-group">
       <div class="control-label">Speed</div>
       <div class="filter-btns">
-        <button class="seg-btn" onclick="setSpeed('slow', this)">Slow</button>
-        <button class="seg-btn active" onclick="setSpeed('normal', this)">Normal</button>
+        <button class="seg-btn active" onclick="setSpeed('slow', this)">Slow</button>
+        <button class="seg-btn" onclick="setSpeed('normal', this)">Normal</button>
         <button class="seg-btn" onclick="setSpeed('fast', this)">Fast</button>
       </div>
     </div>
@@ -524,7 +524,7 @@
 let state = {
   color: '#6366f1',
   size: 48,
-  speed: 'normal',
+  speed: 'slow',
   loop: true,
   autoPlay: true,
   filter: 'all',
@@ -1861,7 +1861,7 @@ function updatePanel() {
   const props = [
     `size={${state.size}}`,
     `color="${state.color}"`,
-    state.speed !== 'normal' ? `speed="${state.speed}"` : null,
+    state.speed !== 'slow' ? `speed="${state.speed}"` : null,
     !state.loop ? `loop={false}` : null,
     !state.autoPlay ? `autoPlay={false}` : null,
   ].filter(Boolean).join('\n  ');
