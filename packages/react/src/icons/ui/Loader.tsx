@@ -9,7 +9,7 @@ export const Loader: React.FC<IconProps> = ({
   size = 48,
   autoPlay = true,
   loop = true,
-  speed = 'normal',
+  speed = 'slow',
   onAnimationEnd,
   style,
   ...colorProps

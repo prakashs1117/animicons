@@ -6,7 +6,7 @@ import { resolveStyle } from '../../utils/resolveStyle';
 import { getAnimDuration } from '../../utils/animDuration';
 
 export const Refresh: React.FC<IconProps> = ({
-  size = 48, autoPlay = true, loop = true, speed = 'normal', onAnimationEnd, style, ...colorProps
+  size = 48, autoPlay = true, loop = true, speed = 'slow', onAnimationEnd, style, ...colorProps
 }) => {
   const uid = useId().replace(/:/g, '');
   const d = getAnimDuration(speed);
@@ -19,7 +19,7 @@ export const Refresh: React.FC<IconProps> = ({
       <style>{`
         @keyframes ai-refresh-spin-${uid} {
           from { transform: rotate(0deg); }
-          to   { transform: rotate(360deg); }
+          to   { transform: rotate(-360deg); }
         }
         .ai-refresh-body-${uid} {
           animation: ai-refresh-spin-${uid} ${d.medium}ms ${EASING_CSS.linear} ${iterCount};

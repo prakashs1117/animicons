@@ -12,7 +12,7 @@ import { getAnimDuration } from '../../utils/animDuration';
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 export const ThumbsUp: React.FC<IconProps> = ({
-  size = 48, autoPlay = true, loop = false, speed = 'normal', style, ...colorProps
+  size = 48, autoPlay = true, loop = false, speed = 'slow', style, ...colorProps
 }) => {
   const translateY = useSharedValue(0);
   const scale = useSharedValue(1);

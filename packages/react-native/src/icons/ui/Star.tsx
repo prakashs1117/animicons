@@ -13,7 +13,7 @@ import { getAnimDuration } from '../../utils/animDuration';
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 export const Star: React.FC<IconProps> = ({
-  size = 48, autoPlay = true, speed = 'normal', onAnimationEnd, style, ...colorProps
+  size = 48, autoPlay = true, speed = 'slow', onAnimationEnd, style, ...colorProps
 }) => {
   const scaleVal = useSharedValue(1);
   const sparkleOp = useSharedValue(0);

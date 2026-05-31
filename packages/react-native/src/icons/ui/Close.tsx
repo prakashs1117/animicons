@@ -12,7 +12,7 @@ import { getAnimDuration } from '../../utils/animDuration';
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 export const Close: React.FC<IconProps> = ({
-  size = 48, autoPlay = true, loop = false, speed = 'normal', style, ...colorProps
+  size = 48, autoPlay = true, loop = false, speed = 'slow', style, ...colorProps
 }) => {
   const scale = useSharedValue(0.5);
   const opacity = useSharedValue(0);

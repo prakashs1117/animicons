@@ -12,7 +12,7 @@ import { getAnimDuration } from '../../utils/animDuration';
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 export const Check: React.FC<IconProps> = ({
-  size = 48, autoPlay = true, loop = false, speed = 'normal',
+  size = 48, autoPlay = true, loop = false, speed = 'slow',
   onAnimationEnd, style, ...colorProps
 }) => {
   const circleProgress = useSharedValue(126);
@@ -23,11 +23,11 @@ export const Check: React.FC<IconProps> = ({
   useEffect(() => {
     if (autoPlay) {
       if (loop) {
-        circleProgress.value = withRepeat(withTiming(0, { duration: d.short, easing: Easing.ease }), -1);
-        checkProgress.value = withRepeat(withDelay(d.short * 0.6, withTiming(0, { duration: d.short * 0.6, easing: Easing.ease })), -1);
+        circleProgress.value = withRepeat(withTiming(0, { duration: d.medium, easing: Easing.ease }), -1);
+        checkProgress.value = withRepeat(withDelay(d.medium * 0.6, withTiming(0, { duration: d.medium * 0.6, easing: Easing.ease })), -1);
       } else {
-        circleProgress.value = withTiming(0, { duration: d.short, easing: Easing.ease });
-        checkProgress.value = withDelay(d.short * 0.6, withTiming(0, { duration: d.short * 0.6, easing: Easing.ease }, () => {
+        circleProgress.value = withTiming(0, { duration: d.medium, easing: Easing.ease });
+        checkProgress.value = withDelay(d.medium * 0.6, withTiming(0, { duration: d.medium * 0.6, easing: Easing.ease }, () => {
           if (onAnimationEnd) runOnJS(onAnimationEnd)();
         }));
       }

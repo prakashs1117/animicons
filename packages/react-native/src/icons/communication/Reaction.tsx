@@ -12,7 +12,7 @@ import { getAnimDuration } from '../../utils/animDuration';
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 export const Reaction: React.FC<IconProps> = ({
-  size = 48, autoPlay = true, loop = true, speed = 'normal', style, ...colorProps
+  size = 48, autoPlay = true, loop = true, speed = 'slow', style, ...colorProps
 }) => {
   const faceScale = useSharedValue(1);
   const neutralOp = useSharedValue(1);

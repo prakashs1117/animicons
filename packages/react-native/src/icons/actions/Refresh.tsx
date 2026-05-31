@@ -12,7 +12,7 @@ import { getAnimDuration } from '../../utils/animDuration';
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 export const Refresh: React.FC<IconProps> = ({
-  size = 48, autoPlay = true, loop = true, speed = 'normal', style, ...colorProps
+  size = 48, autoPlay = true, loop = true, speed = 'slow', style, ...colorProps
 }) => {
   const rotation = useSharedValue(0);
   const d = getAnimDuration(speed);
@@ -21,7 +21,7 @@ export const Refresh: React.FC<IconProps> = ({
   useEffect(() => {
     if (autoPlay) {
       rotation.value = withRepeat(
-        withTiming(360, { duration: d.medium, easing: Easing.linear }), loop ? -1 : 1, false
+        withTiming(-360, { duration: d.medium, easing: Easing.linear }), loop ? -1 : 1, false
       );
     } else {
       cancelAnimation(rotation);

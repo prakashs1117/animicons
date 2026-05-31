@@ -23,7 +23,11 @@
       "Bash(npm whoami *)",
       "Bash(npm set *)",
       "Bash(grep -E \"\\\\.ts$\")",
-      "Bash(npm version *)"
+      "Bash(npm version *)",
+      "Bash(xargs -I {} basename {})",
+      "Bash(sed -n '24,34p' /Users/M324550/Documents/POC/react-native-moticons/packages/react-native/src/icons/device/Battery.tsx)",
+      "Bash(sed -n '34,44p' /Users/M324550/Documents/POC/react-native-moticons/packages/react-native/src/icons/files/Archive.tsx)",
+      "Bash(python3 *)"
     ]
   }
 }

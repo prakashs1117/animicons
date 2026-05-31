@@ -6,7 +6,7 @@ import { resolveStyle } from '../../utils/resolveStyle';
 import { getAnimDuration } from '../../utils/animDuration';
 
 export const Check: React.FC<IconProps> = ({
-  size = 48, autoPlay = true, loop = false, speed = 'normal', onAnimationEnd, style, ...colorProps
+  size = 48, autoPlay = true, loop = false, speed = 'slow', onAnimationEnd, style, ...colorProps
 }) => {
   const uid = useId().replace(/:/g, '');
   const d = getAnimDuration(speed);
@@ -27,14 +27,14 @@ export const Check: React.FC<IconProps> = ({
         }
         .ai-check-circle-${uid} {
           stroke-dasharray: 126;
-          animation: ai-check-circle-${uid} ${d.short}ms ${EASING_CSS.easeInOut} ${iterCount};
+          animation: ai-check-circle-${uid} ${d.medium}ms ${EASING_CSS.easeInOut} ${iterCount};
           animation-play-state: ${playState};
         }
         .ai-check-mark-${uid} {
           stroke-dasharray: 30;
-          animation: ai-check-mark-${uid} ${d.short}ms ${EASING_CSS.easeInOut} ${iterCount};
+          animation: ai-check-mark-${uid} ${d.medium}ms ${EASING_CSS.easeInOut} ${iterCount};
           animation-play-state: ${playState};
-          animation-delay: ${d.short * 0.6}ms;
+          animation-delay: ${d.medium * 0.6}ms;
         }
       `}</style>
       <Svg width={size} height={size} viewBox={CheckPaths.viewBox} style={style as any}

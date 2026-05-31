@@ -13,7 +13,7 @@ import { getAnimDuration } from '../../utils/animDuration';
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 export const Loader: React.FC<IconProps> = ({
-  size = 48, autoPlay = true, loop = true, speed = 'normal',
+  size = 48, autoPlay = true, loop = true, speed = 'slow',
   onAnimationEnd, style, ...colorProps
 }) => {
   const rotation = useSharedValue(0);

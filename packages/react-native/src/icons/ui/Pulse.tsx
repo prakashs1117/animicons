@@ -27,7 +27,7 @@ function usePulseRing(stagger: number, duration: number, autoPlay: boolean, loop
 }
 
 export const Pulse: React.FC<IconProps> = ({
-  size = 48, autoPlay = true, loop = true, speed = 'normal', style, ...colorProps
+  size = 48, autoPlay = true, loop = true, speed = 'slow', style, ...colorProps
 }) => {
   const d = getAnimDuration(speed);
   const s = resolveStyle(colorProps, PulsePaths);

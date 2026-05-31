@@ -12,7 +12,7 @@ import { getAnimDuration } from '../../utils/animDuration';
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 export const Brain: React.FC<IconProps> = ({
-  size = 48, autoPlay = true, loop = true, speed = 'normal', style, ...colorProps
+  size = 48, autoPlay = true, loop = true, speed = 'slow', style, ...colorProps
 }) => {
   const n1r = useSharedValue(3); const n1op = useSharedValue(0.2);
   const n2r = useSharedValue(3); const n2op = useSharedValue(0.2);
