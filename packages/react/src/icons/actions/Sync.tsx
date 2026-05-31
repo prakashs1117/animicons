@@ -17,31 +17,31 @@ export const Sync: React.FC<IconProps> = ({
   return (
     <>
       <style>{`
-        @keyframes ai-sync-fwd-${uid} {
+        @keyframes ai-sync-cw-${uid} {
           from { transform: rotate(0deg); }
           to   { transform: rotate(360deg); }
         }
-        @keyframes ai-sync-rev-${uid} {
+        @keyframes ai-sync-ccw-${uid} {
           from { transform: rotate(0deg); }
           to   { transform: rotate(-360deg); }
         }
-        .ai-sync-fwd-${uid} {
-          animation: ai-sync-fwd-${uid} ${d.long}ms ${EASING_CSS.linear} ${iterCount};
+        .ai-sync-cw-${uid} {
+          animation: ai-sync-cw-${uid} ${d.long}ms ${EASING_CSS.linear} ${iterCount};
           animation-play-state: ${playState};
           transform-origin: 24px 24px;
         }
-        .ai-sync-rev-${uid} {
-          animation: ai-sync-rev-${uid} ${d.long}ms ${EASING_CSS.linear} ${iterCount};
+        .ai-sync-ccw-${uid} {
+          animation: ai-sync-ccw-${uid} ${d.long}ms ${EASING_CSS.linear} ${iterCount};
           animation-play-state: ${playState};
           transform-origin: 24px 24px;
         }
       `}</style>
       <Svg width={size} height={size} viewBox={SyncPaths.viewBox} style={style as any}
         {...({ onAnimationEnd: loop ? undefined : onAnimationEnd } as any)}>
-        <Path {...({ className: `ai-sync-fwd-${uid}` } as any)} d={SyncPaths.arc1} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} strokeLinecap="round" />
-        <Path {...({ className: `ai-sync-fwd-${uid}` } as any)} d={SyncPaths.head1} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} strokeLinecap="round" strokeLinejoin="round" />
-        <Path {...({ className: `ai-sync-rev-${uid}` } as any)} d={SyncPaths.arc2} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} strokeLinecap="round" />
-        <Path {...({ className: `ai-sync-rev-${uid}` } as any)} d={SyncPaths.head2} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} strokeLinecap="round" strokeLinejoin="round" />
+        <Path {...({ className: `ai-sync-cw-${uid}` } as any)} d={SyncPaths.arc1} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} strokeLinecap="round" />
+        <Path {...({ className: `ai-sync-cw-${uid}` } as any)} d={SyncPaths.head1} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} strokeLinecap="round" strokeLinejoin="round" />
+        <Path {...({ className: `ai-sync-ccw-${uid}` } as any)} d={SyncPaths.arc2} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} strokeLinecap="round" />
+        <Path {...({ className: `ai-sync-ccw-${uid}` } as any)} d={SyncPaths.head2} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} strokeLinecap="round" strokeLinejoin="round" />
       </Svg>
     </>
   );
