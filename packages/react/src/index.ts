@@ -1,5 +1,11 @@
 export * from './icons/ui';
 export * from './icons/healthcare';
+export * from './icons/actions';
+export * from './icons/communication';
+export * from './icons/settings';
+export * from './icons/files';
+export * from './icons/media';
+export * from './icons/device';
 export { resolveStyle } from './utils/resolveStyle';
 export { getAnimDuration } from './utils/animDuration';
 export type { IconProps, AnimationSpeed } from '@animicons/shared';
