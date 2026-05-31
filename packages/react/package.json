@@ -1,6 +1,6 @@
 {
   "name": "@animicons/react",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Animated SVG icon library for React",
   "license": "MIT",
   "homepage": "https://github.com/prakashs1117/animicons#readme",
@@ -12,7 +12,15 @@
   "bugs": {
     "url": "https://github.com/prakashs1117/animicons/issues"
   },
-  "keywords": ["animated", "icons", "svg", "react", "animation", "ui", "healthcare"],
+  "keywords": [
+    "animated",
+    "icons",
+    "svg",
+    "react",
+    "animation",
+    "ui",
+    "healthcare"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -24,7 +32,10 @@
     }
   },
   "sideEffects": false,
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsup",
     "typecheck": "tsc --noEmit"
@@ -40,7 +51,5 @@
     "tsup": "^8.0.0",
     "typescript": "^5.4.0"
   },
-  "dependencies": {
-    "@animicons/shared": "*"
-  }
+  "dependencies": {}
 }
