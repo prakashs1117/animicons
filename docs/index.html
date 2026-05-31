@@ -557,7 +557,7 @@ const ICONS = {
     { name: 'Copy',      label: 'Copy',                svg: (c, s) => copy(c, s) },
     { name: 'Pin',       label: 'Pin',                 svg: (c, s) => pin(c, s) },
     { name: 'Bookmark',  label: 'Bookmark',            svg: (c, s) => bookmark(c, s) },
-    { name: 'Filter',    label: 'Filter',              svg: (c, s) => filter(c, s) },
+    { name: 'Filter',    label: 'Filter',              svg: (c, s) => filterIcon(c, s) },
   ],
   communication: [
     { name: 'Mail',     label: 'Email / Mail',         svg: (c, s) => mail(c, s) },
@@ -584,11 +584,11 @@ const ICONS = {
   ],
   files: [
     { name: 'Folder',     label: 'Folder',            svg: (c, s) => folder(c, s) },
-    { name: 'Document',   label: 'Document',          svg: (c, s) => document(c, s) },
-    { name: 'Image',      label: 'Image / Photo',     svg: (c, s) => image(c, s) },
+    { name: 'Document',   label: 'Document',          svg: (c, s) => documentIcon(c, s) },
+    { name: 'Image',      label: 'Image / Photo',     svg: (c, s) => imageIcon(c, s) },
     { name: 'Attachment', label: 'Attachment / Clip', svg: (c, s) => attachment(c, s) },
     { name: 'Cloud',      label: 'Cloud Upload',      svg: (c, s) => cloud(c, s) },
-    { name: 'Link',       label: 'Link / Chain',      svg: (c, s) => link(c, s) },
+    { name: 'Link',       label: 'Link / Chain',      svg: (c, s) => linkIcon(c, s) },
     { name: 'Archive',    label: 'Archive',           svg: (c, s) => archive(c, s) },
     { name: 'Tag',        label: 'Tag / Label',       svg: (c, s) => tag(c, s) },
   ],
@@ -1183,7 +1183,7 @@ function bookmark(c, size) {
   `);
 }
 
-function filter(c, size) {
+function filterIcon(c, size) {
   const id = nextId(); const dd = d();
   return `<style>
     @keyframes ${id}-pl{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.08)}}
@@ -1450,7 +1450,7 @@ function folder(c, size) {
   `);
 }
 
-function document(c, size) {
+function documentIcon(c, size) {
   const id = nextId(); const dd = d();
   return `<style>
     @keyframes ${id}-ln{0%{stroke-dashoffset:18}100%{stroke-dashoffset:0}}
@@ -1466,7 +1466,7 @@ function document(c, size) {
   `);
 }
 
-function image(c, size) {
+function imageIcon(c, size) {
   const id = nextId(); const dd = d();
   return `<style>
     @keyframes ${id}-sun{0%,100%{transform:translateY(4px)}50%{transform:translateY(0)}}
@@ -1501,7 +1501,7 @@ function cloud(c, size) {
   `);
 }
 
-function link(c, size) {
+function linkIcon(c, size) {
   const id = nextId(); const dd = d();
   return `<style>
     @keyframes ${id}-l1{0%,100%{transform:translateX(0)}50%{transform:translateX(-4px)}}

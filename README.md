@@ -1,6 +1,8 @@
 # @animicons
 
-Animated SVG icon library for React and React Native. 21 icons across UI/System and Healthcare categories. 60fps animations. Full colour customisation. Tree-shakeable.
+Animated SVG icon library for React and React Native. 84 icons across 9 categories. 60fps animations. Full colour customisation. Tree-shakeable.
+
+**[Live Playground →](https://prakashs1117.github.io/animicons/)**
 
 ## Packages
 
