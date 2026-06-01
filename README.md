@@ -2,14 +2,31 @@
 
 Animated SVG icon library for React and React Native. 84 icons across 9 categories. 60fps animations. Full colour customisation. Tree-shakeable.
 
-**[Live Playground →](https://prakashs1117.github.io/animicons/)**
+## Preview
+
+<table>
+  <tr>
+    <th align="center">React Native</th>
+    <th align="center">Web (React)</th>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="./assets/demo-react-native.gif" width="260" alt="React Native demo" />
+    </td>
+    <td align="center">
+      <img src="./assets/demo-web.gif" width="480" alt="Web demo" />
+    </td>
+  </tr>
+</table>
+
+**[Live Web Playground →](https://prakashs1117.github.io/animicons/)**
 
 ## Packages
 
-| Package | Platform | Install |
-|---------|----------|---------|
-| `@animicons/react` | React (web) | `npm install @animicons/react react-native-svg` |
-| `@animicons/react-native` | React Native | `npm install @animicons/react-native react-native-svg react-native-reanimated` |
+| Package | Platform | Version | Install |
+|---------|----------|---------|---------|
+| `@animicons/react` | React (web) | `0.2.2` | `npm install @animicons/react react-native-svg` |
+| `@animicons/react-native` | React Native | `0.2.2` | `npm install @animicons/react-native react-native-svg react-native-reanimated` |
 
 ## Usage
 

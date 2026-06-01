@@ -1,22 +1,35 @@
-# @animicons
+# @animicons/react-native
 
-Animated SVG icon library for React and React Native. 21 icons across UI/System and Healthcare categories. 60fps animations. Full colour customisation. Tree-shakeable.
+Animated SVG icon library for React Native. 60fps animations powered by `react-native-reanimated`. Full colour customisation. Tree-shakeable.
 
-## Packages
+## Preview
 
-| Package | Platform | Install |
-|---------|----------|---------|
-| `@animicons/react` | React (web) | `npm install @animicons/react react-native-svg` |
-| `@animicons/react-native` | React Native | `npm install @animicons/react-native react-native-svg react-native-reanimated` |
+<p align="center">
+  <img src="https://raw.githubusercontent.com/prakashs1117/animicons/main/assets/demo-react-native.gif" width="280" alt="React Native demo" />
+</p>
+
+**[Web Playground →](https://prakashs1117.github.io/animicons/)**
+
+## Install
+
+```bash
+npm install @animicons/react-native react-native-svg react-native-reanimated
+```
+
+Add to `babel.config.js`:
+```js
+plugins: ['react-native-reanimated/plugin']
+```
+
+Expo:
+```bash
+npx expo install react-native-svg react-native-reanimated
+```
 
 ## Usage
 
 ```tsx
-// Web
-import { ECG, Brain, Loader } from '@animicons/react'
-
-// React Native
-import { ECG, Brain, Loader } from '@animicons/react-native'
+import { ECG, Brain, Loader, Bell, Heart } from '@animicons/react-native'
 
 // Auto-plays, loops forever
 <ECG size={48} color="#f43f5e" />
@@ -39,7 +52,7 @@ import { ECG, Brain, Loader } from '@animicons/react-native'
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `size` | `number` | `48` | Width and height in dp/px |
+| `size` | `number` | `48` | Width and height in dp |
 | `color` | `string` | icon default | Primary shorthand — sets stroke + fill |
 | `strokeColor` | `string` | `color` | Explicit stroke override |
 | `fillColor` | `string` | `color` | Explicit fill override |
@@ -59,29 +72,6 @@ import { ECG, Brain, Loader } from '@animicons/react-native'
 
 ### Healthcare
 `ECG` `HeartRate` `Lungs` `Pill` `Thermometer` `DNA` `Syringe` `Brain` `BloodDrop` `Steps` `Sleep` `Oxygen` `Medkit`
-
-## React Native setup
-
-Add to `babel.config.js`:
-```js
-plugins: ['react-native-reanimated/plugin']
-```
-
-Expo:
-```bash
-npx expo install react-native-svg react-native-reanimated
-```
-
-## Adding new icons (for maintainers)
-
-1. Add path data to `packages/shared/src/paths/<category>/NewIcon.ts`
-2. Add component to `packages/react/src/icons/<category>/NewIcon.tsx`
-3. Add component to `packages/react-native/src/icons/<category>/NewIcon.tsx`
-4. Add `export { NewIcon } from './NewIcon'` to each `icons/<category>/index.ts`
-5. Bump minor version in both `package.json` files
-6. `npm run build && npm run publish:web && npm run publish:rn`
-
-Existing consumers are never affected — all exports are additive.
 
 ## License
 
