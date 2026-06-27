@@ -93,42 +93,214 @@ Add `react-native-reanimated/plugin` to babel.config.js.
 <Brain strokeColor="#6366f1" fillColor="#eef2ff" />
 ```
 
+## Theming & Color Customization
+
+All color props accept any valid CSS color string (hex, rgb, hsl, named colors).
+
+### `color` — base color shorthand
+
+Sets both stroke and fill in one prop. Use this for simple single-color icons.
+
+```tsx
+<Bell color="#3b82f6" />
+<Loader color="rgb(99, 102, 241)" />
+<Star color="gold" />
+```
+
+### `strokeColor` — override stroke independently
+
+Overrides only the stroke (outline) color. Falls back to `color` when not specified.
+
+```tsx
+// Stroke in indigo, fill inherits from color
+<Brain color="#e0e7ff" strokeColor="#6366f1" />
+
+// Combine with fillColor for full two-tone control
+<Heart strokeColor="#ef4444" fillColor="#fee2e2" />
+```
+
+### `fillColor` — override fill independently
+
+Overrides only the fill color. Falls back to `color` when not specified.
+
+```tsx
+<Bookmark fillColor="#fbbf24" />
+<Cloud strokeColor="#0ea5e9" fillColor="#e0f2fe" />
+```
+
+### `secondaryColor` — accent / glow fill
+
+Used for background rings, glow effects, and accent layers. When omitted, defaults to the base color at **20% alpha** (`${base}33` in hex notation).
+
+```tsx
+// Explicit accent color
+<Heart color="#ef4444" secondaryColor="#fce7f3" />
+
+// Let it auto-derive (base at 20% alpha)
+<ECG color="#f43f5e" />
+
+// Transparent accent (remove glow entirely)
+<Bell color="#3b82f6" secondaryColor="transparent" />
+```
+
+### `opacity` — whole-icon opacity
+
+Applies to the entire icon container. Accepts `0`–`1`.
+
+```tsx
+<Wifi opacity={0.4} />           // dimmed / disabled appearance
+<Notification opacity={0.85} />  // slightly transparent
+```
+
+### `strokeWidth` — line thickness override
+
+Overrides the icon's built-in default stroke width.
+
+```tsx
+<Check strokeWidth={1} />    // thinner lines
+<Loader strokeWidth={3} />   // bolder lines
+```
+
+### Combining props
+
+```tsx
+// Full two-tone with custom opacity and weight
+<Brain
+  strokeColor="#6366f1"
+  fillColor="#eef2ff"
+  secondaryColor="#c7d2fe"
+  strokeWidth={1.5}
+  opacity={0.95}
+/>
+
+// Danger-state bell with glow
+<Bell
+  color="#ef4444"
+  secondaryColor="#fecaca"
+  strokeWidth={2}
+/>
+```
+
 ## Icon Catalog (104 icons)
 
 ### UI / System (8 icons)
+
+```ts
+import { Pulse, Check, Loader, Bell, Heart, Star, Upload, Wifi } from '@animicons/react';
+// or
+import { Pulse, Check, Loader, Bell, Heart, Star, Upload, Wifi } from '@animicons/react-native';
+```
+
 `Pulse` `Check` `Loader` `Upload` `Wifi` `Bell` `Star` `Heart`
 
 ### Navigation & Structure (10 icons)
+
+```ts
+import { Home, Menu, Back, Forward, ChevronDown, Close, Grid, Search } from '@animicons/react';
+// or
+import { Home, Menu, Back, Forward, ChevronDown, Close, Grid, Search } from '@animicons/react-native';
+```
+
 `Home` `Menu` `KebabMenu` `MoreHorizontal` `Back` `Forward` `ChevronDown` `Close` `Grid` `Search`
 
 ### Navigation Additions — Batch 1 (17 icons)
+
+```ts
+import { ChevronUp, ChevronLeft, ChevronRight, ArrowUp, ArrowDown, ArrowLeft } from '@animicons/react';
+// or
+import { ChevronUp, ChevronLeft, ChevronRight, ArrowUp, ArrowDown, ArrowLeft } from '@animicons/react-native';
+```
+
 `ChevronUp` `ChevronLeft` `ChevronRight` `ArrowUp` `ArrowDown` `ArrowLeft` `SortAsc` `SortDesc` `ZoomIn` `ZoomOut` `AlertTriangle` `AlertCircle` `Calendar` `Clock` `Globe` `Flag` `Notification`
 
 ### Core Actions (12 icons)
+
+```ts
+import { Add, Edit, Save, Trash, Share, Download, Refresh, Sync, Copy, Pin, Bookmark, Filter } from '@animicons/react';
+// or
+import { Add, Edit, Save, Trash, Share, Download, Refresh, Sync, Copy, Pin, Bookmark, Filter } from '@animicons/react-native';
+```
+
 `Add` `Edit` `Save` `Trash` `Share` `Download` `Refresh` `Sync` `Copy` `Pin` `Bookmark` `Filter`
 
 ### Actions Additions — Batch 1 (2 icons)
+
+```ts
+import { Undo, Redo } from '@animicons/react';
+// or
+import { Undo, Redo } from '@animicons/react-native';
+```
+
 `Undo` `Redo`
 
 ### Communication & Social (10 icons)
+
+```ts
+import { Mail, Chat, Phone, Video, User, Users, ThumbsUp, Send, Reaction, Mention } from '@animicons/react';
+// or
+import { Mail, Chat, Phone, Video, User, Users, ThumbsUp, Send, Reaction, Mention } from '@animicons/react-native';
+```
+
 `Mail` `Chat` `Phone` `Video` `User` `Users` `ThumbsUp` `Send` `Reaction` `Mention`
 
 ### Settings & Configuration (9 icons)
+
+```ts
+import { Settings, Sliders, Lock, Unlock, Key, Eye, EyeOff, Info, Help } from '@animicons/react';
+// or
+import { Settings, Sliders, Lock, Unlock, Key, Eye, EyeOff, Info, Help } from '@animicons/react-native';
+```
+
 `Settings` `Sliders` `Lock` `Unlock` `Key` `Eye` `EyeOff` `Info` `Help`
 
 ### Settings Additions — Batch 1 (1 icon)
+
+```ts
+import { Logout } from '@animicons/react';
+// or
+import { Logout } from '@animicons/react-native';
+```
+
 `Logout`
 
 ### File & Content (8 icons)
+
+```ts
+import { Folder, Document, Image, Attachment, Cloud, Link, Archive, Tag } from '@animicons/react';
+// or
+import { Folder, Document, Image, Attachment, Cloud, Link, Archive, Tag } from '@animicons/react-native';
+```
+
 `Folder` `Document` `Image` `Attachment` `Cloud` `Link` `Archive` `Tag`
 
 ### Media Playback (8 icons)
+
+```ts
+import { Play, Pause, Stop, FastForward, Rewind, Volume, Mute, Microphone } from '@animicons/react';
+// or
+import { Play, Pause, Stop, FastForward, Rewind, Volume, Mute, Microphone } from '@animicons/react-native';
+```
+
 `Play` `Pause` `Stop` `FastForward` `Rewind` `Volume` `Mute` `Microphone`
 
 ### Device & Hardware (6 icons)
+
+```ts
+import { Battery, Bluetooth, Location, CloudSync, Camera, Brightness } from '@animicons/react';
+// or
+import { Battery, Bluetooth, Location, CloudSync, Camera, Brightness } from '@animicons/react-native';
+```
+
 `Battery` `Bluetooth` `Location` `CloudSync` `Camera` `Brightness`
 
 ### Healthcare (13 icons)
+
+```ts
+import { ECG, HeartRate, Brain, Pill, Thermometer, DNA, Syringe, BloodDrop, Steps, Sleep, Oxygen, Lungs, Medkit } from '@animicons/react';
+// or
+import { ECG, HeartRate, Brain, Pill, Thermometer, DNA, Syringe, BloodDrop, Steps, Sleep, Oxygen, Lungs, Medkit } from '@animicons/react-native';
+```
+
 `ECG` `HeartRate` `Lungs` `Pill` `Thermometer` `DNA` `Syringe` `Brain` `BloodDrop` `Steps` `Sleep` `Oxygen` `Medkit`
 
 ## TypeScript

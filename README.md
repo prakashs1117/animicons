@@ -121,6 +121,98 @@ Expo:
 npx expo install react-native-svg react-native-reanimated
 ```
 
+## Framework Integration
+
+### Next.js (App Router)
+
+Install the web package:
+
+```bash
+npm install @animicons/react react-native-svg
+```
+
+Animated icons use React state and CSS animations, so they must run on the client. Add the `'use client'` directive to any Server Component that renders them:
+
+```tsx
+// app/components/StatusBadge.tsx
+'use client'
+
+import { Loader, Check } from '@animicons/react'
+
+export function StatusBadge({ loading }: { loading: boolean }) {
+  return loading ? <Loader size={24} /> : <Check size={24} color="#22c55e" />
+}
+```
+
+Static (non-animated) use inside Server Components is not supported — always wrap in a Client Component boundary.
+
+### Expo
+
+Install the React Native package and peer dependencies via the Expo CLI (this ensures version compatibility):
+
+```bash
+npx expo install react-native-reanimated react-native-svg
+npm install @animicons/react-native
+```
+
+Add the Reanimated Babel plugin to `babel.config.js`:
+
+```js
+module.exports = {
+  presets: ['babel-preset-expo'],
+  plugins: ['react-native-reanimated/plugin'],
+}
+```
+
+Restart Metro with a cleared cache after adding the plugin:
+
+```bash
+npx expo start --clear
+```
+
+### Vite + React
+
+Install the web package:
+
+```bash
+npm install @animicons/react react-native-svg
+```
+
+No additional configuration is required — `@animicons/react` ships pre-bundled CSS animations and works out of the box with Vite's default setup.
+
+```tsx
+import { Bell, Loader } from '@animicons/react'
+```
+
+### Bare React Native
+
+Install the package and peer dependencies:
+
+```bash
+npm install @animicons/react-native react-native-svg react-native-reanimated
+```
+
+Link the native modules (React Native 0.73+ auto-links; older versions may need explicit linking):
+
+```bash
+npx react-native link react-native-svg
+```
+
+Add the Reanimated Babel plugin to `babel.config.js`:
+
+```js
+module.exports = {
+  presets: ['module:metro-react-native-babel-preset'],
+  plugins: ['react-native-reanimated/plugin'],
+}
+```
+
+Clear Metro cache after modifying `babel.config.js`:
+
+```bash
+npx react-native start --reset-cache
+```
+
 ## Adding new icons (for maintainers)
 
 1. Add path data to `packages/shared/src/paths/<category>/NewIcon.ts`
