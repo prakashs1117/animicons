@@ -345,7 +345,7 @@
 
 <nav>
   <div class="nav-logo">@animicons<span>/react</span></div>
-  <span class="nav-badge">v0.2.0</span>
+  <span class="nav-badge">v0.3.0</span>
   <div class="nav-spacer"></div>
   <div class="nav-links">
     <a class="nav-link" href="https://github.com/prakashs1117/animicons" target="_blank">GitHub</a>
@@ -357,9 +357,9 @@
 <!-- HERO -->
 <section class="hero">
   <h1 class="hero-title">@animicons</h1>
-  <p class="hero-sub">Animated SVG icon library for React and React Native. 84 icons. 60fps. Full colour control. Tree-shakeable.</p>
+  <p class="hero-sub">Animated SVG icon library for React and React Native. 104 icons. 60fps. Full colour control. Tree-shakeable.</p>
   <div class="hero-badges">
-    <span class="badge">✦ 84 Icons</span>
+    <span class="badge">✦ 104 Icons</span>
     <span class="badge">⚡ 60fps</span>
     <span class="badge">🎨 Full colour control</span>
     <span class="badge">🌲 Tree-shakeable</span>
@@ -552,6 +552,23 @@ const ICONS = {
     { name: 'Close',          label: 'Close / X',            svg: (c, s) => closeIcon(c, s) },
     { name: 'Grid',           label: 'Grid Layout',          svg: (c, s) => grid(c, s) },
     { name: 'Search',         label: 'Search',               svg: (c, s) => search(c, s) },
+    { name: 'ChevronUp',      label: 'Chevron Up',           svg: (c, s) => chevronUp(c, s) },
+    { name: 'ChevronLeft',    label: 'Chevron Left',         svg: (c, s) => chevronLeft(c, s) },
+    { name: 'ChevronRight',   label: 'Chevron Right',        svg: (c, s) => chevronRight(c, s) },
+    { name: 'ArrowUp',        label: 'Arrow Up',             svg: (c, s) => arrowUp(c, s) },
+    { name: 'ArrowDown',      label: 'Arrow Down',           svg: (c, s) => arrowDown(c, s) },
+    { name: 'ArrowLeft',      label: 'Arrow Left',           svg: (c, s) => arrowLeft(c, s) },
+    { name: 'SortAsc',        label: 'Sort Ascending',       svg: (c, s) => sortAsc(c, s) },
+    { name: 'SortDesc',       label: 'Sort Descending',      svg: (c, s) => sortDesc(c, s) },
+    { name: 'ZoomIn',         label: 'Zoom In',              svg: (c, s) => zoomIn(c, s) },
+    { name: 'ZoomOut',        label: 'Zoom Out',             svg: (c, s) => zoomOut(c, s) },
+    { name: 'AlertTriangle',  label: 'Alert Triangle',       svg: (c, s) => alertTriangle(c, s) },
+    { name: 'AlertCircle',    label: 'Alert Circle',         svg: (c, s) => alertCircle(c, s) },
+    { name: 'Calendar',       label: 'Calendar',             svg: (c, s) => calendar(c, s) },
+    { name: 'Clock',          label: 'Clock',                svg: (c, s) => clock(c, s) },
+    { name: 'Globe',          label: 'Globe / World',        svg: (c, s) => globe(c, s) },
+    { name: 'Flag',           label: 'Flag',                 svg: (c, s) => flag(c, s) },
+    { name: 'Notification',   label: 'Notification Badge',   svg: (c, s) => notification(c, s) },
   ],
   healthcare: [
     { name: 'ECG',         label: 'ECG Monitor',      svg: (c, s) => ecg(c, s) },
@@ -581,6 +598,8 @@ const ICONS = {
     { name: 'Pin',       label: 'Pin',                 svg: (c, s) => pin(c, s) },
     { name: 'Bookmark',  label: 'Bookmark',            svg: (c, s) => bookmark(c, s) },
     { name: 'Filter',    label: 'Filter',              svg: (c, s) => filterIcon(c, s) },
+    { name: 'Undo',      label: 'Undo',                svg: (c, s) => undo(c, s) },
+    { name: 'Redo',      label: 'Redo',                svg: (c, s) => redo(c, s) },
   ],
   communication: [
     { name: 'Mail',     label: 'Email / Mail',         svg: (c, s) => mail(c, s) },
@@ -604,6 +623,7 @@ const ICONS = {
     { name: 'EyeOff',   label: 'Hide / Eye Off',      svg: (c, s) => eyeOff(c, s) },
     { name: 'Info',     label: 'Info',                svg: (c, s) => info(c, s) },
     { name: 'Help',     label: 'Help / Question',     svg: (c, s) => help(c, s) },
+    { name: 'Logout',   label: 'Logout',              svg: (c, s) => logout(c, s) },
   ],
   files: [
     { name: 'Folder',     label: 'Folder',            svg: (c, s) => folder(c, s) },
@@ -1072,6 +1092,250 @@ function search(c, size) {
   </style>` + svgWrap(id, size, `
     <circle class="${id}-l" cx="20" cy="20" r="12" stroke="${c}" stroke-width="2.5" fill="${hex2(c)}"/>
     <path class="${id}-h" d="M30 30 L42 42" stroke="${c}" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  `);
+}
+
+// ─── Batch 1: Navigation & UI additions ───────────────────────────────────────
+function chevronUp(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-b{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+    .${id}-c{animation:${id}-b ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-c" d="M12 30 L24 18 L36 30" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  `);
+}
+
+function chevronLeft(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-sl{0%,100%{transform:translateX(0)}50%{transform:translateX(-6px)}}
+    .${id}-c{animation:${id}-sl ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-c" d="M30 12 L18 24 L30 36" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  `);
+}
+
+function chevronRight(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-sl{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+    .${id}-c{animation:${id}-sl ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-c" d="M18 12 L30 24 L18 36" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  `);
+}
+
+function arrowUp(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-b{0%,100%{transform:translateY(0)}40%{transform:translateY(-8px)}70%{transform:translateY(-2px)}}
+    .${id}-a{animation:${id}-b ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-a" d="M24 38 L24 10" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-a" d="M14 20 L24 10 L34 20" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  `);
+}
+
+function arrowDown(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-b{0%,100%{transform:translateY(0)}40%{transform:translateY(8px)}70%{transform:translateY(2px)}}
+    .${id}-a{animation:${id}-b ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-a" d="M24 10 L24 38" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-a" d="M14 28 L24 38 L34 28" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  `);
+}
+
+function arrowLeft(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-sl{0%,100%{transform:translateX(0)}40%{transform:translateX(-8px)}70%{transform:translateX(-2px)}}
+    .${id}-a{animation:${id}-sl ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-a" d="M38 24 L10 24" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-a" d="M20 14 L10 24 L20 34" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  `);
+}
+
+function sortAsc(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-rise{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+    .${id}-b1{animation:${id}-rise ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:0ms}
+    .${id}-b2{animation:${id}-rise ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger}ms}
+    .${id}-b3{animation:${id}-rise ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger*2}ms}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-b1" d="M10 36 L24 36" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-b2" d="M10 28 L32 28" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-b3" d="M10 20 L40 20" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function sortDesc(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-drop{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(5px)}}
+    .${id}-b1{animation:${id}-drop ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:0ms}
+    .${id}-b2{animation:${id}-drop ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger}ms}
+    .${id}-b3{animation:${id}-drop ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};animation-delay:${dd.stagger*2}ms}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-b1" d="M10 20 L40 20" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-b2" d="M10 28 L32 28" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-b3" d="M10 36 L24 36" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function zoomIn(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-pl{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+    .${id}-l{animation:${id}-pl ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:20px 20px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-l" d="M20 8 a12 12 0 1 0 0.01 0" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-l" d="M29 29 L40 40" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-l" d="M15 20 L25 20" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-l" d="M20 15 L20 25" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function zoomOut(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-pl{0%,100%{transform:scale(1)}50%{transform:scale(0.85)}}
+    .${id}-l{animation:${id}-pl ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:20px 20px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-l" d="M20 8 a12 12 0 1 0 0.01 0" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-l" d="M29 29 L40 40" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-l" d="M15 20 L25 20" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function alertTriangle(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-shk{0%,100%{transform:rotate(0)}20%{transform:rotate(-6deg)}40%{transform:rotate(6deg)}60%{transform:rotate(-4deg)}80%{transform:rotate(4deg)}}
+    @keyframes ${id}-pl{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.3);opacity:0.8}}
+    .${id}-t{animation:${id}-shk ${sec(dd.long)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+    .${id}-d{animation:${id}-pl ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-t" d="M24 6 L44 42 L4 42 Z" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="${id}-d" d="M24 18 L24 32" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <circle class="${id}-d" cx="24" cy="37" r="1.5" fill="${c}"/>
+  `);
+}
+
+function alertCircle(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-rng{0%{transform:scale(1);opacity:1}50%{transform:scale(1.12);opacity:0.7}100%{transform:scale(1);opacity:1}}
+    .${id}-r{animation:${id}-rng ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-r" d="M24 6 a18 18 0 1 0 0.01 0" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M24 16 L24 28" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <circle cx="24" cy="33" r="2" fill="${c}"/>
+  `);
+}
+
+function calendar(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-pl{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.2);opacity:0.8}}
+    .${id}-sq{animation:${id}-pl ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:24px 30px}
+  </style>` + svgWrap(id, size, `
+    <path d="M6 12 L42 12 L42 44 L6 44 Z" stroke="${c}" stroke-width="2.5" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <path d="M6 20 L42 20" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M16 6 L16 16" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M32 6 L32 16" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-sq" d="M20 26 L28 26 L28 34 L20 34 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}"/>
+  `);
+}
+
+function clock(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    .${id}-m{animation:${id}-spin ${sec(dd.long)} linear ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <path d="M24 6 a18 18 0 1 0 0.01 0" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M24 24 L24 14" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-m" d="M24 24 L32 24" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function globe(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    .${id}-m{animation:${id}-spin ${sec(dd.long)} linear ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <path d="M24 6 a18 18 0 1 0 0.01 0" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-m" d="M24 6 Q36 24 24 42 Q12 24 24 6" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M6 24 L42 24" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M9 14 Q24 20 39 14" stroke="${c}" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <path d="M9 34 Q24 28 39 34" stroke="${c}" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  `);
+}
+
+function flag(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-wv{0%,100%{transform:skewY(0)}25%{transform:skewY(-4deg)}75%{transform:skewY(4deg)}}
+    .${id}-f{animation:${id}-wv ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:12px 14px}
+  </style>` + svgWrap(id, size, `
+    <path d="M12 6 L12 44" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-f" d="M12 8 L38 14 L12 28 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+  `);
+}
+
+function notification(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-bdg{0%,100%{transform:scale(1)}40%{transform:scale(1.4)}60%{transform:scale(1.1)}}
+    .${id}-b{animation:${id}-bdg ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:36px 10px}
+  </style>` + svgWrap(id, size, `
+    <path d="M12 32 C12 20 18 12 24 12 C30 12 36 20 36 32 Z" stroke="${c}" stroke-width="2" fill="${hex2(c)}" stroke-linejoin="round"/>
+    <path d="M20 36 Q24 40 28 36" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M24 8 L24 12" stroke="${c}" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <circle class="${id}-b" cx="36" cy="10" r="5" fill="${c}"/>
+  `);
+}
+
+// ─── Batch 1: Actions additions ───────────────────────────────────────────────
+function undo(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-spin{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+    .${id}-a{animation:${id}-spin ${sec(dd.long)} linear ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-a" d="M32 12 Q16 6 10 20 Q6 32 16 38" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-a" d="M32 12 L24 8 M32 12 L28 20" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  `);
+}
+
+function redo(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    .${id}-a{animation:${id}-spin ${sec(dd.long)} linear ${iter()};animation-play-state:${play()};transform-origin:24px 24px}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-a" d="M16 12 Q32 6 38 20 Q42 32 32 38" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="${id}-a" d="M16 12 L24 8 M16 12 L20 20" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  `);
+}
+
+// ─── Batch 1: Settings additions ─────────────────────────────────────────────
+function logout(c, size) {
+  const id = nextId(); const dd = d();
+  return `<style>
+    @keyframes ${id}-door{0%,100%{transform:rotate(0)}40%,60%{transform:rotate(-8deg)}}
+    @keyframes ${id}-arr{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+    .${id}-d{animation:${id}-door ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()};transform-origin:8px 24px}
+    .${id}-a{animation:${id}-arr ${sec(dd.medium)} ease-in-out ${iter()};animation-play-state:${play()}}
+  </style>` + svgWrap(id, size, `
+    <path class="${id}-d" d="M20 8 L8 8 L8 40 L20 40" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="${id}-a" d="M28 24 L42 24 M34 16 L42 24 L34 32" stroke="${c}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   `);
 }
 

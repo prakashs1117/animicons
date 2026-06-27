@@ -1,6 +1,6 @@
 # @animicons
 
-Animated SVG icon library for React and React Native. 84 icons across 9 categories. 60fps animations. Full colour customisation. Tree-shakeable.
+Animated SVG icon library for React and React Native. 104 icons across 9 categories. 60fps animations. Full colour customisation. Tree-shakeable.
 
 ## Preview
 
@@ -25,8 +25,8 @@ Animated SVG icon library for React and React Native. 84 icons across 9 categori
 
 | Package | Platform | Version | Install |
 |---------|----------|---------|---------|
-| `@animicons/react` | React (web) | `0.2.2` | `npm install @animicons/react react-native-svg` |
-| `@animicons/react-native` | React Native | `0.2.2` | `npm install @animicons/react-native react-native-svg react-native-reanimated` |
+| `@animicons/react` | React (web) | `0.3.0` | `npm install @animicons/react react-native-svg` |
+| `@animicons/react-native` | React Native | `0.3.0` | `npm install @animicons/react-native react-native-svg react-native-reanimated` |
 
 ## Usage
 
@@ -75,6 +75,36 @@ import { ECG, Brain, Loader } from '@animicons/react-native'
 
 ### UI / System
 `Pulse` `Check` `Loader` `Upload` `Wifi` `Bell` `Star` `Heart`
+
+### Navigation & Structure
+`Home` `Menu` `KebabMenu` `MoreHorizontal` `Back` `Forward` `ChevronDown` `Close` `Grid` `Search`
+
+### Navigation Additions — Batch 1
+`ChevronUp` `ChevronLeft` `ChevronRight` `ArrowUp` `ArrowDown` `ArrowLeft` `SortAsc` `SortDesc` `ZoomIn` `ZoomOut` `AlertTriangle` `AlertCircle` `Calendar` `Clock` `Globe` `Flag` `Notification`
+
+### Core Actions
+`Add` `Edit` `Save` `Trash` `Share` `Download` `Refresh` `Sync` `Copy` `Pin` `Bookmark` `Filter`
+
+### Actions Additions — Batch 1
+`Undo` `Redo`
+
+### Communication & Social
+`Mail` `Chat` `Phone` `Video` `User` `Users` `ThumbsUp` `Send` `Reaction` `Mention`
+
+### Settings & Configuration
+`Settings` `Sliders` `Lock` `Unlock` `Key` `Eye` `EyeOff` `Info` `Help`
+
+### Settings Additions — Batch 1
+`Logout`
+
+### File & Content
+`Folder` `Document` `Image` `Attachment` `Cloud` `Link` `Archive` `Tag`
+
+### Media Playback
+`Play` `Pause` `Stop` `FastForward` `Rewind` `Volume` `Mute` `Microphone`
+
+### Device & Hardware
+`Battery` `Bluetooth` `Location` `CloudSync` `Camera` `Brightness`
 
 ### Healthcare
 `ECG` `HeartRate` `Lungs` `Pill` `Thermometer` `DNA` `Syringe` `Brain` `BloodDrop` `Steps` `Sleep` `Oxygen` `Medkit`
