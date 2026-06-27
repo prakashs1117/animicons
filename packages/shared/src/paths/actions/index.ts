@@ -10,3 +10,5 @@ export { CopyPaths }     from './Copy';
 export { PinPaths }      from './Pin';
 export { BookmarkPaths } from './Bookmark';
 export { FilterPaths }   from './Filter';
+export { UndoPaths }     from './Undo';
+export { RedoPaths }     from './Redo';
