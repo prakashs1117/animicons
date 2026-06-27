@@ -15,7 +15,7 @@ export const Search: React.FC<IconProps> = ({
   size = 48, autoPlay = true, loop = true, speed = 'slow', style, ...colorProps
 }) => {
   const lensScale = useSharedValue(1);
-  const handleX = useSharedValue(-4);
+  const handleX = useSharedValue(0);
   const d = getAnimDuration(speed);
   const s = resolveStyle(colorProps, SearchPaths);
 

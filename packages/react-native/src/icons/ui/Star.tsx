@@ -12,6 +12,8 @@ import { getAnimDuration } from '../../utils/animDuration';
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
+// Star uses press-trigger animation (not autoPlay loop) — tap to fill and sparkle.
+// Uses Pressable instead of Svg root; loop prop is intentionally unused.
 export const Star: React.FC<IconProps> = ({
   size = 48, autoPlay = true, speed = 'slow', onAnimationEnd, style, ...colorProps
 }) => {
