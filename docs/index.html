@@ -453,11 +453,18 @@
           <span class="gs-step" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">✦</span>
           Use with Claude, Cursor, or Copilot — one-shot setup prompt
         </div>
-        <a href="./ai-setup-prompt.md" target="_blank"
-          style="background: #312e81; border: 1px solid #4f46e5; border-radius: 7px; padding: 5px 14px;
-          font-size: 12px; color: #c4b5fd; text-decoration: none; white-space: nowrap; flex-shrink: 0;">
-          Open full prompt ↗
-        </a>
+        <div style="display:flex; gap:8px; flex-shrink:0;">
+          <button onclick="copyAiPrompt(this)"
+            style="background: #312e81; border: 1px solid #4f46e5; border-radius: 7px; padding: 5px 14px;
+            font-size: 12px; color: #c4b5fd; cursor: pointer; white-space: nowrap;">
+            Copy prompt
+          </button>
+          <a href="./ai-setup-prompt.md" target="_blank"
+            style="background: transparent; border: 1px solid #334155; border-radius: 7px; padding: 5px 14px;
+            font-size: 12px; color: #64748b; text-decoration: none; white-space: nowrap;">
+            Open ↗
+          </a>
+        </div>
       </div>
       <div class="gs-code" style="font-size: 12px; color: #94a3b8; line-height: 1.6;">Paste the AI setup prompt into Claude, Cursor, Copilot Chat, or any AI coding tool.
 It will scaffold a complete Vite + React demo app showing all 104 animated icons,
@@ -2365,6 +2372,18 @@ function copyCode(id, btn) {
   navigator.clipboard.writeText(document.getElementById(id).textContent);
   btn.textContent = '✓ Copied'; btn.classList.add('copied');
   setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+}
+
+async function copyAiPrompt(btn) {
+  try {
+    const res = await fetch('./ai-setup-prompt.md');
+    const text = await res.text();
+    await navigator.clipboard.writeText(text);
+    btn.textContent = '✓ Copied!'; btn.style.background = '#14532d'; btn.style.borderColor = '#16a34a'; btn.style.color = '#86efac';
+    setTimeout(() => { btn.textContent = 'Copy prompt'; btn.style.background = '#312e81'; btn.style.borderColor = '#4f46e5'; btn.style.color = '#c4b5fd'; }, 2500);
+  } catch {
+    btn.textContent = 'Failed — open manually'; setTimeout(() => { btn.textContent = 'Copy prompt'; }, 2500);
+  }
 }
 
 function gsCopy(btn, id) {
