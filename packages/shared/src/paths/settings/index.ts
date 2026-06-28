@@ -7,3 +7,4 @@ export { EyePaths }      from './Eye';
 export { EyeOffPaths }   from './EyeOff';
 export { InfoPaths }     from './Info';
 export { HelpPaths }     from './Help';
+export { LogoutPaths }   from './Logout';

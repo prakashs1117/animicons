@@ -21,15 +21,14 @@ export const Check: React.FC<IconProps> = ({
   const s = resolveStyle(colorProps, CheckPaths);
 
   useEffect(() => {
+    const cb = onAnimationEnd ? () => { 'worklet'; runOnJS(onAnimationEnd)(); } : undefined;
     if (autoPlay) {
       if (loop) {
         circleProgress.value = withRepeat(withTiming(0, { duration: d.medium, easing: Easing.ease }), -1);
         checkProgress.value = withRepeat(withDelay(d.medium * 0.6, withTiming(0, { duration: d.medium * 0.6, easing: Easing.ease })), -1);
       } else {
         circleProgress.value = withTiming(0, { duration: d.medium, easing: Easing.ease });
-        checkProgress.value = withDelay(d.medium * 0.6, withTiming(0, { duration: d.medium * 0.6, easing: Easing.ease }, () => {
-          if (onAnimationEnd) runOnJS(onAnimationEnd)();
-        }));
+        checkProgress.value = withDelay(d.medium * 0.6, withTiming(0, { duration: d.medium * 0.6, easing: Easing.ease }, cb));
       }
     } else {
       cancelAnimation(circleProgress); cancelAnimation(checkProgress);

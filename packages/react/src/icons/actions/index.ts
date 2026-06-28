@@ -10,3 +10,5 @@ export { Copy }     from './Copy';
 export { Pin }      from './Pin';
 export { Bookmark } from './Bookmark';
 export { Filter }   from './Filter';
+export { Undo }     from './Undo';
+export { Redo }     from './Redo';

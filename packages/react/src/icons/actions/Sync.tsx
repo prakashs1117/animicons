@@ -38,10 +38,12 @@ export const Sync: React.FC<IconProps> = ({
       `}</style>
       <Svg width={size} height={size} viewBox={SyncPaths.viewBox} style={style as any}
         {...({ onAnimationEnd: loop ? undefined : onAnimationEnd } as any)}>
-        <Path {...({ className: `ai-sync-cw-${uid}` } as any)} d={SyncPaths.arc1} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} strokeLinecap="round" />
-        <Path {...({ className: `ai-sync-cw-${uid}` } as any)} d={SyncPaths.head1} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} strokeLinecap="round" strokeLinejoin="round" />
-        <Path {...({ className: `ai-sync-ccw-${uid}` } as any)} d={SyncPaths.arc2} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} strokeLinecap="round" />
-        <Path {...({ className: `ai-sync-ccw-${uid}` } as any)} d={SyncPaths.head2} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} strokeLinecap="round" strokeLinejoin="round" />
+        <Path {...({ className: `ai-sync-cw-${uid}` } as any)} d={SyncPaths.arc1}   stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} strokeLinecap="round" />
+        <Path {...({ className: `ai-sync-cw-${uid}` } as any)} d={SyncPaths.head1}  stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} strokeLinecap="round" />
+        <Path {...({ className: `ai-sync-cw-${uid}` } as any)} d={SyncPaths.head1b} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} strokeLinecap="round" />
+        <Path {...({ className: `ai-sync-ccw-${uid}` } as any)} d={SyncPaths.arc2}   stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} strokeLinecap="round" />
+        <Path {...({ className: `ai-sync-ccw-${uid}` } as any)} d={SyncPaths.head2}  stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} strokeLinecap="round" />
+        <Path {...({ className: `ai-sync-ccw-${uid}` } as any)} d={SyncPaths.head2b} stroke={s.stroke} strokeWidth={s.strokeWidth} fill="none" opacity={s.opacity} strokeLinecap="round" />
       </Svg>
     </>
   );

@@ -1,6 +1,6 @@
 # @animicons/react-native
 
-Animated SVG icon library for React Native. 60fps animations powered by `react-native-reanimated`. Full colour customisation. Tree-shakeable.
+Animated SVG icon library for React Native. 104 icons. 60fps animations powered by `react-native-reanimated`. Full colour customisation. Tree-shakeable.
 
 ## Preview
 
@@ -18,7 +18,11 @@ npm install @animicons/react-native react-native-svg react-native-reanimated
 
 Add to `babel.config.js`:
 ```js
-plugins: ['react-native-reanimated/plugin']
+// babel.config.js
+module.exports = {
+  presets: ['module:metro-react-native-babel-preset'], // or 'babel-preset-expo' for Expo
+  plugins: ['react-native-reanimated/plugin'],
+};
 ```
 
 Expo:
@@ -69,6 +73,27 @@ import { ECG, Brain, Loader, Bell, Heart } from '@animicons/react-native'
 
 ### UI / System
 `Pulse` `Check` `Loader` `Upload` `Wifi` `Bell` `Star` `Heart`
+
+### Navigation & Structure
+`Home` `Menu` `KebabMenu` `MoreHorizontal` `Back` `Forward` `ChevronDown` `Close` `Grid` `Search` `ChevronUp` `ChevronLeft` `ChevronRight` `ArrowUp` `ArrowDown` `ArrowLeft` `SortAsc` `SortDesc` `ZoomIn` `ZoomOut` `AlertTriangle` `AlertCircle` `Calendar` `Clock` `Globe` `Flag` `Notification`
+
+### Core Actions
+`Add` `Edit` `Save` `Trash` `Share` `Download` `Refresh` `Sync` `Copy` `Pin` `Bookmark` `Filter` `Undo` `Redo`
+
+### Communication & Social
+`Mail` `Chat` `Phone` `Video` `User` `Users` `ThumbsUp` `Send` `Reaction` `Mention`
+
+### Settings & Configuration
+`Settings` `Sliders` `Lock` `Unlock` `Key` `Eye` `EyeOff` `Info` `Help` `Logout`
+
+### File & Content
+`Folder` `Document` `Image` `Attachment` `Cloud` `Link` `Archive` `Tag`
+
+### Media Playback
+`Play` `Pause` `Stop` `FastForward` `Rewind` `Volume` `Mute` `Microphone`
+
+### Device & Hardware
+`Battery` `Bluetooth` `Location` `CloudSync` `Camera` `Brightness`
 
 ### Healthcare
 `ECG` `HeartRate` `Lungs` `Pill` `Thermometer` `DNA` `Syringe` `Brain` `BloodDrop` `Steps` `Sleep` `Oxygen` `Medkit`

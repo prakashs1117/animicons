@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0] — 2026-06-27
+
+### Added
+
+- **Navigation & UI (20 icons):** `ChevronUp`, `ChevronLeft`, `ChevronRight`, `ArrowUp`, `ArrowDown`, `ArrowLeft`, `SortAsc`, `SortDesc`, `ZoomIn`, `ZoomOut`, `AlertTriangle`, `AlertCircle`, `Calendar`, `Clock`, `Globe`, `Flag`, `Logout`, `Notification`, `Undo`, `Redo`
+- Total library size: 84 → 104 icons
+- Zero breaking changes — all v0.2.x imports continue to work unchanged
+
 ## [0.2.0] — 2026-06-01
 
 ### Added
