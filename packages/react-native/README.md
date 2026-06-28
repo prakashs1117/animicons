@@ -18,7 +18,11 @@ npm install @animicons/react-native react-native-svg react-native-reanimated
 
 Add to `babel.config.js`:
 ```js
-plugins: ['react-native-reanimated/plugin']
+// babel.config.js
+module.exports = {
+  presets: ['module:metro-react-native-babel-preset'], // or 'babel-preset-expo' for Expo
+  plugins: ['react-native-reanimated/plugin'],
+};
 ```
 
 Expo:

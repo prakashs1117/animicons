@@ -16,7 +16,7 @@ npm install @animicons/react-native react-native-svg react-native-reanimated
 
 ### @animicons/react
 - `react` ^18.0.0
-- `react-native-svg` ^14.0.0
+- `react-native-svg` >=13.0.0
 
 ### @animicons/react-native
 - `react` ^18.0.0
@@ -39,7 +39,10 @@ npx expo install react-native-svg react-native-reanimated
 ```
 Add to `babel.config.js`:
 ```js
-plugins: ['react-native-reanimated/plugin']
+module.exports = {
+  presets: ['babel-preset-expo'],
+  plugins: ['react-native-reanimated/plugin'],
+};
 ```
 
 ### Vite + React
@@ -53,7 +56,14 @@ import { Bell, Loader } from '@animicons/react'
 npm install react-native-svg react-native-reanimated
 npx react-native link react-native-svg
 ```
-Add `react-native-reanimated/plugin` to babel.config.js.
+Add to `babel.config.js`:
+```js
+// babel.config.js
+module.exports = {
+  presets: ['module:metro-react-native-babel-preset'],
+  plugins: ['react-native-reanimated/plugin'],
+};
+```
 
 ## Props Reference
 
@@ -196,9 +206,9 @@ import { Pulse, Check, Loader, Bell, Heart, Star, Upload, Wifi } from '@animicon
 ### Navigation & Structure (10 icons)
 
 ```ts
-import { Home, Menu, Back, Forward, ChevronDown, Close, Grid, Search } from '@animicons/react';
+import { Home, Menu, KebabMenu, MoreHorizontal, Back, Forward, ChevronDown, Close, Grid, Search } from '@animicons/react';
 // or
-import { Home, Menu, Back, Forward, ChevronDown, Close, Grid, Search } from '@animicons/react-native';
+import { Home, Menu, KebabMenu, MoreHorizontal, Back, Forward, ChevronDown, Close, Grid, Search } from '@animicons/react-native';
 ```
 
 `Home` `Menu` `KebabMenu` `MoreHorizontal` `Back` `Forward` `ChevronDown` `Close` `Grid` `Search`

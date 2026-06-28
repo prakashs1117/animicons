@@ -1,6 +1,6 @@
 # @animicons
 
-Animated SVG icon library for React and React Native. 104 icons across 9 categories. 60fps animations. Full colour customisation. Tree-shakeable.
+Animated SVG icon library for React and React Native. 104 icons across 12 categories. 60fps animations. Full colour customisation. Tree-shakeable.
 
 ## Preview
 
@@ -113,7 +113,11 @@ import { ECG, Brain, Loader } from '@animicons/react-native'
 
 Add to `babel.config.js`:
 ```js
-plugins: ['react-native-reanimated/plugin']
+// babel.config.js
+module.exports = {
+  presets: ['module:metro-react-native-babel-preset'], // or 'babel-preset-expo' for Expo
+  plugins: ['react-native-reanimated/plugin'],
+};
 ```
 
 Expo:
