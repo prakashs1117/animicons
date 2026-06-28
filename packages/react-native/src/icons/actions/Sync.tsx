@@ -30,17 +30,21 @@ export const Sync: React.FC<IconProps> = ({
     }
   }, [autoPlay, loop, speed]);
 
-  const arc1Props  = useAnimatedProps(() => ({ transform: [{ rotate: `${rot1.value}deg` }], originX: 24, originY: 24 }));
-  const head1Props = useAnimatedProps(() => ({ transform: [{ rotate: `${rot1.value}deg` }], originX: 24, originY: 24 }));
-  const arc2Props  = useAnimatedProps(() => ({ transform: [{ rotate: `${rot2.value}deg` }], originX: 24, originY: 24 }));
-  const head2Props = useAnimatedProps(() => ({ transform: [{ rotate: `${rot2.value}deg` }], originX: 24, originY: 24 }));
+  const cw1Props  = useAnimatedProps(() => ({ transform: [{ rotate: `${rot1.value}deg` }], originX: 24, originY: 24 }));
+  const cw2Props  = useAnimatedProps(() => ({ transform: [{ rotate: `${rot1.value}deg` }], originX: 24, originY: 24 }));
+  const cw3Props  = useAnimatedProps(() => ({ transform: [{ rotate: `${rot1.value}deg` }], originX: 24, originY: 24 }));
+  const ccw1Props = useAnimatedProps(() => ({ transform: [{ rotate: `${rot2.value}deg` }], originX: 24, originY: 24 }));
+  const ccw2Props = useAnimatedProps(() => ({ transform: [{ rotate: `${rot2.value}deg` }], originX: 24, originY: 24 }));
+  const ccw3Props = useAnimatedProps(() => ({ transform: [{ rotate: `${rot2.value}deg` }], originX: 24, originY: 24 }));
 
   return (
     <Svg width={size} height={size} viewBox={SyncPaths.viewBox} style={style as any}>
-      <AnimatedPath animatedProps={arc1Props}  d={SyncPaths.arc1}  stroke={s.stroke} strokeWidth={s.strokeWidth} strokeLinecap="round" fill="none" opacity={s.opacity} />
-      <AnimatedPath animatedProps={head1Props} d={SyncPaths.head1} stroke={s.stroke} strokeWidth={s.strokeWidth} strokeLinecap="round" strokeLinejoin="round" fill="none" opacity={s.opacity} />
-      <AnimatedPath animatedProps={arc2Props}  d={SyncPaths.arc2}  stroke={s.stroke} strokeWidth={s.strokeWidth} strokeLinecap="round" fill="none" opacity={s.opacity} />
-      <AnimatedPath animatedProps={head2Props} d={SyncPaths.head2} stroke={s.stroke} strokeWidth={s.strokeWidth} strokeLinecap="round" strokeLinejoin="round" fill="none" opacity={s.opacity} />
+      <AnimatedPath animatedProps={cw1Props}  d={SyncPaths.arc1}   stroke={s.stroke} strokeWidth={s.strokeWidth} strokeLinecap="round" fill="none" opacity={s.opacity} />
+      <AnimatedPath animatedProps={cw2Props}  d={SyncPaths.head1}  stroke={s.stroke} strokeWidth={s.strokeWidth} strokeLinecap="round" fill="none" opacity={s.opacity} />
+      <AnimatedPath animatedProps={cw3Props}  d={SyncPaths.head1b} stroke={s.stroke} strokeWidth={s.strokeWidth} strokeLinecap="round" fill="none" opacity={s.opacity} />
+      <AnimatedPath animatedProps={ccw1Props} d={SyncPaths.arc2}   stroke={s.stroke} strokeWidth={s.strokeWidth} strokeLinecap="round" fill="none" opacity={s.opacity} />
+      <AnimatedPath animatedProps={ccw2Props} d={SyncPaths.head2}  stroke={s.stroke} strokeWidth={s.strokeWidth} strokeLinecap="round" fill="none" opacity={s.opacity} />
+      <AnimatedPath animatedProps={ccw3Props} d={SyncPaths.head2b} stroke={s.stroke} strokeWidth={s.strokeWidth} strokeLinecap="round" fill="none" opacity={s.opacity} />
     </Svg>
   );
 };
