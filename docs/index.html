@@ -303,65 +303,6 @@
   }
   .overlay.visible { opacity: 1; pointer-events: all; }
 
-  /* GET STARTED SECTION */
-  .gs-section {
-    max-width: 1100px; margin: 0 auto 40px; padding: 0 24px;
-  }
-  .gs-header {
-    display: flex; align-items: baseline; gap: 12px; margin-bottom: 20px;
-  }
-  .gs-title {
-    font-size: 20px; font-weight: 400; color: var(--text); letter-spacing: -0.5px;
-  }
-  .gs-sub {
-    font-size: 13px; color: var(--text2);
-  }
-  .gs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
-    gap: 14px;
-  }
-  .gs-card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 16px; overflow: hidden; box-shadow: var(--card-shadow);
-  }
-  .gs-card-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 18px 12px;
-    border-bottom: 1px solid var(--border);
-  }
-  .gs-card-title {
-    font-size: 13px; font-weight: 500; color: var(--text);
-    display: flex; align-items: center; gap: 8px;
-  }
-  .gs-card-title .gs-step {
-    width: 22px; height: 22px; border-radius: 50%;
-    background: var(--accent); color: white;
-    font-size: 11px; font-weight: 600;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .gs-card-desc {
-    font-size: 12px; color: var(--text2);
-  }
-  .gs-copy-btn {
-    background: var(--btn-bg); border: 1px solid var(--border);
-    border-radius: 7px; padding: 5px 12px; cursor: pointer;
-    font-size: 12px; color: var(--text2); transition: all 0.15s;
-    white-space: nowrap; flex-shrink: 0;
-  }
-  .gs-copy-btn:hover { background: var(--btn-hover); color: var(--text); }
-  .gs-copy-btn.copied { background: #dcfce7; color: #15803d; border-color: #86efac; }
-  .gs-code {
-    padding: 16px 18px;
-    font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12.5px;
-    color: var(--code-text); background: var(--code-bg);
-    line-height: 1.7; white-space: pre; overflow-x: auto;
-  }
-  @media (max-width: 600px) {
-    .gs-grid { grid-template-columns: 1fr; }
-  }
-
   /* FOOTER */
   footer {
     text-align: center; padding: 40px 24px;
@@ -409,7 +350,6 @@
   <div class="nav-links">
     <a class="nav-link" href="https://github.com/prakashs1117/animicons" target="_blank">GitHub</a>
     <a class="nav-link" href="https://www.npmjs.com/package/@animicons/react" target="_blank">npm</a>
-    <a class="nav-link" href="./ai-setup-prompt.md" target="_blank">AI Setup Prompt</a>
     <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙 Dark</button>
   </div>
 </nav>
@@ -439,150 +379,28 @@
 </section>
 
 <!-- GET STARTED -->
-<section class="gs-section">
-  <div class="gs-header">
-    <h2 class="gs-title">Get Started</h2>
-    <span class="gs-sub">Copy and paste to start using @animicons in your project</span>
-  </div>
-  <div class="gs-grid">
-
-    <!-- AI Prompt card — full width -->
-    <div class="gs-card" style="grid-column: 1 / -1; border-color: #6366f1;">
-      <div class="gs-card-header" style="background: linear-gradient(135deg, #1e1b4b, #1e293b);">
-        <div class="gs-card-title">
-          <span class="gs-step" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">✦</span>
-          Use with Claude, Cursor, or Copilot — one-shot setup prompt
-        </div>
-        <div style="display:flex; gap:8px; flex-shrink:0;">
-          <button onclick="copyAiPrompt(this)"
-            style="background: #312e81; border: 1px solid #4f46e5; border-radius: 7px; padding: 5px 14px;
-            font-size: 12px; color: #c4b5fd; cursor: pointer; white-space: nowrap;">
-            Copy prompt
-          </button>
-          <a href="./ai-setup-prompt.md" target="_blank"
-            style="background: transparent; border: 1px solid #334155; border-radius: 7px; padding: 5px 14px;
-            font-size: 12px; color: #64748b; text-decoration: none; white-space: nowrap;">
-            Open ↗
-          </a>
-        </div>
+<section style="max-width:1100px;margin:0 auto 40px;padding:0 24px;">
+  <div style="background:#131929;border:1px solid #6366f1;border-radius:16px;overflow:hidden;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px 12px;border-bottom:1px solid #1e293b;background:linear-gradient(135deg,#1e1b4b,#1e293b);">
+      <div style="font-size:13px;font-weight:500;color:#f1f5f9;display:flex;align-items:center;gap:8px;">
+        <span style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;">✦</span>
+        Use with Claude, Cursor, or Copilot — one-shot setup prompt
       </div>
-      <div class="gs-code" style="font-size: 12px; color: #94a3b8; line-height: 1.6;">Paste the AI setup prompt into Claude, Cursor, Copilot Chat, or any AI coding tool.
+      <div style="display:flex;gap:8px;flex-shrink:0;">
+        <button onclick="copyAiPrompt(this)" id="aiPromptCopyBtn"
+          style="background:#312e81;border:1px solid #4f46e5;border-radius:7px;padding:5px 14px;font-size:12px;color:#c4b5fd;cursor:pointer;white-space:nowrap;">
+          Copy prompt
+        </button>
+        <a href="./ai-setup-prompt.md" target="_blank"
+          style="background:transparent;border:1px solid #334155;border-radius:7px;padding:5px 14px;font-size:12px;color:#64748b;text-decoration:none;white-space:nowrap;">
+          Open ↗
+        </a>
+      </div>
+    </div>
+    <div style="padding:16px 18px;font-family:'SF Mono','Fira Code',monospace;font-size:12px;color:#94a3b8;line-height:1.6;">Paste the AI setup prompt into Claude, Cursor, Copilot Chat, or any AI coding tool.
 It will scaffold a complete Vite + React demo app showing all 104 animated icons,
 with live color / size / speed controls and copy-ready import snippets.
 No configuration needed — runs in under 60 seconds.</div>
-    </div>
-
-    <!-- Step 1: Install React -->
-    <div class="gs-card">
-      <div class="gs-card-header">
-        <div class="gs-card-title">
-          <span class="gs-step">1</span>
-          Install — React (Web)
-        </div>
-        <button class="gs-copy-btn" onclick="gsCopy(this, 'gs-code-1')">Copy</button>
-      </div>
-      <div class="gs-code" id="gs-code-1">npm install @animicons/react react-native-svg</div>
-    </div>
-
-    <!-- Step 1 alt: Install React Native -->
-    <div class="gs-card">
-      <div class="gs-card-header">
-        <div class="gs-card-title">
-          <span class="gs-step">1</span>
-          Install — React Native / Expo
-        </div>
-        <button class="gs-copy-btn" onclick="gsCopy(this, 'gs-code-2')">Copy</button>
-      </div>
-      <div class="gs-code" id="gs-code-2">npm install @animicons/react-native react-native-svg react-native-reanimated</div>
-    </div>
-
-    <!-- Step 2: Basic usage React -->
-    <div class="gs-card">
-      <div class="gs-card-header">
-        <div class="gs-card-title">
-          <span class="gs-step">2</span>
-          Basic Usage — React
-        </div>
-        <button class="gs-copy-btn" onclick="gsCopy(this, 'gs-code-3')">Copy</button>
-      </div>
-      <div class="gs-code" id="gs-code-3">import { Bell, Refresh, Check } from '@animicons/react';
-
-export default function App() {
-  return (
-    &lt;div&gt;
-      &lt;Bell /&gt;
-      &lt;Refresh color="#6366f1" size={32} speed="fast" /&gt;
-      &lt;Check loop={false} onAnimationEnd={() =&gt; console.log('done')} /&gt;
-    &lt;/div&gt;
-  );
-}</div>
-    </div>
-
-    <!-- Step 2 alt: Basic usage React Native -->
-    <div class="gs-card">
-      <div class="gs-card-header">
-        <div class="gs-card-title">
-          <span class="gs-step">2</span>
-          Basic Usage — React Native
-        </div>
-        <button class="gs-copy-btn" onclick="gsCopy(this, 'gs-code-4')">Copy</button>
-      </div>
-      <div class="gs-code" id="gs-code-4">import { Bell, Refresh, Check } from '@animicons/react-native';
-import { View } from 'react-native';
-
-export default function App() {
-  return (
-    &lt;View&gt;
-      &lt;Bell /&gt;
-      &lt;Refresh color="#6366f1" size={32} speed="fast" /&gt;
-      &lt;Check loop={false} onAnimationEnd={() =&gt; console.log('done')} /&gt;
-    &lt;/View&gt;
-  );
-}</div>
-    </div>
-
-    <!-- Babel plugin (RN only) -->
-    <div class="gs-card">
-      <div class="gs-card-header">
-        <div class="gs-card-title">
-          <span class="gs-step">3</span>
-          React Native — babel.config.js
-        </div>
-        <button class="gs-copy-btn" onclick="gsCopy(this, 'gs-code-5')">Copy</button>
-      </div>
-      <div class="gs-code" id="gs-code-5">// babel.config.js — add the Reanimated plugin (must be last)
-module.exports = {
-  presets: ['module:metro-react-native-babel-preset'],
-  // or 'babel-preset-expo' for Expo projects
-  plugins: ['react-native-reanimated/plugin'],
-};</div>
-    </div>
-
-    <!-- Color customisation -->
-    <div class="gs-card">
-      <div class="gs-card-header">
-        <div class="gs-card-title">
-          <span class="gs-step">4</span>
-          Color &amp; Style Customisation
-        </div>
-        <button class="gs-copy-btn" onclick="gsCopy(this, 'gs-code-6')">Copy</button>
-      </div>
-      <div class="gs-code" id="gs-code-6">// All props are optional — every icon has sensible defaults
-&lt;Bell
-  color="#6366f1"          // base color (stroke + fill)
-  strokeColor="#818cf8"    // override stroke independently
-  fillColor="transparent"  // override fill independently
-  secondaryColor="#6366f133" // accent fill (default = base @ 20% alpha)
-  opacity={0.9}            // 0–1
-  strokeWidth={2}          // override line thickness
-  size={48}                // width &amp; height in px
-  speed="normal"           // 'slow' | 'normal' | 'fast'
-  autoPlay={true}          // start animation immediately
-  loop={true}              // repeat forever
-  onAnimationEnd={() =&gt; {}} // called when loop=false finishes
-/&gt;</div>
-    </div>
-
   </div>
 </section>
 
@@ -2386,14 +2204,6 @@ async function copyAiPrompt(btn) {
   }
 }
 
-function gsCopy(btn, id) {
-  const raw = document.getElementById(id).textContent;
-  // decode HTML entities that were escaped for display
-  const txt = raw.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
-  navigator.clipboard.writeText(txt);
-  btn.textContent = '✓ Copied'; btn.classList.add('copied');
-  setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
-}
 
 // ─── Theme ────────────────────────────────────────────────────────────────────
 function toggleTheme() {
