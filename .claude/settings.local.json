@@ -27,7 +27,11 @@
       "Bash(xargs -I {} basename {})",
       "Bash(sed -n '24,34p' /Users/M324550/Documents/POC/react-native-moticons/packages/react-native/src/icons/device/Battery.tsx)",
       "Bash(sed -n '34,44p' /Users/M324550/Documents/POC/react-native-moticons/packages/react-native/src/icons/files/Archive.tsx)",
-      "Bash(python3 *)"
+      "Bash(python3 *)",
+      "Bash(screencapture -x /tmp/refresh_preview.png)",
+      "Bash(open /tmp/sync_anim.html)",
+      "Bash(cp \"/Users/M324550/Downloads/Simulator Screen Recording - iPhone 17e - 2026-06-01 at 12.29.51.gif\" /Users/M324550/Documents/POC/react-native-moticons/assets/demo-react-native.gif)",
+      "Bash(cp \"/Users/M324550/Downloads/Screen Recording 2026-06-01 at 12.35.16 PM.gif\" /Users/M324550/Documents/POC/react-native-moticons/assets/demo-web.gif)"
     ]
   }
 }
