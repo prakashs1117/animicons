@@ -303,6 +303,65 @@
   }
   .overlay.visible { opacity: 1; pointer-events: all; }
 
+  /* GET STARTED SECTION */
+  .gs-section {
+    max-width: 1100px; margin: 0 auto 40px; padding: 0 24px;
+  }
+  .gs-header {
+    display: flex; align-items: baseline; gap: 12px; margin-bottom: 20px;
+  }
+  .gs-title {
+    font-size: 20px; font-weight: 400; color: var(--text); letter-spacing: -0.5px;
+  }
+  .gs-sub {
+    font-size: 13px; color: var(--text2);
+  }
+  .gs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+    gap: 14px;
+  }
+  .gs-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden; box-shadow: var(--card-shadow);
+  }
+  .gs-card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .gs-card-title {
+    font-size: 13px; font-weight: 500; color: var(--text);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .gs-card-title .gs-step {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--accent); color: white;
+    font-size: 11px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .gs-card-desc {
+    font-size: 12px; color: var(--text2);
+  }
+  .gs-copy-btn {
+    background: var(--btn-bg); border: 1px solid var(--border);
+    border-radius: 7px; padding: 5px 12px; cursor: pointer;
+    font-size: 12px; color: var(--text2); transition: all 0.15s;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .gs-copy-btn:hover { background: var(--btn-hover); color: var(--text); }
+  .gs-copy-btn.copied { background: #dcfce7; color: #15803d; border-color: #86efac; }
+  .gs-code {
+    padding: 16px 18px;
+    font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12.5px;
+    color: var(--code-text); background: var(--code-bg);
+    line-height: 1.7; white-space: pre; overflow-x: auto;
+  }
+  @media (max-width: 600px) {
+    .gs-grid { grid-template-columns: 1fr; }
+  }
+
   /* FOOTER */
   footer {
     text-align: center; padding: 40px 24px;
@@ -375,6 +434,128 @@
   <div class="install-code">
     <code id="installCmd">npm install @animicons/react react-native-svg</code>
     <button class="copy-btn" onclick="copyInstall(this)">Copy</button>
+  </div>
+</section>
+
+<!-- GET STARTED -->
+<section class="gs-section">
+  <div class="gs-header">
+    <h2 class="gs-title">Get Started</h2>
+    <span class="gs-sub">Copy and paste to start using @animicons in your project</span>
+  </div>
+  <div class="gs-grid">
+
+    <!-- Step 1: Install React -->
+    <div class="gs-card">
+      <div class="gs-card-header">
+        <div class="gs-card-title">
+          <span class="gs-step">1</span>
+          Install — React (Web)
+        </div>
+        <button class="gs-copy-btn" onclick="gsCopy(this, 'gs-code-1')">Copy</button>
+      </div>
+      <div class="gs-code" id="gs-code-1">npm install @animicons/react react-native-svg</div>
+    </div>
+
+    <!-- Step 1 alt: Install React Native -->
+    <div class="gs-card">
+      <div class="gs-card-header">
+        <div class="gs-card-title">
+          <span class="gs-step">1</span>
+          Install — React Native / Expo
+        </div>
+        <button class="gs-copy-btn" onclick="gsCopy(this, 'gs-code-2')">Copy</button>
+      </div>
+      <div class="gs-code" id="gs-code-2">npm install @animicons/react-native react-native-svg react-native-reanimated</div>
+    </div>
+
+    <!-- Step 2: Basic usage React -->
+    <div class="gs-card">
+      <div class="gs-card-header">
+        <div class="gs-card-title">
+          <span class="gs-step">2</span>
+          Basic Usage — React
+        </div>
+        <button class="gs-copy-btn" onclick="gsCopy(this, 'gs-code-3')">Copy</button>
+      </div>
+      <div class="gs-code" id="gs-code-3">import { Bell, Refresh, Check } from '@animicons/react';
+
+export default function App() {
+  return (
+    &lt;div&gt;
+      &lt;Bell /&gt;
+      &lt;Refresh color="#6366f1" size={32} speed="fast" /&gt;
+      &lt;Check loop={false} onAnimationEnd={() =&gt; console.log('done')} /&gt;
+    &lt;/div&gt;
+  );
+}</div>
+    </div>
+
+    <!-- Step 2 alt: Basic usage React Native -->
+    <div class="gs-card">
+      <div class="gs-card-header">
+        <div class="gs-card-title">
+          <span class="gs-step">2</span>
+          Basic Usage — React Native
+        </div>
+        <button class="gs-copy-btn" onclick="gsCopy(this, 'gs-code-4')">Copy</button>
+      </div>
+      <div class="gs-code" id="gs-code-4">import { Bell, Refresh, Check } from '@animicons/react-native';
+import { View } from 'react-native';
+
+export default function App() {
+  return (
+    &lt;View&gt;
+      &lt;Bell /&gt;
+      &lt;Refresh color="#6366f1" size={32} speed="fast" /&gt;
+      &lt;Check loop={false} onAnimationEnd={() =&gt; console.log('done')} /&gt;
+    &lt;/View&gt;
+  );
+}</div>
+    </div>
+
+    <!-- Babel plugin (RN only) -->
+    <div class="gs-card">
+      <div class="gs-card-header">
+        <div class="gs-card-title">
+          <span class="gs-step">3</span>
+          React Native — babel.config.js
+        </div>
+        <button class="gs-copy-btn" onclick="gsCopy(this, 'gs-code-5')">Copy</button>
+      </div>
+      <div class="gs-code" id="gs-code-5">// babel.config.js — add the Reanimated plugin (must be last)
+module.exports = {
+  presets: ['module:metro-react-native-babel-preset'],
+  // or 'babel-preset-expo' for Expo projects
+  plugins: ['react-native-reanimated/plugin'],
+};</div>
+    </div>
+
+    <!-- Color customisation -->
+    <div class="gs-card">
+      <div class="gs-card-header">
+        <div class="gs-card-title">
+          <span class="gs-step">4</span>
+          Color &amp; Style Customisation
+        </div>
+        <button class="gs-copy-btn" onclick="gsCopy(this, 'gs-code-6')">Copy</button>
+      </div>
+      <div class="gs-code" id="gs-code-6">// All props are optional — every icon has sensible defaults
+&lt;Bell
+  color="#6366f1"          // base color (stroke + fill)
+  strokeColor="#818cf8"    // override stroke independently
+  fillColor="transparent"  // override fill independently
+  secondaryColor="#6366f133" // accent fill (default = base @ 20% alpha)
+  opacity={0.9}            // 0–1
+  strokeWidth={2}          // override line thickness
+  size={48}                // width &amp; height in px
+  speed="normal"           // 'slow' | 'normal' | 'fast'
+  autoPlay={true}          // start animation immediately
+  loop={true}              // repeat forever
+  onAnimationEnd={() =&gt; {}} // called when loop=false finishes
+/&gt;</div>
+    </div>
+
   </div>
 </section>
 
@@ -2162,6 +2343,15 @@ function copyInstall(btn) {
 
 function copyCode(id, btn) {
   navigator.clipboard.writeText(document.getElementById(id).textContent);
+  btn.textContent = '✓ Copied'; btn.classList.add('copied');
+  setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+}
+
+function gsCopy(btn, id) {
+  const raw = document.getElementById(id).textContent;
+  // decode HTML entities that were escaped for display
+  const txt = raw.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+  navigator.clipboard.writeText(txt);
   btn.textContent = '✓ Copied'; btn.classList.add('copied');
   setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
 }
